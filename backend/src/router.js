@@ -12,5 +12,6 @@ router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
 router.get("/works", worksControllers.browse);
+router.get("/works/:id", worksControllers.read);
 
 module.exports = router;
