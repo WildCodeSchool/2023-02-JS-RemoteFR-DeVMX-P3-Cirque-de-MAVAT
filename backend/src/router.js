@@ -4,6 +4,7 @@ const router = express.Router();
 
 const itemControllers = require("./controllers/itemControllers");
 const worksControllers = require("./controllers/worksControllers");
+const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
 
 router.get("/items", itemControllers.browse);
@@ -13,6 +14,7 @@ router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
 router.get("/works", worksControllers.browse);
+router.get("/users", usersControllers.browse);
 
 router.get("/authors", authorsControllers.browse);
 
