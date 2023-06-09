@@ -3,19 +3,29 @@
 /** @section Elements in general for printing */
 
 * {
-    @media print {
-        color: black !important;
-        background-color: transparent !important;
-        background-image: none !important;
-    }
+  @media print {
+    color: black !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
 }
-h1, h2, h3, h4, h5, h6 {
-    @media print {
-        page-break-after: avoid;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @media print {
+    page-break-after: avoid;
+  }
 }
-img, object, audio, video, embed, svg {
-    @media print {
-        page-break-inside: avoid;
-    }
+img,
+object,
+audio,
+video,
+embed,
+svg {
+  @media print {
+    page-break-inside: avoid;
+  }
 }
