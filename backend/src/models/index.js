@@ -32,6 +32,7 @@ const models = {};
 const ItemManager = require("./ItemManager");
 const WorksManager = require("./WorksManager");
 const UsersManager = require("./UsersManager");
+const AuthorsManager = require("./AuthorsManager");
 
 models.item = new ItemManager();
 models.item.setDatabase(pool);
@@ -41,6 +42,8 @@ models.works.setDatabase(pool);
 
 models.users = new UsersManager();
 models.users.setDatabase(pool);
+models.authors = new AuthorsManager();
+models.authors.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
