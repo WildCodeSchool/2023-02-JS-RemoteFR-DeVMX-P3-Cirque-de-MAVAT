@@ -42,6 +42,7 @@ models.works.setDatabase(pool);
 
 models.users = new UsersManager();
 models.users.setDatabase(pool);
+
 models.authors = new AuthorsManager();
 models.authors.setDatabase(pool);
 

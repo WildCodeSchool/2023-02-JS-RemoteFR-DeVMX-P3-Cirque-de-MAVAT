@@ -11,6 +11,13 @@ class AuthorsManager extends AbstractManager {
       [authors.firstname]
     );
   }
+
+  update(authors) {
+    return this.database.query(
+      `update ${this.table} firstname = ? where id = ?`,
+      [authors.firstname, authors.id]
+    );
+  }
 }
 
 module.exports = AuthorsManager;

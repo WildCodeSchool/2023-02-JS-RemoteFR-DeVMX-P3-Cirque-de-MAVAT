@@ -18,5 +18,6 @@ router.get("/works/:id", worksControllers.read);
 router.get("/users", usersControllers.browse);
 
 router.get("/authors", authorsControllers.browse);
+router.get("/authors/:id", authorsControllers.read);
 
 module.exports = router;
