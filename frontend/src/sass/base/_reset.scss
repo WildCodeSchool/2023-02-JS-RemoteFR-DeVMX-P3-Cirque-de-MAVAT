@@ -9,74 +9,119 @@
  */
 
 body,
-h1, h2, h3, h4, h5, h6,
-ul, ol, li, dl, dt, dd,
-p, pre, blockquote,
-figure, figcaption,
-form, fieldset, legend, input, select, textarea, button {
-    padding: 0;
-    margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+p,
+pre,
+blockquote,
+figure,
+figcaption,
+form,
+fieldset,
+legend,
+input,
+select,
+textarea,
+button {
+  padding: 0;
+  margin: 0;
 }
 /**
  * [1] Prevent text resizing when the terminal orientation changes (user zoom is preserved)
  * @bugfix @affected Safari iOS
  */
 html {
-    font-size: 62.5%;
-    @include css-text-size-adjust (100%); /* [1] */
+  font-size: 62.5%;
+  @include css-text-size-adjust(100%); /* [1] */
 }
 body {
-    font-size: 100%;
-    line-height: 1.5;
+  font-size: 100%;
+  line-height: 1.5;
 }
-h1, h2, h3, h4, h5, h6, pre {
-    font-size: 1rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre {
+  font-size: 1rem;
 }
 pre {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 address {
-    font-style: normal;
+  font-style: normal;
 }
-fieldset, legend, img, abbr, acronym {
-    border: none;
+fieldset,
+legend,
+img,
+abbr,
+acronym {
+  border: none;
 }
 legend {
-    white-space: normal;
+  white-space: normal;
 }
-input, select, textarea, button, img {
-    vertical-align: middle;
+input,
+select,
+textarea,
+button,
+img {
+  vertical-align: middle;
 }
-input, select, textarea, button, code, kbd, samp, var {
-    font-size: inherit;
+input,
+select,
+textarea,
+button,
+code,
+kbd,
+samp,
+var {
+  font-size: inherit;
 }
-input, select, textarea, button {
-    font-family: inherit;
-    border: 1px solid;
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  border: 1px solid;
 }
 /**
  * Rounded corners removal
  * @css-for Safari iOS
  */
-input, select, textarea {
-    border-radius: 0;
+input,
+select,
+textarea {
+  border-radius: 0;
 }
 input {
-    &[type="checkbox"],
-    &[type="radio"],
-    &[type="submit"],
-    &[type="reset"],
-    &[type="button"] {
-        cursor: pointer;
-    }
+  &[type="checkbox"],
+  &[type="radio"],
+  &[type="submit"],
+  &[type="reset"],
+  &[type="button"] {
+    cursor: pointer;
+  }
 }
 button,
 details summary {
-    cursor: pointer;
+  cursor: pointer;
 }
 /**
  * [1] Field default appearance removal
@@ -92,52 +137,58 @@ details summary {
  * @css-for Firefox
  */
 input {
-    &[type="checkbox"],
-    &[type="radio"] {
-        border: none;
-    }
-    &[type="search"] {
-        appearance: none; /* [1] */
-    }
-    &[type="submit"],
-    &[type="reset"] {
-        appearance: none; /* [2] */
-    }
-    &::placeholder {
-        color: inherit; /* [3] */
-        opacity: 1; /* [4] */
-    }
+  &[type="checkbox"],
+  &[type="radio"] {
+    border: none;
+  }
+  &[type="search"] {
+    appearance: none; /* [1] */
+  }
+  &[type="submit"],
+  &[type="reset"] {
+    appearance: none; /* [2] */
+  }
+  &::placeholder {
+    color: inherit; /* [3] */
+    opacity: 1; /* [4] */
+  }
 }
-input, button {
-    &[disabled] {
-        cursor: default;
-    }
+input,
+button {
+  &[disabled] {
+    cursor: default;
+  }
 }
 /**
  * [1] Outline added
  * @css-for Firefox
  */
 button {
-    background: transparent;
-    &:focus-visible {
-        outline: thin dotted; /* [1] */
-    }
+  background: transparent;
+  &:focus-visible {
+    outline: thin dotted; /* [1] */
+  }
 }
-img, object, audio, video, embed, svg {
-    max-width: 100%;
-    height: auto;
+img,
+object,
+audio,
+video,
+embed,
+svg {
+  max-width: 100%;
+  height: auto;
 }
 /**
   * Removal of the text decoration
   * @css-for Firefox
   */
 abbr {
-    &[title] {
-        text-decoration: none;
-    }
+  &[title] {
+    text-decoration: none;
+  }
 }
 ::selection {
-    color: black;
-    background-color: lightblue;
-    text-shadow: none
+  color: black;
+  background-color: lightblue;
+  text-shadow: none;
 }
