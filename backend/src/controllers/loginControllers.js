@@ -44,6 +44,24 @@ const verifyPassword = async (req, res) => {
   }
 };
 
+const verifyToken = (req, res, next) => {
+  try {
+    const authorizationHeader = req.get("Authorization");
+    if (!authorizationHeader) {
+      throw new Error("Authorization header is missing.");
+    }
+    const [type, token] = authorizationHeader.split(" ");
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the `Bearer` type.");
+    }
+    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
+
 const login = (req, res, next) => {
   models.login
     .findUser(req.body)
@@ -65,5 +83,6 @@ const login = (req, res, next) => {
 module.exports = {
   hashPassword,
   verifyPassword,
+  verifyToken,
   login,
 };
