@@ -112,7 +112,7 @@ INSERT INTO
     )
 VALUES (
         'benoit.vandanjon@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Benoît',
         'Vandanjon',
         1
@@ -128,7 +128,7 @@ INSERT INTO
     )
 VALUES (
         'anthony.gorski@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Anthony',
         'Gorski',
         1
@@ -144,7 +144,7 @@ INSERT INTO
     )
 VALUES (
         'victor.brito@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Victor',
         'Brito',
         0
@@ -160,7 +160,7 @@ INSERT INTO
     )
 VALUES (
         'marine.deveza@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Marine',
         'Deveza',
         0
@@ -176,7 +176,7 @@ INSERT INTO
     )
 VALUES (
         'anthony.lasternas@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Anthony',
         'Lasternas',
         0
@@ -192,7 +192,7 @@ INSERT INTO
     )
 VALUES (
         'anne.louis@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Anne',
         'Louis',
         0
@@ -208,7 +208,7 @@ INSERT INTO
     )
 VALUES (
         'trung.nguyen@wildcodeschool.com',
-        '123456',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
         'Trung',
         'Nguyen',
         0
