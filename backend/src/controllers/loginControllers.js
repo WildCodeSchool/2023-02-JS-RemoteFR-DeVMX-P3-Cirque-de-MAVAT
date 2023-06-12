@@ -35,7 +35,7 @@ const verifyPassword = async (req, res) => {
         expiresIn: "1h",
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, options);
-      delete req.user.hashedPassword;
+      delete req.user.password;
       res.status(200).send({ token, user: req.user });
     } else res.sendStatus(401);
   } catch (err) {
