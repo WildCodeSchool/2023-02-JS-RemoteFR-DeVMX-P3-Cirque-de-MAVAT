@@ -6,7 +6,6 @@ class LoginManager extends AbstractManager {
   }
 
   findUser(item) {
-    console.info("te item", item);
     return this.database.query(
       `SELECT id, password, firstname, lastname, role FROM ${this.table} WHERE email = ?`,
       [item.email]
