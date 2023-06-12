@@ -6,6 +6,7 @@ const itemControllers = require("./controllers/itemControllers");
 const worksControllers = require("./controllers/worksControllers");
 const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
+const loginControllers = require("./controllers/loginControllers");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -19,5 +20,7 @@ router.get("/users", usersControllers.browse);
 
 router.get("/authors", authorsControllers.browse);
 router.get("/authors/:id", authorsControllers.read);
+
+router.post("/login", loginControllers.login, loginControllers.verifyPassword);
 
 module.exports = router;
