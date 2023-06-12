@@ -10,4 +10,9 @@
 @use "sass/base/reset";
 @use "sass/base/print";
 
+@use "sass/home";
+@use "sass/gallery";
+@use "sass/author";
+@use "sass/about";
+
 @use "sass/footer";
