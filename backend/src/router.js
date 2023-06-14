@@ -15,7 +15,10 @@ router.delete("/items/:id", itemControllers.destroy);
 
 router.get("/works", worksControllers.browse);
 router.get("/works/:id", worksControllers.read);
+
 router.get("/users", usersControllers.browse);
+router.get("/users/:id", usersControllers.read);
+router.delete("/users/:id", usersControllers.destroy);
 
 router.get("/authors", authorsControllers.browse);
 router.get("/authors/:id", authorsControllers.read);
