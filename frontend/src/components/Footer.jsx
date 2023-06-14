@@ -1,6 +1,6 @@
-import logoAfac974 from "../assets/logo-afac974.jpg";
-import logoIhoi from "../assets/logo-ihoi.png";
-import logoObjetTemoin from "../assets/logo-objet-temoin.png";
+import logoAfac974 from "../assets/logo-afac.svg";
+import logoIhoi from "../assets/logo-ihoi.svg";
+import logoObjetTemoin from "../assets/logo-objet-temoin.svg";
 
 function Footer() {
   return (
