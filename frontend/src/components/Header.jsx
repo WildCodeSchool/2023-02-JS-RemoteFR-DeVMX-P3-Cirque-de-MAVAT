@@ -1,4 +1,7 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+
+import CurrentUserLogContext from "../contexts/CurrentUserLog";
 
 import logo from "../assets/logo-afac.svg";
 import account from "../assets/icon-account.svg";
@@ -9,6 +12,7 @@ import diamant from "../assets/bouton1.svg";
 
 export default function Header() {
   const location = useLocation();
+  const { isUserLogged } = useContext(CurrentUserLogContext);
 
   return (
     <header className="header">
@@ -54,22 +58,30 @@ export default function Header() {
         </nav>
         <div className="triangle" />
         <nav className="icon-nav">
-          <figure>
-            <img src={favorite} alt="favorite icon" className="icon-fav" />
-            <figcaption>Favoris</figcaption>
-          </figure>
-          <figure>
-            <img src={account} alt="account icon" className="icon-account" />
-            <figcaption>Compte</figcaption>
-          </figure>
-          <figure>
-            <img
-              src={disconnect}
-              alt="disconnect icon"
-              className="icon-disconnect"
-            />
-            <figcaption>Déconnexion</figcaption>
-          </figure>
+          {isUserLogged && (
+            <figure>
+              <img src={favorite} alt="favorite icon" className="icon-fav" />
+              <figcaption>Favoris</figcaption>
+            </figure>
+          )}
+          <Link to="/account">
+            <figure>
+              <img src={account} alt="account icon" className="icon-account" />
+              <figcaption>Compte</figcaption>
+            </figure>
+          </Link>
+          {isUserLogged && (
+            <Link to="/logout">
+              <figure>
+                <img
+                  src={disconnect}
+                  alt="disconnect icon"
+                  className="icon-disconnect"
+                />
+                <figcaption>Déconnexion</figcaption>
+              </figure>
+            </Link>
+          )}
         </nav>
       </div>
     </header>
