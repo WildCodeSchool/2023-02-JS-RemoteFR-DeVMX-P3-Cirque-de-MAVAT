@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 import "./styles.scss";
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
