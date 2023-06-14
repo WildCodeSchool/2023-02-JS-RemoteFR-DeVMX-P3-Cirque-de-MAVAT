@@ -5,9 +5,9 @@ import Imagearbredessin from "../assets/imagearbredessin.jpg";
 
 function Slides() {
   return (
-    <section id="slideshow">
+    <section className="slideshow">
       <div className="container">
-        <div className="sliderprincipal" />
+        <div className="principalslider" />
         <div className="slider">
           <figure>
             <img src={Imagejourneepatrimoine} alt="" width="640" height="310" />
@@ -20,7 +20,7 @@ function Slides() {
           <figure>
             <img src={Imagearbrefleur} alt="" width="640" height="310" />
             <figcaption>
-              Oeuvre dessin<em>(Image arbre en fleur au crayon)</em> time
+              Oeuvre dessin<em>(Image arbre en fleur au crayon)</em>
             </figcaption>
           </figure>
           <figure>
