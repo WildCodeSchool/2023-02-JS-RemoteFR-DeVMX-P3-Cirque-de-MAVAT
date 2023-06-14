@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Author from "./pages/Author";
 import About from "./pages/About";
+import Login from "./pages/Login";
 
 import Footer from "./components/Footer";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/author" element={<Author />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
       <Footer />
