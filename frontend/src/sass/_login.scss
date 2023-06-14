@@ -11,6 +11,7 @@
         width: 175px;
         height: 177px;
         position: absolute;
+        z-index: -1;
         content: "";
     }
     &::before {
@@ -26,6 +27,7 @@
         font-size: 4rem;
         color: var(--primary-color);
         text-align: center;
+        text-transform: uppercase;
         margin-bottom: 1.4rem;
         + p {
             font-size: 1.2rem;
@@ -46,6 +48,10 @@
                 font-weight: bold;
                 text-decoration: none;
                 text-transform: uppercase;
+                &:hover,
+                &:focus {
+                    text-decoration: underline;
+                }
             }
         }
     }
@@ -74,6 +80,10 @@
         font-size: 1.2rem;
         font-style: italic;
         text-align: end;
+    }
+    .error {
+        color: red;
+        margin-left: 1rem;
     }
     @media (min-width: 480px) {
         display: grid;
