@@ -12,7 +12,10 @@ import diamant from "../assets/bouton1.svg";
 
 export default function Header() {
   const location = useLocation();
-  const { isUserLogged } = useContext(CurrentUserLogContext);
+  const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
+  const logout = () => {
+    setIsUserLogged(false);
+  };
 
   return (
     <header className="header">
@@ -71,7 +74,7 @@ export default function Header() {
             </figure>
           </Link>
           {isUserLogged && (
-            <Link to="/logout">
+            <button type="button" onClick={logout}>
               <figure>
                 <img
                   src={disconnect}
@@ -80,7 +83,7 @@ export default function Header() {
                 />
                 <figcaption>Déconnexion</figcaption>
               </figure>
-            </Link>
+            </button>
           )}
         </nav>
       </div>

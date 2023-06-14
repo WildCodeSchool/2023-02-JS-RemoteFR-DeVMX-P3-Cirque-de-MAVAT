@@ -6,7 +6,6 @@ import Author from "./pages/Author";
 import About from "./pages/About";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
-import Logout from "./pages/Logout";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -30,7 +29,6 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/account" element={<Account />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Logout />} />
             </Routes>
           </Router>
           <Footer />
