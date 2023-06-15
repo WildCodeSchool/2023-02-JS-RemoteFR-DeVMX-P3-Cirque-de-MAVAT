@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+.account {
+    padding: 4.2rem 8.2rem 9rem;
+    margin-block: 2.4rem 3.5rem;
+    position: relative;
+    &::before,
+    &::after {
+        background: url("./assets/login.svg") no-repeat;
+        display: block;
+        width: 175px;
+        height: 177px;
+        position: absolute;
+        z-index: -1;
+        content: "";
+    }
+    &::before {
+        top: 0;
+        left: 0;
+    }
+    &::after {
+        right: 0;
+        bottom: 0;
+        transform: rotate(180deg);
+    }
+    h2 {
+        font-size: 4rem;
+        color: var(--primary-color);
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 1.4rem;
+    }
+    @media (min-width: 800px) {
+        box-sizing: border-box;
+        width: 80rem;
+        margin-inline: auto;
+    }
+}

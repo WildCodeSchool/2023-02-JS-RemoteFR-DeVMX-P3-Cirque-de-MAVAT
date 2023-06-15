@@ -1,3 +1,9 @@
+import Slides from "../components/Slides";
+
 export default function Home() {
-  return <h1 className="home">Home</h1>;
+  return (
+    <div>
+      <Slides />
+    </div>
+  );
 }
