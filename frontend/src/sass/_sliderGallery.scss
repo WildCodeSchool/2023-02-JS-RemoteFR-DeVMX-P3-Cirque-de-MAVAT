@@ -1,8 +1,7 @@
 .slider-gallery {
   display: flex;
   align-items: center;
-  width: 80rem;
-  height: 70vh;
+  width: 100rem;
   button {
     width: 2rem;
     height: 2rem;
@@ -39,22 +38,24 @@
     cursor: pointer;
   }
   img {
-    width: 30rem;
+    width: 37rem;
     margin: 0 5rem 0 5rem;
   }
   h1 {
     color: var(--primary-color);
     font-size: 3rem;
     font-weight: 700;
+    margin-bottom: 2rem;
   }
   h2 {
     font-size: 2rem;
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   p {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    margin: 2rem 0 1.5rem 0;
   }
   span,
   a {
