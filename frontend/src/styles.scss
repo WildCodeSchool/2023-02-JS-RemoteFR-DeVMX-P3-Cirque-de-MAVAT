@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+/**
+ * @site Web art gallery - AFAC 974
+ * @author Victor Brito, Marine Deveza, Anthony Lasternas, Anne Louis, Trung Nguyen
+ */
+
+@use "sass/base/mixins";
+@use "sass/variables";
+@use "sass/base/reset";
+@use "sass/base/print";
+
+@use "sass/home";
+@use "sass/gallery";
+@use "sass/author";
+@use "sass/about";
+
+@use "sass/footer";
+@use "sass/header";
+@use "sass/account";
+@use "sass/login";
+@use "sass/filter";
+@use "sass/hexagone";
+@use "sass/sliderGallery";
