@@ -17,10 +17,10 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      height: 10.5rem;
+      height: 12rem;
       width: 78vw;
       list-style: none;
-      border-bottom: 10px solid var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
       li {
         width: 25%;
       }
@@ -35,7 +35,7 @@
       }
       .diamant {
         position: relative;
-        top: -83px;
+        top: -90px;
         left: 78px;
         opacity: 0;
         transition: all 0.2s ease-in-out;
