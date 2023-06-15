@@ -1,3 +1,9 @@
+import Filter from "../components/Filter";
+
 export default function Gallery() {
-  return <h1 className="gallery">Gallery</h1>;
+  return (
+    <div>
+      <Filter />
+    </div>
+  );
 }
