@@ -4,11 +4,13 @@ import axios from "axios";
 import CurrentUserLogContext from "../contexts/CurrentUserLog";
 import CurrentUserStatusContext from "../contexts/CurrentUserStatus";
 import CurrentUserIdContext from "../contexts/CurrentUserId";
+import CurrentUserNameContext from "../contexts/CurrentUserName";
 
 export default function Login() {
   const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
   const { setIsUserAdmin } = useContext(CurrentUserStatusContext);
   const { setId } = useContext(CurrentUserIdContext);
+  const { setUserName } = useContext(CurrentUserNameContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
@@ -52,6 +54,7 @@ export default function Login() {
           if (user.role === 1) setIsUserAdmin(true);
           setIsUserLogged(true);
           setId(user.id);
+          setUserName(`${user.firstname} ${user.lastname}`.trim());
         })
         .catch((err) => {
           setInvalidLogin(err.response.data.error);

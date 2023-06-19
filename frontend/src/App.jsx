@@ -15,6 +15,7 @@ import { CurrentUserStatusProvider } from "./contexts/CurrentUserStatus";
 import { CurrentUserIdProvider } from "./contexts/CurrentUserId";
 
 import "./styles.scss";
+import { CurrentUserNameProvider } from "./contexts/CurrentUserName";
 
 function App() {
   return (
@@ -22,18 +23,20 @@ function App() {
       <CurrentUserLogProvider>
         <CurrentUserStatusProvider>
           <CurrentUserIdProvider>
-            <Router>
-              <Header />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/author" element={<Author />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/account" element={<Account />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </Router>
-            <Footer />
+            <CurrentUserNameProvider>
+              <Router>
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/author" element={<Author />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/account" element={<Account />} />
+                  <Route path="/login" element={<Login />} />
+                </Routes>
+              </Router>
+              <Footer />
+            </CurrentUserNameProvider>
           </CurrentUserIdProvider>
         </CurrentUserStatusProvider>
       </CurrentUserLogProvider>

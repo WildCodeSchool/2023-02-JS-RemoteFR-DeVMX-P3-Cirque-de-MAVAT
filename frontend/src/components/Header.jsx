@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import CurrentUserLogContext from "../contexts/CurrentUserLog";
 import CurrentUserStatusContext from "../contexts/CurrentUserStatus";
 import CurrentUserIdContext from "../contexts/CurrentUserId";
+import CurrentUserNameContext from "../contexts/CurrentUserName";
 
 import logo from "../assets/logo-afac.svg";
 import account from "../assets/icon-account.svg";
@@ -17,10 +18,12 @@ export default function Header() {
   const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
   const { setIsUserAdmin } = useContext(CurrentUserStatusContext);
   const { setId } = useContext(CurrentUserIdContext);
+  const { userName, setUserName } = useContext(CurrentUserNameContext);
   const logout = () => {
     setIsUserLogged(false);
     setIsUserAdmin(false);
     setId(null);
+    setUserName(null);
   };
 
   return (
@@ -92,6 +95,9 @@ export default function Header() {
             </button>
           )}
         </nav>
+        {isUserLogged && userName && (
+          <p className="hello">Bonjour, {userName}</p>
+        )}
       </div>
     </header>
   );
