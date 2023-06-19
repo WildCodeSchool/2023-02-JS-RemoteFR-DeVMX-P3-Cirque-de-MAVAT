@@ -28,8 +28,6 @@ export default function Login() {
     };
     const errors = new Set();
 
-    // setIsUserLogged(false);
-
     for (const field in fields) {
       if (!fields[field].match(validationFilters[field])) {
         errors.add(field);
@@ -46,12 +44,16 @@ export default function Login() {
           const {
             data: { user },
           } = response;
-          const loggedUser = {
+          let username = null;
+          if (user.firstname) {
+            if (user.lastname) username = `${user.firstname} ${user.lastname}`;
+            else username = user.firstname;
+          } else if (user.lastname) username = user.lastname;
+          setCurrentUser({
             id: user.id,
-            username: `${user.firstname} ${user.lastname}`.trim(),
+            username,
             isAdmin: user.role === 1,
-          };
-          setCurrentUser(loggedUser);
+          });
         })
         .catch((err) => {
           setInvalidLogin(err.response.data.error);
