@@ -3,10 +3,12 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import CurrentUserLogContext from "../contexts/CurrentUserLog";
 import CurrentUserStatusContext from "../contexts/CurrentUserStatus";
+import CurrentUserIdContext from "../contexts/CurrentUserId";
 
 export default function Login() {
   const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
   const { setIsUserAdmin } = useContext(CurrentUserStatusContext);
+  const { setId } = useContext(CurrentUserIdContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
@@ -44,9 +46,12 @@ export default function Login() {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
         .then((response) => {
-          const { data } = response;
-          if (data.user.role === 1) setIsUserAdmin(true);
+          const {
+            data: { user },
+          } = response;
+          if (user.role === 1) setIsUserAdmin(true);
           setIsUserLogged(true);
+          setId(user.id);
         })
         .catch((err) => {
           setInvalidLogin(err.response.data.error);
