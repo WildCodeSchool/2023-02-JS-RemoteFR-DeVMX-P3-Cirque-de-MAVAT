@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 import CurrentUserLogContext from "../contexts/CurrentUserLog";
+import CurrentUserStatusContext from "../contexts/CurrentUserStatus";
 
 export default function Login() {
   const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
+  const { setIsUserAdmin } = useContext(CurrentUserStatusContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
+  const [invalidLogin, setInvalidLogin] = useState("");
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -37,7 +41,16 @@ export default function Login() {
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
-      setIsUserLogged(true);
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
+        .then((response) => {
+          const { data } = response;
+          if (data.user.role === 1) setIsUserAdmin(true);
+          setIsUserLogged(true);
+        })
+        .catch((err) => {
+          setInvalidLogin(err.response.data.error);
+        });
     }
   };
 
@@ -46,7 +59,10 @@ export default function Login() {
       {isUserLogged && <Navigate to="/account" />}
       <form className="account login" onSubmit={handleLogin} noValidate>
         <h2>S’identifier</h2>
-        <p>Tous les champs sont obligatoires</p>
+        <p>
+          Tous les champs sont obligatoires
+          {invalidLogin && <span className="error">{invalidLogin}</span>}
+        </p>
         <p>
           <label htmlFor="login-email">
             Adresse email
