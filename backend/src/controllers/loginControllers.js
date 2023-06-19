@@ -42,7 +42,7 @@ const verifyPassword = async (req, res) => {
       delete req.user.password;
       res.status(200).send({ token, user: req.user });
     } else {
-      res.status(401).send({ error: "Vos identifiants ne sont pas valides." });
+      res.status(400).send({ error: "Vos identifiants ne sont pas valides." });
     }
   } catch (err) {
     console.error(err);
@@ -81,7 +81,7 @@ const login = (req, res, next) => {
         next();
       } else {
         res
-          .status(404)
+          .status(400)
           .send({ error: "Vos identifiants ne sont pas valides." });
       }
     })
