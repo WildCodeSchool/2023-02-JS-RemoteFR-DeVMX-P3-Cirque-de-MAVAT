@@ -1,16 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
-import CurrentUserLogContext from "../contexts/CurrentUserLog";
-import CurrentUserStatusContext from "../contexts/CurrentUserStatus";
-import CurrentUserIdContext from "../contexts/CurrentUserId";
-import CurrentUserNameContext from "../contexts/CurrentUserName";
+
+import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function Login() {
-  const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
-  const { setIsUserAdmin } = useContext(CurrentUserStatusContext);
-  const { setId } = useContext(CurrentUserIdContext);
-  const { setUserName } = useContext(CurrentUserNameContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
@@ -33,7 +28,7 @@ export default function Login() {
     };
     const errors = new Set();
 
-    setIsUserLogged(false);
+    // setIsUserLogged(false);
 
     for (const field in fields) {
       if (!fields[field].match(validationFilters[field])) {
@@ -51,10 +46,12 @@ export default function Login() {
           const {
             data: { user },
           } = response;
-          if (user.role === 1) setIsUserAdmin(true);
-          setIsUserLogged(true);
-          setId(user.id);
-          setUserName(`${user.firstname} ${user.lastname}`.trim());
+          const loggedUser = {
+            id: user.id,
+            username: `${user.firstname} ${user.lastname}`.trim(),
+            isAdmin: user.role === 1,
+          };
+          setCurrentUser(loggedUser);
         })
         .catch((err) => {
           setInvalidLogin(err.response.data.error);
@@ -64,7 +61,7 @@ export default function Login() {
 
   return (
     <>
-      {isUserLogged && <Navigate to="/account" />}
+      {currentUser && <Navigate to="/account" />}
       <form className="account login" onSubmit={handleLogin} noValidate>
         <h2>S’identifier</h2>
         <p>

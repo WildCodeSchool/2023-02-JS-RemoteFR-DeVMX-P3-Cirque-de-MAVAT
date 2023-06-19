@@ -10,36 +10,27 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-import { CurrentUserLogProvider } from "./contexts/CurrentUserLog";
-import { CurrentUserStatusProvider } from "./contexts/CurrentUserStatus";
-import { CurrentUserIdProvider } from "./contexts/CurrentUserId";
+import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
-import { CurrentUserNameProvider } from "./contexts/CurrentUserName";
 
 function App() {
   return (
     <div className="App">
-      <CurrentUserLogProvider>
-        <CurrentUserStatusProvider>
-          <CurrentUserIdProvider>
-            <CurrentUserNameProvider>
-              <Router>
-                <Header />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/gallery" element={<Gallery />} />
-                  <Route path="/author" element={<Author />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/account" element={<Account />} />
-                  <Route path="/login" element={<Login />} />
-                </Routes>
-              </Router>
-              <Footer />
-            </CurrentUserNameProvider>
-          </CurrentUserIdProvider>
-        </CurrentUserStatusProvider>
-      </CurrentUserLogProvider>
+      <CurrentUserProvider>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/author" element={<Author />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </CurrentUserProvider>
     </div>
   );
 }
