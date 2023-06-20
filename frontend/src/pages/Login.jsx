@@ -115,7 +115,7 @@ export default function Login() {
         </p>
         <p>
           Vous n’avez pas de compte&nbsp;?{" "}
-          <Link to="/create-account">Créer un compte</Link>
+          <Link to="/signup">Créer un compte</Link>
         </p>
       </form>
     </>
