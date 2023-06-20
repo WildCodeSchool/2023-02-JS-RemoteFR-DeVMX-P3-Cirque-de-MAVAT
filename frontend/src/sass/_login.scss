@@ -45,6 +45,9 @@
   }
   label {
     font-weight: bold;
+    .error {
+      margin-left: 1rem;
+    }
   }
   a {
     color: inherit;
@@ -56,7 +59,6 @@
   }
   .error {
     color: red;
-    margin-left: 1rem;
   }
   @media (min-width: 480px) {
     display: grid;

@@ -7,6 +7,7 @@ const worksControllers = require("./controllers/worksControllers");
 const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
 const loginControllers = require("./controllers/loginControllers");
+const validateLogin = require("./services/validateLogin");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -24,6 +25,11 @@ router.delete("/users/:id", usersControllers.destroy);
 router.get("/authors", authorsControllers.browse);
 router.get("/authors/:id", authorsControllers.read);
 
-router.post("/login", loginControllers.login, loginControllers.verifyPassword);
+router.post(
+  "/login",
+  validateLogin,
+  loginControllers.login,
+  loginControllers.verifyPassword
+);
 
 module.exports = router;
