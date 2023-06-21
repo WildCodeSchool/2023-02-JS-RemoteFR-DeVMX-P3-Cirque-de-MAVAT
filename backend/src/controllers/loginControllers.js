@@ -3,26 +3,6 @@ const jwt = require("jsonwebtoken");
 
 const models = require("../models");
 
-const hashPassword = async (req, res, next) => {
-  try {
-    const { password } = req.body;
-    const hashingOptions = {
-      memoryCost: 2 ** 14,
-      timeCost: 2,
-      parallelism: 1,
-    };
-    const hashedPassword = await argon2.hash(password, hashingOptions);
-    req.body.hashedPassword = hashedPassword;
-    delete req.body.password;
-    next();
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .send({ error: "There was a problem when validating the password." });
-  }
-};
-
 const verifyPassword = async (req, res) => {
   try {
     const verifiedPassword = await argon2.verify(
@@ -95,7 +75,6 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
-  hashPassword,
   verifyPassword,
   verifyToken,
   login,
