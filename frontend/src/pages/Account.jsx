@@ -5,10 +5,11 @@ import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function Account() {
   const { currentUser } = useContext(CurrentUserContext);
+  const isRedirectionRequired = !Object.keys(currentUser).length;
 
   return (
     <>
-      {currentUser === null && <Navigate to="/login" />}
+      {isRedirectionRequired && <Navigate to="/login" />}
       <section className="account">
         <h2>Mon compte</h2>
         <ul className="tools">

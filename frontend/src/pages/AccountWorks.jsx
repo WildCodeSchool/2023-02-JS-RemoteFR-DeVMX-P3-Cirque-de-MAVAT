@@ -8,10 +8,11 @@ import AdminWorksList from "../components/AdminWorksList";
 
 export default function AccountWorks() {
   const { currentUser } = useContext(CurrentUserContext);
+  const isRedirectionRequired = !Object.keys(currentUser).length;
 
   return (
     <>
-      {currentUser === null && <Navigate to="/login" />}
+      {isRedirectionRequired && <Navigate to="/login" />}
       <nav className="account-breadcrumb">
         <ul>
           <li>
