@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Thumb from "./EmblaCarouselThumbsButton";
@@ -7,6 +8,7 @@ import imageByIndex from "./ImageByIndex";
 export default function EmblaCarousel(props) {
   const { slides, options } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [work, setWork] = useState();
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
@@ -33,6 +35,15 @@ export default function EmblaCarousel(props) {
     emblaMainApi.on("select", onSelect);
     emblaMainApi.on("reInit", onSelect);
   }, [emblaMainApi, onSelect]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/works`)
+      .then((res) => setWork(res.data))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <div className="embla">
