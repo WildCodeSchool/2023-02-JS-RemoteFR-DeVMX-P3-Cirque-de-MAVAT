@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+@mixin button {
+    font-style: italic;
+    color: white;
+    background: var(--primary-color);
+    padding: 1rem 1.3rem 1.2rem;
+}
 .account {
     padding: 4.2rem 8.2rem 9rem;
     margin-block: 2.4rem 3.5rem;
@@ -65,10 +71,7 @@
             border-left: none;
         }
         &[type="submit"] {
-            font-style: italic;
-            color: white;
-            background: var(--primary-color);
-            padding: 1rem 1.3rem 1.2rem;
+            @include button;
         }
     }
     label {
@@ -129,6 +132,47 @@
             color: var(--primary-color);
         }
     }
+    &.works {
+        h2 {
+            + p {
+                font-style: initial;
+                a {
+                    @include button;
+                    font-weight: inherit;
+                    text-transform: initial;
+                    align-self: center;
+                    width: 12rem;
+                }
+            }
+        }
+        ul {
+            font-weight: bold;
+            font-size: 1.4rem;
+            list-style: none;
+        }
+        li {
+            text-align: center;
+            padding: .5rem;
+            &:not(:last-child) {
+                border-bottom: 1px solid var(--primary-color);
+            }
+            a {
+                text-decoration: none;
+                display: block;
+            }
+            .delete {
+                font-weight: initial;
+                font-style: italic;
+                font-size: 1.2rem;
+                color: var(--primary-color);
+                width: 12rem;
+                padding: .5rem 1.3rem .6rem;
+                margin-inline: auto;
+                border: 1px solid;
+                box-sizing: border-box;
+            }
+        }
+    }
     @media (min-width: 480px) {
         display: grid;
         h2 {
@@ -141,6 +185,20 @@
             &[type="submit"] {
                 align-self: flex-end;
                 width: 12rem;
+            }
+        }
+    }
+    @media (min-width: 560px) {
+        &.works {
+            li {
+                display: flex;
+                gap: 1rem;
+                justify-content: space-between;
+                align-items: center;
+                .delete {
+                    width: initial;
+                    margin-inline: initial;
+                }
             }
         }
     }

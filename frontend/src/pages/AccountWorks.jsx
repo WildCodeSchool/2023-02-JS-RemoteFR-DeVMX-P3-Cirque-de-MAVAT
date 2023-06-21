@@ -21,7 +21,7 @@ export default function AccountWorks() {
           <li>{currentUser.isAdmin ? "Gérer les œuvres" : "Accès interdit"}</li>
         </ul>
       </nav>
-      <section className="account">
+      <section className="account works">
         {currentUser.isAdmin ? <AdminWorksList /> : <Admin403 />}
       </section>
     </>
