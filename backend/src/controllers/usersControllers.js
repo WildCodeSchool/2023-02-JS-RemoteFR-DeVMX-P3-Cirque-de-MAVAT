@@ -28,6 +28,21 @@ const read = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  const { email, password, firstname, lastname } = req.body;
+  models.users
+    .create(email, password, firstname, lastname)
+    .then(([rows]) => {
+      res.status(201).json({ id: rows.insertId });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "L’inscription n’a pas pu être effectuée avec succès.",
+      });
+    });
+};
+
 const destroy = (req, res) => {
   models.users
     .delete(req.params.id)
@@ -47,5 +62,6 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  create,
   destroy,
 };

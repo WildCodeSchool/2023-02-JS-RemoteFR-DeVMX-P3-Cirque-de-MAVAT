@@ -7,7 +7,10 @@ const worksControllers = require("./controllers/worksControllers");
 const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
 const loginControllers = require("./controllers/loginControllers");
+
 const validateLogin = require("./services/validateLogin");
+const validateSignup = require("./services/validateSignup");
+const hashPassword = require("./services/hashPassword");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -31,5 +34,7 @@ router.post(
   loginControllers.login,
   loginControllers.verifyPassword
 );
+
+router.post("/users", validateSignup, hashPassword, usersControllers.create);
 
 module.exports = router;

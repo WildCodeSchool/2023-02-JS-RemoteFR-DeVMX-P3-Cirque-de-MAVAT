@@ -6,6 +6,7 @@ import Author from "./pages/Author";
 import About from "./pages/About";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -27,6 +28,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/account" element={<Account />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </Router>
         <Footer />
