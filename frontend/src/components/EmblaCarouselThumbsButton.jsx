@@ -26,7 +26,7 @@ export default function Thumb(props) {
 }
 
 Thumb.propTypes = {
-  selected: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
   imgSrc: PropTypes.string.isRequired,
-  onClick: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
