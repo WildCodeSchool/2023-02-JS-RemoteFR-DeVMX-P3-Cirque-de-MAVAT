@@ -5,8 +5,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import Thumb from "./EmblaCarouselThumbsButton";
 import imageByIndex from "./ImageByIndex";
 
-// import EmblaCarouselWork from "./EmblaCarouselWork";
-
 export default function EmblaCarousel(props) {
   const { slides, options } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
