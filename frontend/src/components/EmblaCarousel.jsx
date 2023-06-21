@@ -57,7 +57,7 @@ export default function EmblaCarousel(props) {
                 alt="Your alt text"
               />
               <div className="embla__slide__text">
-                <h1>TOTO TEST</h1>
+                <h1>{work.title}</h1>
                 <h2>TATA TEST</h2>
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
