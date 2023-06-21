@@ -109,6 +109,26 @@
             place-items: center;
         }
     }
+    &-breadcrumb {
+        font-size: 1.2rem;
+        margin: 1rem 2rem;
+        ul {
+            display: flex;
+            gap: .5rem;
+            list-style: none;
+        }
+        li {
+            &:not(:last-child) {
+                &::after {
+                    margin-left: 1ch;
+                    content: "\203a";
+                }
+            }
+        }
+        a {
+            color: var(--primary-color);
+        }
+    }
     @media (min-width: 480px) {
         display: grid;
         h2 {
@@ -128,5 +148,9 @@
         box-sizing: border-box;
         width: 80rem;
         margin-inline: auto;
+        &-breadcrumb {
+            width: 80rem;
+            margin-inline: auto;
+        }
     }
 }

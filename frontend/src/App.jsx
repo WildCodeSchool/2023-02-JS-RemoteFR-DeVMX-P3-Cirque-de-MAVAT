@@ -5,6 +5,7 @@ import Gallery from "./pages/Gallery";
 import Author from "./pages/Author";
 import About from "./pages/About";
 import Account from "./pages/Account";
+import AccountWorks from "./pages/AccountWorks";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/author" element={<Author />} />
             <Route path="/about" element={<About />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/account/works" element={<AccountWorks />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
           </Routes>
