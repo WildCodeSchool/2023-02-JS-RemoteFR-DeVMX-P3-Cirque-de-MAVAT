@@ -88,6 +88,27 @@
     .error {
         color: red;
     }
+    .tools {
+        font-size: 1.6rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        list-style: none;
+        li {
+            color: white;
+            background: var(--primary-color);
+            flex-basis: 15rem;
+            display: inline-flex;
+            aspect-ratio: 1;
+        }
+        a {
+            text-decoration: none;
+            display: inline-grid;
+            flex: 1;
+            place-items: center;
+        }
+    }
     @media (min-width: 480px) {
         display: grid;
         h2 {
