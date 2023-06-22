@@ -1,111 +1,111 @@
 @charset "utf-8";
 
 .account {
-    padding: 4.2rem 8.2rem 9rem;
-    margin-block: 2.4rem 3.5rem;
-    position: relative;
-    &::before,
-    &::after {
-        background: url("./assets/login.svg") no-repeat;
-        display: block;
-        width: 175px;
-        height: 177px;
-        position: absolute;
-        z-index: -1;
-        content: "";
+  padding: 4.2rem 8.2rem 9rem;
+  margin-block: 2.4rem 3.5rem;
+  position: relative;
+  &::before,
+  &::after {
+    background: url("./assets/login.svg") no-repeat;
+    display: block;
+    width: 175px;
+    height: 177px;
+    position: absolute;
+    z-index: -1;
+    content: "";
+  }
+  &::before {
+    top: 0;
+    left: 0;
+  }
+  &::after {
+    right: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+  }
+  h2 {
+    font-size: 4rem;
+    color: var(--primary-color);
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+    + p {
+      font-size: 1.2rem;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 5.6rem;
     }
-    &::before {
-        top: 0;
-        left: 0;
-    }
-    &::after {
-        right: 0;
-        bottom: 0;
-        transform: rotate(180deg);
-    }
-    h2 {
-        font-size: 4rem;
-        color: var(--primary-color);
-        text-align: center;
+  }
+  p {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 4rem;
+    &:last-of-type {
+      gap: initial;
+      a {
+        font-weight: bold;
+        text-decoration: none;
         text-transform: uppercase;
-        margin-bottom: 1.4rem;
-        + p {
-            font-size: 1.2rem;
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 5.6rem;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
         }
+      }
     }
-    p {
-        font-size: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 4rem;
-        &:last-of-type {
-            gap: initial;
-            a {
-                font-weight: bold;
-                text-decoration: none;
-                text-transform: uppercase;
-                &:hover,
-                &:focus {
-                    text-decoration: underline;
-                }
-            }
-        }
+  }
+  input {
+    &[type="text"],
+    &[type="email"],
+    &[type="password"] {
+      height: 3rem;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+    &[type="submit"] {
+      font-style: italic;
+      color: white;
+      background: var(--primary-color);
+      padding: 1rem 1.3rem 1.2rem;
+    }
+  }
+  label {
+    font-weight: bold;
+    .error {
+      margin-left: 1rem;
+    }
+  }
+  a {
+    color: inherit;
+  }
+  .forgotten-password-link {
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: end;
+  }
+  .error {
+    color: red;
+  }
+  @media (min-width: 480px) {
+    display: grid;
+    h2 {
+      grid-column: 1 / -1;
+      + p {
+        margin-bottom: 1.6rem;
+      }
     }
     input {
-        &[type="text"],
-        &[type="email"],
-        &[type="password"] {
-            height: 3rem;
-            border-top: none;
-            border-right: none;
-            border-left: none;
-        }
-        &[type="submit"] {
-            font-style: italic;
-            color: white;
-            background: var(--primary-color);
-            padding: 1rem 1.3rem 1.2rem;
-        }
+      &[type="submit"] {
+        align-self: flex-end;
+        width: 12rem;
+      }
     }
-    label {
-        font-weight: bold;
-        .error {
-            margin-left: 1rem;
-        }
-    }
-    a {
-        color: inherit;
-    }
-    .forgotten-password-link {
-        font-size: 1.2rem;
-        font-style: italic;
-        text-align: end;
-    }
-    .error {
-        color: red;
-    }
-    @media (min-width: 480px) {
-        display: grid;
-        h2 {
-            grid-column: 1 / -1;
-            + p {
-                margin-bottom: 1.6rem;
-            }
-        }
-        input {
-            &[type="submit"] {
-                align-self: flex-end;
-                width: 12rem;
-            }
-        }
-    }
-    @media (min-width: 800px) {
-        box-sizing: border-box;
-        width: 80rem;
-        margin-inline: auto;
-    }
+  }
+  @media (min-width: 800px) {
+    box-sizing: border-box;
+    width: 80rem;
+    margin-inline: auto;
+  }
 }
