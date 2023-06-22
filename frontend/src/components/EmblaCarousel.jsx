@@ -68,7 +68,9 @@ export default function EmblaCarousel(props) {
                     <h3>Année de réalisation : {works[index].created}</h3>
                     <h3>Lieu de conservation : {works[index].location}</h3>
                     <p>{works[index].story}</p>
-                    <span>Article lié :{works[index].external}</span>
+                    {works[index].external && (
+                      <span>Article lié : {works[index].external}</span>
+                    )}
                   </div>
                 </div>
               ))}
