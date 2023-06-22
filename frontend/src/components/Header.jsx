@@ -13,8 +13,9 @@ import diamant from "../assets/bouton1.svg";
 export default function Header() {
   const location = useLocation();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const hasCurrentUser = !!Object.keys(currentUser).length;
   const logout = () => {
-    setCurrentUser(null);
+    setCurrentUser({});
   };
 
   return (
@@ -61,7 +62,7 @@ export default function Header() {
         </nav>
         <div className="triangle" />
         <nav className="icon-nav">
-          {currentUser && (
+          {hasCurrentUser && (
             <figure>
               <img src={favorite} alt="favorite icon" className="icon-fav" />
               <figcaption>Favoris</figcaption>
@@ -73,7 +74,7 @@ export default function Header() {
               <figcaption>Compte</figcaption>
             </figure>
           </Link>
-          {currentUser && (
+          {hasCurrentUser && (
             <button type="button" onClick={logout}>
               <figure>
                 <img
@@ -86,7 +87,7 @@ export default function Header() {
             </button>
           )}
         </nav>
-        {currentUser && currentUser.username && (
+        {hasCurrentUser && currentUser.username && (
           <p className="hello">Bonjour, {currentUser.username}</p>
         )}
       </div>
