@@ -7,6 +7,9 @@ const worksControllers = require("./controllers/worksControllers");
 const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
 const loginControllers = require("./controllers/loginControllers");
+const categoriesControllers = require("./controllers/categoriesControllers");
+const techniquesControllers = require("./controllers/techniquesControllers");
+const favouritesControllers = require("./controllers/favouritesControllers");
 
 const validateLogin = require("./services/validateLogin");
 const validateSignup = require("./services/validateSignup");
@@ -27,6 +30,12 @@ router.delete("/users/:id", usersControllers.destroy);
 
 router.get("/authors", authorsControllers.browse);
 router.get("/authors/:id", authorsControllers.read);
+
+router.get("/categories", categoriesControllers.browse);
+
+router.get("/techniques", techniquesControllers.browse);
+
+router.get("/favourites", favouritesControllers.browse);
 
 router.post(
   "/login",
