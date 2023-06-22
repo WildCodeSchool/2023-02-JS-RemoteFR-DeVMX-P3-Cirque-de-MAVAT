@@ -181,6 +181,7 @@ export default function AdminWorksAdd() {
                       id="add-publish-yes"
                       name="is_published"
                       type="radio"
+                      value="true"
                     />
                     <label htmlFor="add-publish-yes">Oui</label>
                   </li>
@@ -189,6 +190,7 @@ export default function AdminWorksAdd() {
                       id="add-publish-no"
                       name="is_published"
                       type="radio"
+                      value="false"
                       defaultChecked
                     />
                     <label htmlFor="add-publish-no">Non</label>

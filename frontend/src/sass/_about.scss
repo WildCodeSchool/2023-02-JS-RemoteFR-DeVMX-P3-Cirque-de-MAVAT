@@ -1,69 +1,68 @@
+.about {
+  margin: 3rem auto 20rem auto;
+  width: 60%;
 
-.about{
-    margin: 3rem auto 20rem auto;
-    width: 60%;
-    
-    h1 {
-        color :var(--primary-color);
-        font-weight: bold;
-        font-size: 5rem;
+  h1 {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 5rem;
+  }
+
+  h2 {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 2.2rem;
+    text-align: justify;
+  }
+  .about-afac-974 {
+    display: flex;
+    margin-top: 5rem;
+    margin-bottom: 15rem;
+
+    .img-logo-afac {
+      width: 50%;
+      margin-right: 4%;
     }
-    
-    h2 {
-        color :var(--primary-color);
-        font-weight: bold;
-        font-size: 3.5rem;
-        margin-bottom:2rem;
+    .about-info-afac {
+      width: 50%;
     }
-    
-    p {
-        font-size: 2.2rem;
-        text-align: justify;
-    }
-    .about-afac-974 {
-        display: flex;
-        margin-top: 5rem;
-        margin-bottom: 15rem;
-        
-        .img-logo-afac {
-            width: 50%;
-            margin-right: 4%;
-        }
-        .about-info-afac {
-            width: 50%;
-        }
-    }
+  }
 }
 
 .about-objet-temoin {
-    display: flex;
-    margin-top: 5rem;
-    margin-bottom: 10rem;
+  display: flex;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
 
-    .img-logo-objet-temoin{
-        width: 50%;
-        margin-right: 4%;
-    }
+  .img-logo-objet-temoin {
+    width: 50%;
+    margin-right: 4%;
+  }
 
-    .about-info-objet-temoin{
-        width: 50%;
-    }
+  .about-info-objet-temoin {
+    width: 50%;
+  }
 }
 
 .about-ihoi {
-    display : flex;
-    .about-info-ihoi{
-        width: 50%;
-        padding-right: 5%;
-    }
+  display: flex;
+  .about-info-ihoi {
+    width: 50%;
+    padding-right: 5%;
+  }
 
-    .background-logo {
-        width: 50%;
-        margin: auto;
-        .img-logo-ihoi {
-            width: 96%;
-            padding:2%;
-            background-color: var(--primary-color);
-        }
+  .background-logo {
+    width: 50%;
+    margin: auto;
+    .img-logo-ihoi {
+      width: 96%;
+      padding: 2%;
+      background-color: var(--primary-color);
     }
+  }
 }
