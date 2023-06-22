@@ -7,7 +7,9 @@ function Footer() {
     <footer className="footer">
       <div className="footer-left">
         <div className="logo-afac974">
-          <img src={logoAfac974} alt="logo AFAC 974" />
+          <a href="https://capeline974.re/CAPELINE/CARTOTHEQUE/capeline-accueil.html">
+            <img src={logoAfac974} alt="logo AFAC 974" />
+          </a>
         </div>
         <div className="afac-infos">
           <p>Association des Familles et Amis de CAPELINE</p>
@@ -23,12 +25,16 @@ function Footer() {
       </div>
       <div className="footer-right">
         <p>Nos Partenaires</p>
-        <img className="logo-ihoi" src={logoIhoi} alt="logo IHOI" />
-        <img
-          className="logo-objet-temoin"
-          src={logoObjetTemoin}
-          alt="logo Objet Témoin"
-        />
+        <div className="logo-ihoi">
+          <a href="https://ihoi.org/app/photopro.sk/ihoi_icono/?">
+            <img src={logoIhoi} alt="logo IHOI" />
+          </a>
+        </div>
+        <div className="logo-objet-temoin">
+          <a href="https://museo.vandanjon.com/index.php/en/">
+            <img src={logoObjetTemoin} alt="logo Objet Témoin" />
+          </a>
+        </div>
       </div>
     </footer>
   );
