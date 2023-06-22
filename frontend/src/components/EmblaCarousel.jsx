@@ -8,7 +8,7 @@ import imageByIndex from "./ImageByIndex";
 export default function EmblaCarousel(props) {
   const { slides, options } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [work, setWork] = useState([]);
+  const [works, setWorks] = useState([]);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
@@ -39,28 +39,36 @@ export default function EmblaCarousel(props) {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/works`)
-      .then((res) => setWork(res.data))
+      .then((res) => setWorks(res.data))
       .catch((err) => {
         console.error(err);
       });
   }, []);
   return (
     <div className="embla">
-      {work.length && (
+      {works.length && (
         <>
           <div className="embla__viewport" ref={emblaMainRef}>
             <div className="embla__container">
-              {slides.slice(0, work.length).map((index) => (
+              {slides.slice(0, works.length).map((index) => (
                 <div className="embla__slide" key={index}>
                   <img
                     className="embla__slide__img"
                     src={imageByIndex(index)}
-                    alt="Your alt text"
+                    alt={works[index].description}
                   />
                   <div className="embla__slide__text">
-                    <h1>{work[index].title}</h1>
-                    <h2>{work[index].author_id}</h2>
-                    <p>{work[index].story}</p>
+                    <h1>{works[index].title}</h1>
+                    <h2>
+                      {works[index].firstname} {works[index].lastname}
+                    </h2>
+                    <h3>Référence image ADR : {works[index].reference}</h3>
+                    <h3>Technique : {works[index].technique}</h3>
+                    <h3>Dimension : {works[index].sizes}</h3>
+                    <h3>Année de réalisation : {works[index].created}</h3>
+                    <h3>Lieu de conservation : {works[index].location}</h3>
+                    <p>{works[index].story}</p>
+                    <span>Article lié :{works[index].external}</span>
                   </div>
                 </div>
               ))}
@@ -70,7 +78,7 @@ export default function EmblaCarousel(props) {
           <div className="embla-thumbs">
             <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
               <div className="embla-thumbs__container">
-                {slides.slice(0, work.length).map((index) => (
+                {slides.slice(0, works.length).map((index) => (
                   <Thumb
                     onClick={() => onThumbClick(index)}
                     selected={index === selectedIndex}
