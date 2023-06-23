@@ -14,6 +14,7 @@ import Header from "./components/Header";
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
+import Page404 from "./pages/Page404";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/account" element={<Account />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </Router>
         <Footer />
