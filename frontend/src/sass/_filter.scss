@@ -1,40 +1,38 @@
 .filter {
-    position:relative;
-    height: 70rem;
-    width: 20rem;
-    background: var(--primary-color);
-    margin-bottom: 5rem;
-    margin-top: 10rem;
-    margin-left: 5rem;
+  position: relative;
+  height: 70rem;
+  width: 20rem;
+  background: var(--primary-color);
+  margin-bottom: 5rem;
+  margin-top: 10rem;
+  margin-left: -8rem;
+}
+
+.filter-menus-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+  margin-left: 3rem;
+  font-size: medium;
+  color: white;
+
+  details {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
-  
-  .filter-menus-container {
+
+  summary {
+    font-weight: bold;
+  }
+
+  p {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    height: 100%;
-    margin-left: 3rem;
-    font-size: medium;
-    color: white;
-
-    details {
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-      }
-
-      summary{
-        font-weight: bold;
-      }
-
-      p{
-        display: flex;
-        align-items: baseline;
-      }
-
-    input {
-    margin-right: 1rem;
-      }
+    align-items: baseline;
   }
 
- 
+  input {
+    margin-right: 1rem;
+  }
+}

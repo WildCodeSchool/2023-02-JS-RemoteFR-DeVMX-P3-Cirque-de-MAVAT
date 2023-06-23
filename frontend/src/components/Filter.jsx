@@ -1,17 +1,37 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function Filter() {
-  const [categories] = useState([
-    { category: "Usine" },
-    { category: "Travailleurs" },
-    { category: "Lieux" },
-    { category: "Animaux" },
-  ]);
-  const [techniques] = useState([
-    { technique: "Aquarelle" },
-    { technique: "Dessins" },
-    { technique: "Dessins a la mine de plomb" },
-  ]);
+  const [categories, setCategories] = useState([]);
+  const [techniques, setTechniques] = useState([]);
+  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+      .then((res) => setCategories(res.data))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/techniques`)
+      .then((res) => setTechniques(res.data))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/favourites`)
+      .then((res) => setFavourites(res.data))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <aside className="filter">
@@ -21,41 +41,49 @@ export default function Filter() {
 
       <nav className="filter-menus-container">
         <details>
-          <summary>Catégories</summary>
-          <p>
-            <input type="checkbox" />
-            {categories[0].category}
-          </p>
-          <p>
-            <input type="checkbox" />
-            {categories[1].category}
-          </p>
-          <p>
-            <input type="checkbox" />
-            {categories[2].category}
-          </p>
-          <p>
-            <input type="checkbox" />
-            {categories[3].category}
-          </p>
+          {categories.length && (
+            <>
+              <summary>Catégories</summary>
+              <div className="category">
+                {categories.slice(0, categories.length).map((cat) => (
+                  <div className="subcategory" key={cat.id}>
+                    <input type="checkbox" />
+                    <span>{cat.category}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </details>
         <details>
-          <summary>Techniques</summary>
-          <p>
-            <input type="checkbox" />
-            {techniques[0].technique}
-          </p>
-          <p>
-            <input type="checkbox" />
-            {techniques[1].technique}
-          </p>
-          <p>
-            <input type="checkbox" />
-            {techniques[2].technique}
-          </p>
+          {categories.length && (
+            <>
+              <summary>Techniques</summary>
+              <div className="technique">
+                {techniques.slice(0, techniques.length).map((tech) => (
+                  <div className="subsubtechnique" key={tech.id}>
+                    <input type="checkbox" />
+                    <span>{tech.technique}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </details>
         <details>
-          <summary>Favoris</summary>
+          {categories.length && (
+            <>
+              <summary>Favoris</summary>
+              <div className="favourite">
+                {favourites.slice(0, favourites.length).map((favor) => (
+                  <div className="subfavourites" key={favor.id}>
+                    <input type="checkbox" />
+                    <span>{favor.favourites}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </details>
       </nav>
     </aside>

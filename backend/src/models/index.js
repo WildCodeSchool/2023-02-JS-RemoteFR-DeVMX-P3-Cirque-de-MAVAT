@@ -34,6 +34,9 @@ const WorksManager = require("./WorksManager");
 const UsersManager = require("./UsersManager");
 const AuthorsManager = require("./AuthorsManager");
 const LoginManager = require("./LoginManager");
+const CategoriesManager = require("./CategoriesManager");
+const TechniquesManager = require("./TechniquesManager");
+const FavouritesManager = require("./FavouritesManager");
 
 models.item = new ItemManager();
 models.item.setDatabase(pool);
@@ -49,6 +52,15 @@ models.authors.setDatabase(pool);
 
 models.login = new LoginManager();
 models.login.setDatabase(pool);
+
+models.categories = new CategoriesManager();
+models.categories.setDatabase(pool);
+
+models.techniques = new TechniquesManager();
+models.techniques.setDatabase(pool);
+
+models.favourites = new FavouritesManager();
+models.favourites.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

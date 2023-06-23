@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-import CurrentUserLogContext from "../contexts/CurrentUserLog";
+import CurrentUserContext from "../contexts/CurrentUser";
 
 import logo from "../assets/logo-afac.svg";
 import account from "../assets/icon-account.svg";
@@ -12,9 +12,9 @@ import diamant from "../assets/bouton1.svg";
 
 export default function Header() {
   const location = useLocation();
-  const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const logout = () => {
-    setIsUserLogged(false);
+    setCurrentUser(null);
   };
 
   return (
@@ -61,7 +61,7 @@ export default function Header() {
         </nav>
         <div className="triangle" />
         <nav className="icon-nav">
-          {isUserLogged && (
+          {currentUser && (
             <figure>
               <img src={favorite} alt="favorite icon" className="icon-fav" />
               <figcaption>Favoris</figcaption>
@@ -73,7 +73,7 @@ export default function Header() {
               <figcaption>Compte</figcaption>
             </figure>
           </Link>
-          {isUserLogged && (
+          {currentUser && (
             <button type="button" onClick={logout}>
               <figure>
                 <img
@@ -86,6 +86,9 @@ export default function Header() {
             </button>
           )}
         </nav>
+        {currentUser && currentUser.username && (
+          <p className="hello">Bonjour, {currentUser.username}</p>
+        )}
       </div>
     </header>
   );
