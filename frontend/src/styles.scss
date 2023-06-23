@@ -14,11 +14,15 @@
 @use "sass/gallery";
 @use "sass/author";
 @use "sass/about";
+@use "sass/page404";
 
 @use "sass/footer";
 @use "sass/header";
 @use "sass/account";
 @use "sass/login";
+@use "sass/signup";
 @use "sass/filter";
 @use "sass/hexagone";
 @use "sass/sliderGallery";
+
+@use "sass/embla";
