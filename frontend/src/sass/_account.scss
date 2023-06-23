@@ -61,9 +61,31 @@
             }
         }
     }
+    fieldset {
+        margin-top: 4rem;
+        &:last-of-type {
+            legend {
+                font-size: 1.5rem;
+                color: inherit;
+            }
+            ul {
+                display: flex;
+                gap: 1rem;
+            }
+            li:not(:last-child) {
+                border-bottom: none;
+            }
+        }
+    }
+    legend {
+        font-weight: bold;
+        font-size: 2rem;
+        color: var(--primary-color);
+    }
     input {
         &[type="text"],
         &[type="email"],
+        &[type="url"],
         &[type="password"] {
             height: 3rem;
             border-top: none;
@@ -73,6 +95,10 @@
         &[type="submit"] {
             @include button;
         }
+    }
+    textarea {
+        height: 6rem;
+        border-color: black; // Safari
     }
     label {
         font-weight: bold;
