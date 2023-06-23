@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Thumb from "./EmblaCarouselThumbsButton";
-import imageByIndex from "./ImageByIndex";
 
 export default function EmblaCarousel(props) {
   const { slides, options } = props;
@@ -54,7 +53,9 @@ export default function EmblaCarousel(props) {
                 <div className="embla__slide" key={index}>
                   <img
                     className="embla__slide__img"
-                    src={imageByIndex(index)}
+                    src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                      works[index].src
+                    }`}
                     alt={works[index].description}
                   />
                   <div className="embla__slide__text">
@@ -85,7 +86,9 @@ export default function EmblaCarousel(props) {
                     onClick={() => onThumbClick(index)}
                     selected={index === selectedIndex}
                     index={index}
-                    imgSrc={imageByIndex(index)}
+                    imgSrc={`${
+                      import.meta.env.VITE_BACKEND_URL
+                    }/assets/images/${works[index].src}`}
                     key={index}
                   />
                 ))}
