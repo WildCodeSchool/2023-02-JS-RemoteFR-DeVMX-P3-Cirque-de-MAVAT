@@ -47,7 +47,7 @@ export default function AdminWorksList() {
                 {works.map((work) => {
                   const { id, title } = work;
                   return (
-                    <li key={id}>
+                    <li key={`works-${id}`}>
                       <Link to={`/account/works/${id}`}>{title}</Link>
                       <Link
                         to={`/account/works/delete/${id}`}

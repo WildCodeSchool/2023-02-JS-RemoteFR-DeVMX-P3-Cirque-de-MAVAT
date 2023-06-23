@@ -11,7 +11,7 @@ export default function AccountBreadcrumb({ breadcrumb }) {
             {breadcrumb.map((item) => {
               const { id, link, title } = item;
               return (
-                <li key={id}>
+                <li key={`account-breadcrumb-item-${id}`}>
                   {link ? <Link to={link}>{title}</Link> : title}
                 </li>
               );
