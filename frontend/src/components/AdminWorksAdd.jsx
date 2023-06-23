@@ -1,5 +1,5 @@
-import { useContext } from "react";
-// import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 import AccountBreadcrumb from "./AccountBreadcrumb";
 import Admin403 from "./Admin403";
@@ -8,6 +8,9 @@ import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function AdminWorksAdd() {
   const { currentUser } = useContext(CurrentUserContext);
+  const [authors, setAuthors] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [techniques, setTechniques] = useState([]);
   const breadcrumb = [
     {
       id: 1,
@@ -25,6 +28,22 @@ export default function AdminWorksAdd() {
       link: null,
     },
   ];
+
+  useEffect(() => {
+    const host = import.meta.env.VITE_BACKEND_URL;
+    axios
+      .get(`${host}/authors`)
+      .then((response) => setAuthors(response.data))
+      .catch((err) => console.error(err));
+    axios
+      .get(`${host}/categories`)
+      .then((response) => setCategories(response.data))
+      .catch((err) => console.error(err));
+    axios
+      .get(`${host}/techniques`)
+      .then((response) => setTechniques(response.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -94,33 +113,63 @@ export default function AdminWorksAdd() {
               </fieldset>
               <fieldset>
                 <legend>Caractéristiques</legend>
-                <p>
-                  <label htmlFor="add-author">
-                    Auteur
-                    <span aria-label=" obligatoire"> *</span>
-                  </label>
-                  <select id="add-author" name="author" required>
-                    <option value={1}>Auteur</option>
-                  </select>
-                </p>
-                <p>
-                  <label htmlFor="add-category">
-                    Catégorie
-                    <span aria-label=" obligatoire"> *</span>
-                  </label>
-                  <select id="add-category" name="category" required>
-                    <option value={1}>Catégorie</option>
-                  </select>
-                </p>
-                <p>
-                  <label htmlFor="add-technique">
-                    Technique
-                    <span aria-label=" obligatoire"> *</span>
-                  </label>
-                  <select id="add-technique" name="technique" required>
-                    <option value={1}>Auteur</option>
-                  </select>
-                </p>
+                {authors.length && (
+                  <p>
+                    <label htmlFor="add-author">
+                      Auteur
+                      <span aria-label=" obligatoire"> *</span>
+                    </label>
+                    <select id="add-author" name="author_id" required>
+                      {authors.map((option) => {
+                        const { id, firstname, lastname, artistname } = option;
+                        const author = [firstname, lastname, artistname]
+                          .filter((element) => element)
+                          .join(" ");
+                        return (
+                          <option key={`author-${id}`} value={id}>
+                            {author}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </p>
+                )}
+                {categories.length && (
+                  <p>
+                    <label htmlFor="add-category">
+                      Catégorie
+                      <span aria-label=" obligatoire"> *</span>
+                    </label>
+                    <select id="add-category" name="category_id" required>
+                      {categories.map((option) => {
+                        const { id, category } = option;
+                        return (
+                          <option key={`category-${id}`} value={id}>
+                            {category}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </p>
+                )}
+                {techniques.length && (
+                  <p>
+                    <label htmlFor="add-technique">
+                      Technique
+                      <span aria-label=" obligatoire"> *</span>
+                    </label>
+                    <select id="add-technique" name="technique_id" required>
+                      {techniques.map((option) => {
+                        const { id, technique } = option;
+                        return (
+                          <option key={`technique-${id}`} value={id}>
+                            {technique}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </p>
+                )}
                 <p>
                   <label htmlFor="add-created">
                     Date de réalisation
