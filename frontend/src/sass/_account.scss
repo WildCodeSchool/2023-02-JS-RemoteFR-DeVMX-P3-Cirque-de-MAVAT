@@ -199,6 +199,13 @@
                 box-sizing: border-box;
             }
         }
+        .back {
+            @include button;
+            font-weight: inherit;
+            text-transform: initial;
+            align-self: center;
+            width: max-content;
+        }
     }
     @media (min-width: 480px) {
         display: grid;
