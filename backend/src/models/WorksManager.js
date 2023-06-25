@@ -16,6 +16,43 @@ class WorksManager extends AbstractManager {
       `
     );
   }
+
+  create(
+    authorId,
+    categoryId,
+    techniqueId,
+    imageId,
+    reference,
+    title,
+    shortTitle,
+    created,
+    location,
+    sizes,
+    story,
+    externalLink,
+    isPublished
+  ) {
+    return this.database.query(
+      `INSERT INTO ${this.table}
+      (author_id, category_id, technique_id, image_id, reference, title, short_title, created, location, sizes, story, external, is_published)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        authorId,
+        categoryId,
+        techniqueId,
+        imageId,
+        reference,
+        title,
+        shortTitle,
+        created,
+        location,
+        sizes,
+        story,
+        externalLink,
+        isPublished,
+      ]
+    );
+  }
 }
 
 module.exports = WorksManager;

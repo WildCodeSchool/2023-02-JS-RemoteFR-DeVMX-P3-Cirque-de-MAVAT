@@ -37,6 +37,7 @@ const LoginManager = require("./LoginManager");
 const CategoriesManager = require("./CategoriesManager");
 const TechniquesManager = require("./TechniquesManager");
 const FavouritesManager = require("./FavouritesManager");
+const ImagesManager = require("./ImagesManager");
 
 models.item = new ItemManager();
 models.item.setDatabase(pool);
@@ -61,6 +62,9 @@ models.techniques.setDatabase(pool);
 
 models.favourites = new FavouritesManager();
 models.favourites.setDatabase(pool);
+
+models.images = new ImagesManager();
+models.images.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
