@@ -28,7 +28,51 @@ const read = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  const {
+    authorId,
+    categoryId,
+    techniqueId,
+    imageId,
+    reference,
+    title,
+    shortTitle,
+    created,
+    location,
+    sizes,
+    story,
+    externalLink,
+    isPublished,
+  } = req.body;
+  models.works
+    .create(
+      authorId,
+      categoryId,
+      techniqueId,
+      imageId,
+      reference,
+      title,
+      shortTitle,
+      created,
+      location,
+      sizes,
+      story,
+      externalLink,
+      isPublished
+    )
+    .then(([rows]) => {
+      res.status(201).json({ id: rows.insertId });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "L’œuvre n’a pas pu être ajoutée.",
+      });
+    });
+};
+
 module.exports = {
   browse,
   read,
+  create,
 };
