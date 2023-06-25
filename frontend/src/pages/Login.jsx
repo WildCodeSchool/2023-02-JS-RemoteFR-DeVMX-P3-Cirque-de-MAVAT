@@ -63,7 +63,7 @@ export default function Login() {
 
   return (
     <>
-      {currentUser && <Navigate to="/account" />}
+      {Object.keys(currentUser).length && <Navigate to="/account" />}
       <form className="account login" onSubmit={handleLogin} noValidate>
         <h2>S’identifier</h2>
         <p>

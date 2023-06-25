@@ -2,7 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
+const multer = require("multer");
+
+const upload = multer({ dest: "./public/assets/media/" });
+
 const itemControllers = require("./controllers/itemControllers");
+const imagesControllers = require("./controllers/imagesControllers");
 const worksControllers = require("./controllers/worksControllers");
 const usersControllers = require("./controllers/usersControllers");
 const authorsControllers = require("./controllers/authorsControllers");
@@ -14,6 +19,7 @@ const favouritesControllers = require("./controllers/favouritesControllers");
 const validateLogin = require("./services/validateLogin");
 const validateSignup = require("./services/validateSignup");
 const hashPassword = require("./services/hashPassword");
+const validateWork = require("./services/validateWork");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -44,6 +50,13 @@ router.post(
   loginControllers.verifyPassword
 );
 
+router.post(
+  "/works",
+  upload.single("image"),
+  validateWork,
+  imagesControllers.create,
+  worksControllers.create
+);
 router.post("/users", validateSignup, hashPassword, usersControllers.create);
 
 module.exports = router;

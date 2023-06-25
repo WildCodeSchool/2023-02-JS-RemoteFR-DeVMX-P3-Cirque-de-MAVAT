@@ -10,10 +10,15 @@ import SignUp from "./pages/SignUp";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import AccountDashboard from "./components/AccountDashboard";
+import AdminWorks from "./components/AdminWorks";
+import AdminWorksList from "./components/AdminWorksList";
+import AdminWorksAdd from "./components/AdminWorksAdd";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
+import Page404 from "./pages/Page404";
 
 function App() {
   return (
@@ -26,9 +31,16 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/author" element={<Author />} />
             <Route path="/about" element={<About />} />
-            <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account />}>
+              <Route index element={<AccountDashboard />} />
+              <Route path="works" element={<AdminWorks />}>
+                <Route index element={<AdminWorksList />} />
+                <Route path="add" element={<AdminWorksAdd />} />
+              </Route>
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </Router>
         <Footer />
