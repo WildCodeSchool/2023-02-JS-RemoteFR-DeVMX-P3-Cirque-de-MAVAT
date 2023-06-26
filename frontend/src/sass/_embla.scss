@@ -110,3 +110,13 @@
   width: 100%;
   object-fit: cover;
 }
+
+.favourite {
+  width: 10%;
+  height: 10%;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Ei-heart.svg');
+  background-size: 100%;
+  &.isLiked {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/35/Emoji_u2665.svg');
+  }
+}
