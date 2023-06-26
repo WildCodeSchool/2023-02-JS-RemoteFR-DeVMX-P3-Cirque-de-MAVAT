@@ -1,6 +1,5 @@
 .embla {
-  padding: 1.6rem;
-  width: 100rem;
+  max-width: 65%;
 }
 .embla__viewport {
   overflow: hidden;
@@ -27,8 +26,30 @@
   object-fit: cover;
 }
 .embla__slide__text {
-  margin-left: 2rem;
-  font-size: 2rem;
+  margin-left: 5rem;
+  h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  .embla_author {
+    color: black;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+  span {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
 }
 .embla__slide__number {
   width: 4.6rem;
