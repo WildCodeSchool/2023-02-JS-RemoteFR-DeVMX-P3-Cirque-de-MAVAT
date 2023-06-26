@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import Thumb from "./EmblaCarouselThumbsButton";
 
@@ -61,7 +62,9 @@ export default function EmblaCarousel(props) {
                   <div className="embla__slide__text">
                     <h1>{works[index].title}</h1>
                     <h2>
-                      {works[index].firstname} {works[index].lastname}
+                      <Link to="/author" className="embla_author">
+                        {works[index].firstname} {works[index].lastname}
+                      </Link>
                     </h2>
                     <h3>Référence image ADR : {works[index].reference}</h3>
                     <h3>Technique : {works[index].technique}</h3>
@@ -72,7 +75,12 @@ export default function EmblaCarousel(props) {
                     <h3>Lieu de conservation : {works[index].location}</h3>
                     <p>{works[index].story}</p>
                     {works[index].external && (
-                      <span>Article lié : {works[index].external}</span>
+                      <span>
+                        Article lié :{" "}
+                        <a href={works[index].external}>
+                          {works[index].external}
+                        </a>
+                      </span>
                     )}
                   </div>
                 </div>
