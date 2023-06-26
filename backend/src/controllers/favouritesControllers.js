@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.favourites
-    .findAll()
+    .findAllFavourites(req.params.id)
     .then(([rows]) => {
       res.send(rows);
     })

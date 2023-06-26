@@ -1,11 +1,16 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import PropTypes from "prop-types";
 import axios from "axios";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import CurrentUserContext from "../contexts/CurrentUser";
 import Thumb from "./EmblaCarouselThumbsButton";
 
 export default function EmblaCarousel(props) {
   const { slides, options } = props;
+  const { currentUser } = useContext(CurrentUserContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
@@ -13,6 +18,14 @@ export default function EmblaCarousel(props) {
     containScroll: "keepSnaps",
     dragFree: true,
   });
+
+  const liked = new Set();
+  const handleClickLiked = (e) => {
+    const workId = e.target.dataset.work;
+    if (liked.has(workId)) liked.delete(workId);
+    else liked.add(workId);
+    e.target.classList.toggle("isLiked");
+  };
 
   const onThumbClick = useCallback(
     (index) => {
@@ -43,6 +56,22 @@ export default function EmblaCarousel(props) {
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(currentUser).length && currentUser.id) {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/favourites/${currentUser.id}`)
+        .then((res) => {
+          res.data.forEach((row) => {
+            liked.add(row.work_id);
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, []);
+
   return (
     <div className="embla">
       {works.length && (
@@ -60,6 +89,14 @@ export default function EmblaCarousel(props) {
                   />
                   <div className="embla__slide__text">
                     <h1>{works[index].title}</h1>
+                    {Object.keys(currentUser).length ? (
+                      <div
+                        className="favourite"
+                        onClick={handleClickLiked}
+                        data-work={works[index].id}
+                      />
+                    ) : null}
+
                     <h2>
                       {works[index].firstname} {works[index].lastname}
                     </h2>

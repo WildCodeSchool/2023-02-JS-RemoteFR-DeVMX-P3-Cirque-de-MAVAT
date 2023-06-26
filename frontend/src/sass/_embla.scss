@@ -1,5 +1,5 @@
 .embla {
-  padding: 1.6rem;
+  padding: 1rem;
   width: 100rem;
 }
 .embla__viewport {
@@ -11,7 +11,7 @@
   touch-action: pan-y;
   flex-direction: row;
   height: auto;
-  margin-left: calc(1rem * -1);
+  // margin-left: calc(1rem * -1);
 }
 .embla__slide {
   display: flex;
@@ -24,7 +24,7 @@
 .embla__slide__img {
   display: block;
   width: 35%;
-  object-fit: cover;
+  // object-fit: cover;
 }
 .embla__slide__text {
   margin-left: 2rem;
@@ -88,4 +88,30 @@
   height: 9rem;
   width: 100%;
   object-fit: cover;
+}
+h1 {
+  color: var(--primary-color);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 2rem;
+}
+p {
+  font-size: 2rem;
+  margin: 2rem 0 1.5rem 0;
+}
+
+.favourite {
+  width: 10%;
+  height: 10%;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Ei-heart.svg');
+  background-size: 100%;
+  &.isLiked {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/35/Emoji_u2665.svg');
+  }
 }

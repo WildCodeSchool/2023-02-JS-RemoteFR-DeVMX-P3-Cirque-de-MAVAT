@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export default function Filter() {
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
-  const [favourites, setFavourites] = useState([]);
+  // const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,15 +19,6 @@ export default function Filter() {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/techniques`)
       .then((res) => setTechniques(res.data))
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/favourites`)
-      .then((res) => setFavourites(res.data))
       .catch((err) => {
         console.error(err);
       });
@@ -64,21 +55,6 @@ export default function Filter() {
                   <div className="subsubtechnique" key={tech.id}>
                     <input type="checkbox" />
                     <span>{tech.technique}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </details>
-        <details>
-          {categories.length && (
-            <>
-              <summary>Favoris</summary>
-              <div className="favourite">
-                {favourites.slice(0, favourites.length).map((favor) => (
-                  <div className="subfavourites" key={favor.id}>
-                    <input type="checkbox" />
-                    <span>{favor.favourites}</span>
                   </div>
                 ))}
               </div>
