@@ -36,6 +36,9 @@ router.delete("/users/:id", usersControllers.destroy);
 
 router.get("/authors", authorsControllers.browse);
 router.get("/authors/:id", authorsControllers.read);
+router.post("/authors", authorsControllers.add);
+router.put("/authors/:id", authorsControllers.edit);
+router.delete("/authors/:id", authorsControllers.destroy);
 
 router.get("/categories", categoriesControllers.browse);
 

@@ -7,15 +7,34 @@ class AuthorsManager extends AbstractManager {
 
   insert(authors) {
     return this.database.query(
-      `insert into ${this.table} (firstname) values (?)`,
-      [authors.firstname]
+      `insert into ${this.table} (firstname, lastname, artistname, birthdate, deathdate, birthplace, deathplace, biography) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        authors.firstname,
+        authors.lastname,
+        authors.artistname,
+        authors.birthdate,
+        authors.deathdate,
+        authors.birthplace,
+        authors.deathplace,
+        authors.biography,
+      ]
     );
   }
 
   update(authors) {
     return this.database.query(
-      `update ${this.table} firstname = ? where id = ?`,
-      [authors.firstname, authors.id]
+      `update ${this.table} set firstname = ?, lastname = ?, artistname = ?, birthdate = ?, deathdate = ?, birthplace = ?, deathplace = ?, biography = ? where id = ?`,
+      [
+        authors.firstname,
+        authors.lastname,
+        authors.artistname,
+        authors.birthdate,
+        authors.deathdate,
+        authors.birthplace,
+        authors.deathplace,
+        authors.biography,
+        authors.id,
+      ]
     );
   }
 }
