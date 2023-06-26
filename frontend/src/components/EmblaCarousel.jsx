@@ -65,7 +65,9 @@ export default function EmblaCarousel(props) {
                     </h2>
                     <h3>Référence image ADR : {works[index].reference}</h3>
                     <h3>Technique : {works[index].technique}</h3>
-                    <h3>Dimension : {works[index].sizes}</h3>
+                    {works[index].sizes && (
+                      <h3>Dimension : {works[index].sizes} cm</h3>
+                    )}
                     <h3>Année de réalisation : {works[index].created}</h3>
                     <h3>Lieu de conservation : {works[index].location}</h3>
                     <p>{works[index].story}</p>
