@@ -44,7 +44,9 @@ router.get("/categories", categoriesControllers.browse);
 
 router.get("/techniques", techniquesControllers.browse);
 
-router.get("/favourites", favouritesControllers.browse);
+router.get("/favourites/:id", favouritesControllers.browse);
+router.post("/favourites", favouritesControllers.create);
+router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
 
 router.post(
   "/login",
