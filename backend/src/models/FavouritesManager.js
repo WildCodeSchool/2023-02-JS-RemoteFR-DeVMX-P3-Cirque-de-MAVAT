@@ -14,5 +14,19 @@ class FavouritesManager extends AbstractManager {
       [id]
     );
   }
+
+  create(userId, workId) {
+    return this.database.query(
+      `INSERT INTO ${this.table} (user_id, work_id) VALUES (?, ?)`,
+      [userId, workId]
+    );
+  }
+
+  delete(userId, workId) {
+    return this.database.query(
+      `DELETE FROM ${this.table} WHERE user_id = ? AND work_id =?`,
+      [userId, workId]
+    );
+  }
 }
 module.exports = FavouritesManager;

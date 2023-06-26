@@ -13,18 +13,43 @@ export default function EmblaCarousel(props) {
   const { currentUser } = useContext(CurrentUserContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
+  const [favourites, setFavourites] = useState(new Map());
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,
   });
 
-  const liked = new Set();
   const handleClickLiked = (e) => {
-    const workId = e.target.dataset.work;
-    if (liked.has(workId)) liked.delete(workId);
-    else liked.add(workId);
-    e.target.classList.toggle("isLiked");
+    const liked = favourites;
+    const workId = Number.parseInt(e.target.dataset.work, 10);
+    if (liked.has(workId) && e.target.classList.contains("isLiked")) {
+      axios
+        .delete(
+          `${import.meta.env.VITE_BACKEND_URL}/favourites/${
+            currentUser.id
+          }/${workId}`
+        )
+        .then((res) => {
+          if (res.data.affectedRows) liked.delete(workId);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/favourites`, {
+          userId: currentUser.id,
+          workId,
+        })
+        .then((res) => {
+          if (res.data.affectedRows) liked.set(workId, true);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+    setFavourites(liked);
   };
 
   const onThumbClick = useCallback(
@@ -59,18 +84,20 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     if (Object.keys(currentUser).length && currentUser.id) {
+      const liked = new Map();
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/favourites/${currentUser.id}`)
         .then((res) => {
           res.data.forEach((row) => {
-            liked.add(row.work_id);
+            liked.set(row.work_id, true);
           });
+          setFavourites(liked);
         })
         .catch((err) => {
           console.error(err);
         });
     }
-  }, []);
+  }, [favourites]);
 
   return (
     <div className="embla">
@@ -91,7 +118,11 @@ export default function EmblaCarousel(props) {
                     <h1>{works[index].title}</h1>
                     {Object.keys(currentUser).length ? (
                       <div
-                        className="favourite"
+                        className={
+                          favourites.has(works[index].id)
+                            ? "favourite isLiked"
+                            : "favourite"
+                        }
                         onClick={handleClickLiked}
                         data-work={works[index].id}
                       />

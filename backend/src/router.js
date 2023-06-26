@@ -36,7 +36,8 @@ router.get("/categories", categoriesControllers.browse);
 router.get("/techniques", techniquesControllers.browse);
 
 router.get("/favourites/:id", favouritesControllers.browse);
-router.put("/favourites/:id", itemControllers.edit);
+router.post("/favourites", favouritesControllers.create);
+router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
 
 router.post(
   "/login",
