@@ -19,6 +19,21 @@ const create = (req, res, next) => {
     });
 };
 
+const destroy = (req, res, next) => {
+  const { imageId } = req.body;
+  models.images
+    .delete(imageId)
+    .then(([rows]) => {
+      req.body.affectedRows = rows.affectedRows;
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   create,
+  destroy,
 };
