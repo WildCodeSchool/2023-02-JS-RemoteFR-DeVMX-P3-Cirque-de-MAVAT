@@ -49,6 +49,8 @@ router.get("/favourites/:id", favouritesControllers.browse);
 router.post("/favourites", favouritesControllers.create);
 router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
 
+router.get("/images/:id", imagesControllers.read);
+
 router.post(
   "/login",
   validateLogin,
@@ -64,7 +66,7 @@ router.post(
   worksControllers.create
 );
 router.delete(
-  "/works/:id",
+  "/images/:id/:file",
   removeImage,
   imagesControllers.destroy,
   worksControllers.destroy
