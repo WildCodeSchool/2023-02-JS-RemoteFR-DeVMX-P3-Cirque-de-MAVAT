@@ -1,17 +1,21 @@
+import { useState } from "react";
 import Filter from "../components/Filter";
 import EmblaCarousel from "../components/EmblaCarousel";
 
 export default function Gallery() {
   const OPTIONS = {};
-  const SLIDE_COUNT = 30;
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCategoryChange = (categories) => {
+    setSelectedCategories(categories);
+  };
 
   return (
     <div className="gallery_page">
-      <Filter />
+      <Filter onCategoryChange={handleCategoryChange} />
       <EmblaCarousel
-        slides={SLIDES.slice(0, SLIDES.length)}
         options={OPTIONS}
+        selectedCategories={selectedCategories}
       />
     </div>
   );

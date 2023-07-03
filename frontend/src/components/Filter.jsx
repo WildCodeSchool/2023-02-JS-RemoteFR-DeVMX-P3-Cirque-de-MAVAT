@@ -1,9 +1,21 @@
+import PropTypes from "prop-types";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Filter() {
+export default function Filter({ onCategoryChange }) {
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCategoryChange = (e, categoryId) => {
+    if (e.target.checked) {
+      setSelectedCategories([...selectedCategories, categoryId]);
+    } else {
+      setSelectedCategories(
+        selectedCategories.filter((id) => id !== categoryId)
+      );
+    }
+  };
 
   useEffect(() => {
     axios
@@ -23,6 +35,10 @@ export default function Filter() {
       });
   }, []);
 
+  useEffect(() => {
+    onCategoryChange(selectedCategories);
+  }, [selectedCategories, onCategoryChange]);
+
   return (
     <aside className="filter">
       <div className="hexagon-part">
@@ -31,13 +47,17 @@ export default function Filter() {
 
       <nav className="filter-menus-container">
         <details>
-          {categories.length && (
+          {categories.length > 0 && (
             <>
               <summary>Catégories</summary>
               <div className="category">
-                {categories.slice(0, categories.length).map((cat) => (
+                {categories.map((cat) => (
                   <div className="subcategory" key={cat.id}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(cat.id)}
+                      onChange={(e) => handleCategoryChange(e, cat.id)}
+                    />
                     <span>{cat.category}</span>
                   </div>
                 ))}
@@ -64,3 +84,7 @@ export default function Filter() {
     </aside>
   );
 }
+
+Filter.propTypes = {
+  onCategoryChange: PropTypes.func.isRequired,
+};
