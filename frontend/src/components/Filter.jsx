@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function Filter({
   onCategoryChange,
   onTechniqueChange,
   onFavouriteChange,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
+  const hasCurrentUser = !!Object.keys(currentUser).length;
+
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -109,13 +114,15 @@ export default function Filter({
             </>
           )}
         </details>
-        <button
-          type="button"
-          className={`favourite-button${selectedFavourites ? " active" : ""}`}
-          onClick={handleFavouritesChange}
-        >
-          Favoris
-        </button>
+        {hasCurrentUser && (
+          <button
+            type="button"
+            className={`favourite-button${selectedFavourites ? " active" : ""}`}
+            onClick={handleFavouritesChange}
+          >
+            Favoris
+          </button>
+        )}
       </nav>
     </aside>
   );
