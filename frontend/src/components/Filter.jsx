@@ -2,10 +2,11 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Filter({ onCategoryChange }) {
+export default function Filter({ onCategoryChange, onTechniqueChange }) {
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedTechniques, setSelectedTechniques] = useState([]);
 
   const handleCategoryChange = (e, categoryId) => {
     if (e.target.checked) {
@@ -13,6 +14,15 @@ export default function Filter({ onCategoryChange }) {
     } else {
       setSelectedCategories(
         selectedCategories.filter((id) => id !== categoryId)
+      );
+    }
+  };
+  const handleTechniqueChange = (e, techniqueId) => {
+    if (e.target.checked) {
+      setSelectedTechniques([...selectedTechniques, techniqueId]);
+    } else {
+      setSelectedTechniques(
+        selectedTechniques.filter((id) => id !== techniqueId)
       );
     }
   };
@@ -37,7 +47,13 @@ export default function Filter({ onCategoryChange }) {
 
   useEffect(() => {
     onCategoryChange(selectedCategories);
-  }, [selectedCategories, onCategoryChange]);
+    onTechniqueChange(selectedTechniques);
+  }, [
+    selectedCategories,
+    onCategoryChange,
+    selectedTechniques,
+    onTechniqueChange,
+  ]);
 
   return (
     <aside className="filter">
@@ -66,13 +82,17 @@ export default function Filter({ onCategoryChange }) {
           )}
         </details>
         <details>
-          {categories.length && (
+          {categories.length > 0 && (
             <>
               <summary>Techniques</summary>
               <div className="technique">
-                {techniques.slice(0, techniques.length).map((tech) => (
+                {techniques.map((tech) => (
                   <div className="subsubtechnique" key={tech.id}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={selectedTechniques.includes(tech.id)}
+                      onChange={(e) => handleTechniqueChange(e, tech.id)}
+                    />
                     <span>{tech.technique}</span>
                   </div>
                 ))}
@@ -87,4 +107,5 @@ export default function Filter({ onCategoryChange }) {
 
 Filter.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
+  onTechniqueChange: PropTypes.func.isRequired,
 };

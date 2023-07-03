@@ -10,7 +10,7 @@ import CurrentUserContext from "../contexts/CurrentUser";
 import Thumb from "./EmblaCarouselThumbsButton";
 
 export default function EmblaCarousel(props) {
-  const { options, selectedCategories } = props;
+  const { options, selectedCategories, selectedTechniques } = props;
   const { currentUser } = useContext(CurrentUserContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
@@ -76,14 +76,12 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/works`, {
-        params: { categories: selectedCategories },
-      })
+      .get(`${import.meta.env.VITE_BACKEND_URL}/works`)
       .then((res) => setWorks(res.data))
       .catch((err) => {
         console.error(err);
       });
-  }, [selectedCategories]);
+  }, []);
 
   useEffect(() => {
     if (Object.keys(currentUser).length && currentUser.id) {
@@ -103,8 +101,13 @@ export default function EmblaCarousel(props) {
   }, [favourites]);
 
   const filteredWorks = works.filter((work) => {
-    if (selectedCategories.length === 0) return true;
-    return selectedCategories.includes(work.category_id);
+    const categoryMatches =
+      !selectedCategories.length ||
+      selectedCategories.includes(work.category_id);
+    const techniqueMatches =
+      !selectedTechniques.length ||
+      selectedTechniques.includes(work.technique_id);
+    return categoryMatches && techniqueMatches;
   });
 
   return (
@@ -185,4 +188,5 @@ export default function EmblaCarousel(props) {
 EmblaCarousel.propTypes = {
   options: PropTypes.objectOf(PropTypes.string).isRequired,
   selectedCategories: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedTechniques: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
