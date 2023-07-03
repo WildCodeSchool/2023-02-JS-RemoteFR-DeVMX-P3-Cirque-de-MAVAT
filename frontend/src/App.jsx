@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Page404 from "./pages/Page404";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -14,11 +15,11 @@ import AccountDashboard from "./components/AccountDashboard";
 import AdminWorks from "./components/AdminWorks";
 import AdminWorksList from "./components/AdminWorksList";
 import AdminWorksAdd from "./components/AdminWorksAdd";
+import AdminWorksDelete from "./components/AdminWorksDelete";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
-import Page404 from "./pages/Page404";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="works" element={<AdminWorks />}>
                 <Route index element={<AdminWorksList />} />
                 <Route path="add" element={<AdminWorksAdd />} />
+                <Route path="delete/:id" element={<AdminWorksDelete />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />

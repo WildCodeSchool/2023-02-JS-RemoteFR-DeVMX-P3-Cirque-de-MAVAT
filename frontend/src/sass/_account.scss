@@ -2,9 +2,19 @@
 
 @mixin button {
   font-style: italic;
+}
+@mixin button-confirm {
+  @include button;
   color: white;
   background: var(--primary-color);
   padding: 1rem 1.3rem 1.2rem;
+  border: none;
+}
+@mixin button-cancel {
+  @include button;
+  color: var(--primary-color);
+  background: transparent;
+  padding: .9rem 1.2rem 1.1rem;
 }
 .account {
   padding: 4.2rem 8.2rem 9rem;
@@ -93,7 +103,10 @@
       border-left: none;
     }
     &[type="submit"] {
-      @include button;
+      @include button-confirm;
+    }
+    &[type="reset"] {
+      @include button-cancel;
     }
   }
   textarea {
@@ -164,7 +177,7 @@
       + p {
         font-style: initial;
         a {
-          @include button;
+          @include button-confirm;
           font-weight: inherit;
           text-transform: initial;
           align-self: center;
@@ -200,11 +213,21 @@
       }
     }
     .back {
-      @include button;
+      @include button-confirm;
       font-weight: inherit;
       text-transform: initial;
       align-self: center;
       width: max-content;
+    }
+    &.delete {
+      form {
+        p {
+          text-align: center;
+          &:last-child {
+            gap: .5rem;
+          }
+        }
+      }
     }
   }
   @media (min-width: 480px) {
@@ -216,9 +239,24 @@
       }
     }
     input {
-      &[type="submit"] {
-        align-self: flex-end;
+      &[type="submit"],
+      &[type="reset"] {
         width: 12rem;
+      }
+      &[type="reset"] {
+        align-self: flex-end;
+      }
+    }
+    &.works {
+      &.delete {
+        form {
+          p {
+            &:last-child {
+              flex-direction: initial;
+              justify-content: center;
+            }
+          }
+        }
       }
     }
   }

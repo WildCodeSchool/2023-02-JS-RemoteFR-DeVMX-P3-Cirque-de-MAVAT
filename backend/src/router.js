@@ -20,6 +20,7 @@ const validateLogin = require("./services/validateLogin");
 const validateSignup = require("./services/validateSignup");
 const hashPassword = require("./services/hashPassword");
 const validateWork = require("./services/validateWork");
+const removeImage = require("./services/removeImage");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -48,6 +49,8 @@ router.get("/favourites/:id", favouritesControllers.browse);
 router.post("/favourites", favouritesControllers.create);
 router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
 
+router.get("/images/:id", imagesControllers.read);
+
 router.post(
   "/login",
   validateLogin,
@@ -62,6 +65,13 @@ router.post(
   imagesControllers.create,
   worksControllers.create
 );
+router.delete(
+  "/images/:id/:file",
+  removeImage,
+  imagesControllers.destroy,
+  worksControllers.destroy
+);
+
 router.post("/users", validateSignup, hashPassword, usersControllers.create);
 
 module.exports = router;
