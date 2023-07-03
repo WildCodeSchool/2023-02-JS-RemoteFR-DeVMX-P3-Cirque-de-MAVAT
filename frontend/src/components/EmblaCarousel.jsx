@@ -10,7 +10,12 @@ import CurrentUserContext from "../contexts/CurrentUser";
 import Thumb from "./EmblaCarouselThumbsButton";
 
 export default function EmblaCarousel(props) {
-  const { options, selectedCategories, selectedTechniques } = props;
+  const {
+    options,
+    selectedCategories,
+    selectedTechniques,
+    selectedFavourites,
+  } = props;
   const { currentUser } = useContext(CurrentUserContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
@@ -107,7 +112,11 @@ export default function EmblaCarousel(props) {
     const techniqueMatches =
       !selectedTechniques.length ||
       selectedTechniques.includes(work.technique_id);
-    return categoryMatches && techniqueMatches;
+    return (
+      categoryMatches &&
+      techniqueMatches &&
+      (!selectedFavourites || favourites.has(work.id))
+    );
   });
 
   return (
@@ -189,4 +198,5 @@ EmblaCarousel.propTypes = {
   options: PropTypes.objectOf(PropTypes.string).isRequired,
   selectedCategories: PropTypes.arrayOf(PropTypes.number).isRequired,
   selectedTechniques: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedFavourites: PropTypes.bool.isRequired,
 };

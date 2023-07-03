@@ -2,11 +2,16 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Filter({ onCategoryChange, onTechniqueChange }) {
+export default function Filter({
+  onCategoryChange,
+  onTechniqueChange,
+  onFavouriteChange,
+}) {
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedTechniques, setSelectedTechniques] = useState([]);
+  const [selectedFavourites, setSelectedFavourites] = useState(false);
 
   const handleCategoryChange = (e, categoryId) => {
     if (e.target.checked) {
@@ -25,6 +30,10 @@ export default function Filter({ onCategoryChange, onTechniqueChange }) {
         selectedTechniques.filter((id) => id !== techniqueId)
       );
     }
+  };
+  const handleFavouritesChange = () => {
+    setSelectedFavourites(!selectedFavourites);
+    onFavouriteChange();
   };
 
   useEffect(() => {
@@ -100,6 +109,13 @@ export default function Filter({ onCategoryChange, onTechniqueChange }) {
             </>
           )}
         </details>
+        <button
+          type="button"
+          className={`favourite-button${selectedFavourites ? " active" : ""}`}
+          onClick={handleFavouritesChange}
+        >
+          Favoris
+        </button>
       </nav>
     </aside>
   );
@@ -108,4 +124,5 @@ export default function Filter({ onCategoryChange, onTechniqueChange }) {
 Filter.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
   onTechniqueChange: PropTypes.func.isRequired,
+  onFavouriteChange: PropTypes.func.isRequired,
 };
