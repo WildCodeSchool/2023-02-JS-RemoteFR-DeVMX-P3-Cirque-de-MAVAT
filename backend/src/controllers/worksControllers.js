@@ -71,8 +71,22 @@ const create = (req, res) => {
     });
 };
 
+const destroy = (req, res) => {
+  const { affectedRows } = req.body;
+
+  // Since row deletion from `images` table deletes all rows referring to it thanks to `ON DELETE CASCADE` constraint, there is no need for a query
+  if (affectedRows) {
+    res.status(204).json({ message: "L’œuvre a été supprimée avec succès." });
+  } else {
+    res
+      .status(404)
+      .json({ message: "L’œuvre à supprimer n’a pas été trouvée." });
+  }
+};
+
 module.exports = {
   browse,
   read,
   create,
+  destroy,
 };
