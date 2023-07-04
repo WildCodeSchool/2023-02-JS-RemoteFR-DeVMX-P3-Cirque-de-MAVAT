@@ -31,4 +31,14 @@
   input {
     margin-right: 1rem;
   }
+  .favourite-button {
+    padding-left: 1.8rem;
+    margin-top: 1.8rem;
+    color: white;
+    border: none;
+    text-align: start;
+  }
+  .favourite-button.active {
+    font-weight: bold;
+  }
 }

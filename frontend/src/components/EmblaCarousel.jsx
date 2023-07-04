@@ -10,7 +10,12 @@ import CurrentUserContext from "../contexts/CurrentUser";
 import Thumb from "./EmblaCarouselThumbsButton";
 
 export default function EmblaCarousel(props) {
-  const { slides, options } = props;
+  const {
+    options,
+    selectedCategories,
+    selectedTechniques,
+    selectedFavourites,
+  } = props;
   const { currentUser } = useContext(CurrentUserContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
@@ -100,54 +105,64 @@ export default function EmblaCarousel(props) {
     }
   }, [favourites]);
 
+  const filteredWorks = works.filter((work) => {
+    const categoryMatches =
+      !selectedCategories.length ||
+      selectedCategories.includes(work.category_id);
+    const techniqueMatches =
+      !selectedTechniques.length ||
+      selectedTechniques.includes(work.technique_id);
+    return (
+      categoryMatches &&
+      techniqueMatches &&
+      (!selectedFavourites || favourites.has(work.id))
+    );
+  });
+
   return (
     <div className="embla">
-      {works.length && (
+      {filteredWorks.length > 0 && (
         <>
           <div className="embla__viewport" ref={emblaMainRef}>
             <div className="embla__container">
-              {slides.slice(0, works.length).map((index) => (
-                <div className="embla__slide" key={index}>
+              {filteredWorks.map((work) => (
+                <div className="embla__slide" key={work.id}>
                   <img
                     className="embla__slide__img"
                     src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                      works[index].src
+                      work.src
                     }`}
-                    alt={works[index].description}
+                    alt={work.description}
                   />
                   <div className="embla__slide__text">
-                    <h1>{works[index].title}</h1>
+                    <h1>{work.title}</h1>
                     {Object.keys(currentUser).length ? (
                       <div
                         className={
-                          favourites.has(works[index].id)
+                          favourites.has(work.id)
                             ? "favourite isLiked"
                             : "favourite"
                         }
                         onClick={handleClickLiked}
-                        data-work={works[index].id}
+                        data-work={work.id}
                       />
                     ) : null}
 
                     <h2>
                       <Link to="/author" className="embla_author">
-                        {works[index].firstname} {works[index].lastname}
+                        {work.firstname} {work.lastname}
                       </Link>
                     </h2>
-                    <h3>Référence image ADR : {works[index].reference}</h3>
-                    <h3>Technique : {works[index].technique}</h3>
-                    {works[index].sizes && (
-                      <h3>Dimension : {works[index].sizes} cm</h3>
-                    )}
-                    <h3>Année de réalisation : {works[index].created}</h3>
-                    <h3>Lieu de conservation : {works[index].location}</h3>
-                    <p>{works[index].story}</p>
-                    {works[index].external && (
+                    <h3>Référence image ADR : {work.reference}</h3>
+                    <h3>Technique : {work.technique}</h3>
+                    {work.sizes && <h3>Dimension : {work.sizes} cm</h3>}
+                    <h3>Année de réalisation : {work.created}</h3>
+                    <h3>Lieu de conservation : {work.location}</h3>
+                    <p>{work.story}</p>
+                    {work.external && (
                       <span>
                         Article lié :{" "}
-                        <a href={works[index].external}>
-                          {works[index].external}
-                        </a>
+                        <a href={work.external}>{work.external}</a>
                       </span>
                     )}
                   </div>
@@ -159,15 +174,15 @@ export default function EmblaCarousel(props) {
           <div className="embla-thumbs">
             <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
               <div className="embla-thumbs__container">
-                {slides.slice(0, works.length).map((index) => (
+                {filteredWorks.map((work, index) => (
                   <Thumb
                     onClick={() => onThumbClick(index)}
                     selected={index === selectedIndex}
                     index={index}
                     imgSrc={`${
                       import.meta.env.VITE_BACKEND_URL
-                    }/assets/images/${works[index].src}`}
-                    key={index}
+                    }/assets/images/${work.src}`}
+                    key={work.id}
                   />
                 ))}
               </div>
@@ -180,6 +195,8 @@ export default function EmblaCarousel(props) {
 }
 
 EmblaCarousel.propTypes = {
-  slides: PropTypes.arrayOf(PropTypes.number).isRequired,
   options: PropTypes.objectOf(PropTypes.string).isRequired,
+  selectedCategories: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedTechniques: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedFavourites: PropTypes.bool.isRequired,
 };
