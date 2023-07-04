@@ -1,5 +1,4 @@
 import AutoPortrait from "../assets/HCNMT_autoportrait.jpg";
-import AuthorsFormAdd from "../components/AuthorsFormAdd";
 
 export default function Author() {
   return (
@@ -17,7 +16,6 @@ export default function Author() {
           possimus iste! Ipsa ad eum ipsum dignissimos, similique esse aperiam
           saepe.
         </p>
-        <AuthorsFormAdd />
       </div>
     </div>
   );

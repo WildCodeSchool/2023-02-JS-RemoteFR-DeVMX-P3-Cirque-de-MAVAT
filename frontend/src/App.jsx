@@ -16,6 +16,7 @@ import AdminWorks from "./components/AdminWorks";
 import AdminWorksList from "./components/AdminWorksList";
 import AdminWorksAdd from "./components/AdminWorksAdd";
 import AdminWorksDelete from "./components/AdminWorksDelete";
+import AuthorsFormAdd from "./components/AuthorsFormAdd";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
@@ -39,6 +40,7 @@ function App() {
                 <Route path="add" element={<AdminWorksAdd />} />
                 <Route path="delete/:id" element={<AdminWorksDelete />} />
               </Route>
+              <Route path="/account/authors" element={<AuthorsFormAdd />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
