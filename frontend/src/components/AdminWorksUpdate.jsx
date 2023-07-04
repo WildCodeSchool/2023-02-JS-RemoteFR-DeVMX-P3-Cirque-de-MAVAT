@@ -84,10 +84,6 @@ export default function AdminWorksUpdate() {
       reference: {
         type: "string",
       },
-      image: {
-        type: "upload",
-        formats: ["image/jpeg", "image/png", "image/svg+xml", "image/tiff"],
-      },
       description: {
         type: "string",
       },
@@ -250,22 +246,12 @@ export default function AdminWorksUpdate() {
                   <fieldset>
                     <legend>Image</legend>
                     <p>
-                      <label htmlFor="add-image">
-                        Fichier à téléverser
-                        <span aria-label=" obligatoire"> *</span>
-                        {invalidFields.includes("image") && (
-                          <span className="error">
-                            (un fichier au format JPG, PNG, SVG ou TIFF doit
-                            être sélectionné)
-                          </span>
-                        )}
-                      </label>
+                      <label htmlFor="add-image">Fichier à téléverser</label>
                       <input
                         id="add-image"
                         name="image"
                         type="file"
                         accept="image/jpeg,image/png,image/svg+xml,image/tiff"
-                        required
                         ref={inputRef}
                       />
                     </p>
