@@ -186,6 +186,13 @@ export default function AdminWorksUpdate() {
                     <span className="error">{invalidWorkUpdate}</span>
                   )}
                 </p>
+                <p>
+                  <img
+                    src={`${host}/assets/media/${currentWork.get("src")}`}
+                    alt={currentWork.get("description")}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </p>
                 <form
                   encType="multipart/form-data"
                   onSubmit={handleUpdate}

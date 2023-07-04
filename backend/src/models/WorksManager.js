@@ -17,6 +17,16 @@ class WorksManager extends AbstractManager {
     );
   }
 
+  find(id) {
+    return this.database.query(
+      `SELECT w.id AS id, author_id, category_id, technique_id, image_id, reference, title, short_title, created, location, sizes, story, external, is_published, src, description
+      FROM ${this.table} w
+      JOIN images ON images.id = image_id
+      WHERE w.id = ?`,
+      [id]
+    );
+  }
+
   create(
     authorId,
     categoryId,
