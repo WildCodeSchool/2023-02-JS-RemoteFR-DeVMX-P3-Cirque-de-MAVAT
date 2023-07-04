@@ -15,6 +15,7 @@ import AccountDashboard from "./components/AccountDashboard";
 import AdminWorks from "./components/AdminWorks";
 import AdminWorksList from "./components/AdminWorksList";
 import AdminWorksAdd from "./components/AdminWorksAdd";
+import AdminWorksUpdate from "./components/AdminWorksUpdate";
 import AdminWorksDelete from "./components/AdminWorksDelete";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
@@ -37,6 +38,7 @@ function App() {
               <Route path="works" element={<AdminWorks />}>
                 <Route index element={<AdminWorksList />} />
                 <Route path="add" element={<AdminWorksAdd />} />
+                <Route path=":id" element={<AdminWorksUpdate />} />
                 <Route path="delete/:id" element={<AdminWorksDelete />} />
               </Route>
             </Route>
