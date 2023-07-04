@@ -1,10 +1,45 @@
+import PropTypes from "prop-types";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-export default function Filter() {
+import CurrentUserContext from "../contexts/CurrentUser";
+
+export default function Filter({
+  onCategoryChange,
+  onTechniqueChange,
+  onFavouriteChange,
+}) {
+  const { currentUser } = useContext(CurrentUserContext);
+  const hasCurrentUser = !!Object.keys(currentUser).length;
+
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
-  const [favourites, setFavourites] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedTechniques, setSelectedTechniques] = useState([]);
+  const [selectedFavourites, setSelectedFavourites] = useState(false);
+
+  const handleCategoryChange = (e, categoryId) => {
+    if (e.target.checked) {
+      setSelectedCategories([...selectedCategories, categoryId]);
+    } else {
+      setSelectedCategories(
+        selectedCategories.filter((id) => id !== categoryId)
+      );
+    }
+  };
+  const handleTechniqueChange = (e, techniqueId) => {
+    if (e.target.checked) {
+      setSelectedTechniques([...selectedTechniques, techniqueId]);
+    } else {
+      setSelectedTechniques(
+        selectedTechniques.filter((id) => id !== techniqueId)
+      );
+    }
+  };
+  const handleFavouritesChange = () => {
+    setSelectedFavourites(!selectedFavourites);
+    onFavouriteChange();
+  };
 
   useEffect(() => {
     axios
@@ -25,13 +60,14 @@ export default function Filter() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/favourites`)
-      .then((res) => setFavourites(res.data))
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    onCategoryChange(selectedCategories);
+    onTechniqueChange(selectedTechniques);
+  }, [
+    selectedCategories,
+    onCategoryChange,
+    selectedTechniques,
+    onTechniqueChange,
+  ]);
 
   return (
     <aside className="filter">
@@ -41,13 +77,17 @@ export default function Filter() {
 
       <nav className="filter-menus-container">
         <details>
-          {categories.length && (
+          {categories.length > 0 && (
             <>
               <summary>Catégories</summary>
               <div className="category">
-                {categories.slice(0, categories.length).map((cat) => (
+                {categories.map((cat) => (
                   <div className="subcategory" key={cat.id}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(cat.id)}
+                      onChange={(e) => handleCategoryChange(e, cat.id)}
+                    />
                     <span>{cat.category}</span>
                   </div>
                 ))}
@@ -56,13 +96,17 @@ export default function Filter() {
           )}
         </details>
         <details>
-          {categories.length && (
+          {categories.length > 0 && (
             <>
               <summary>Techniques</summary>
               <div className="technique">
-                {techniques.slice(0, techniques.length).map((tech) => (
+                {techniques.map((tech) => (
                   <div className="subsubtechnique" key={tech.id}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={selectedTechniques.includes(tech.id)}
+                      onChange={(e) => handleTechniqueChange(e, tech.id)}
+                    />
                     <span>{tech.technique}</span>
                   </div>
                 ))}
@@ -70,22 +114,22 @@ export default function Filter() {
             </>
           )}
         </details>
-        <details>
-          {categories.length && (
-            <>
-              <summary>Favoris</summary>
-              <div className="favourite">
-                {favourites.slice(0, favourites.length).map((favor) => (
-                  <div className="subfavourites" key={favor.id}>
-                    <input type="checkbox" />
-                    <span>{favor.favourites}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </details>
+        {hasCurrentUser && (
+          <button
+            type="button"
+            className={`favourite-button${selectedFavourites ? " active" : ""}`}
+            onClick={handleFavouritesChange}
+          >
+            Favoris
+          </button>
+        )}
       </nav>
     </aside>
   );
 }
+
+Filter.propTypes = {
+  onCategoryChange: PropTypes.func.isRequired,
+  onTechniqueChange: PropTypes.func.isRequired,
+  onFavouriteChange: PropTypes.func.isRequired,
+};

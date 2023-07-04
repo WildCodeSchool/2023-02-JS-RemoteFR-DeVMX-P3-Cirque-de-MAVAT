@@ -1,5 +1,18 @@
 const models = require("../models");
 
+const read = (req, res) => {
+  const { id } = req.params;
+  models.images
+    .find(id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const create = (req, res, next) => {
   const { description, src } = req.body;
   models.images
@@ -19,6 +32,22 @@ const create = (req, res, next) => {
     });
 };
 
+const destroy = (req, res, next) => {
+  const { id } = req.body;
+  models.images
+    .delete(id)
+    .then(([rows]) => {
+      req.body.affectedRows = rows.affectedRows;
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
+  read,
   create,
+  destroy,
 };
