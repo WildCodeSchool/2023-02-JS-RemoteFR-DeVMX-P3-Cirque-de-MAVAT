@@ -182,13 +182,15 @@ export default function AdminWorksUpdate() {
                     <span className="error">{invalidWorkUpdate}</span>
                   )}
                 </p>
-                <p>
-                  <img
-                    src={`${host}/assets/media/${currentWork.get("src")}`}
-                    alt={currentWork.get("description")}
-                    onContextMenu={(e) => e.preventDefault()}
-                  />
-                </p>
+                {currentWork.has("src") && (
+                  <p>
+                    <img
+                      src={`${host}/assets/media/${currentWork.get("src")}`}
+                      alt={currentWork.get("description")}
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                  </p>
+                )}
                 <form
                   encType="multipart/form-data"
                   onSubmit={handleUpdate}
@@ -471,6 +473,11 @@ export default function AdminWorksUpdate() {
                     </ul>
                   </fieldset>
                   <p>
+                    <input
+                      name="prevImage"
+                      type="hidden"
+                      defaultValue={currentWork.get("src")}
+                    />
                     <input type="submit" value="Ajouter" />
                   </p>
                 </form>
