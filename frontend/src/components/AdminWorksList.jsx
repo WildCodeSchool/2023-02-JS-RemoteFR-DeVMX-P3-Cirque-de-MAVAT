@@ -10,6 +10,7 @@ import CurrentUserContext from "../contexts/CurrentUser";
 export default function AdminWorksList() {
   const { currentUser } = useContext(CurrentUserContext);
   const [works, setWorks] = useState([]);
+  const host = import.meta.env.VITE_BACKEND_URL;
   const breadcrumb = [
     {
       id: 1,
@@ -42,13 +43,21 @@ export default function AdminWorksList() {
             <p>
               <Link to="/account/works/add">Ajouter une œuvre</Link>
             </p>
-            {works.length && (
+            {works.length ? (
               <ul>
                 {works.map((work) => {
-                  const { id, title } = work;
+                  const { id, title, src } = work;
                   return (
                     <li key={`works-${id}`}>
-                      <Link to={`/account/works/${id}`}>{title}</Link>
+                      <img
+                        src={`${host}/assets/media/${src}`}
+                        alt=""
+                        onContextMenu={(e) => e.preventDefault()}
+                      />
+                      {title}
+                      <Link to={`/account/works/${id}`} className="edit">
+                        Modifier
+                      </Link>
                       <Link
                         to={`/account/works/delete/${id}`}
                         className="delete"
@@ -59,6 +68,8 @@ export default function AdminWorksList() {
                   );
                 })}
               </ul>
+            ) : (
+              <p>Aucune œuvre enregistrée.</p>
             )}
           </section>
         </>
