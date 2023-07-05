@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import AuthorsList from "./AuthorsList";
 
 function AuthorsFormAdd() {
   const [firstname, setFirstname] = useState("");
@@ -34,6 +35,7 @@ function AuthorsFormAdd() {
     <div>
       <section className="account">
         <h2>Gérer les auteurs</h2>
+        <AuthorsList />
         <p className="authortoadd">Ajouter un auteur</p>
         <form onSubmit={handleSubmit} className="register-form">
           <label htmlFor="lastname">Nom :</label>
