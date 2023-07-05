@@ -1,5 +1,4 @@
 .footer {
-  
   background: var(--primary-gradient-color);
   color: white;
   font-size: 2rem;
@@ -9,19 +8,19 @@
     justify-content: space-around;
     min-height: 34rem;
     .footer-left {
-       display: flex;
+      display: flex;
       .logo-afac974 {
-         width: 14rem;
+        width: 14rem;
         margin-right: 8rem;
       }
       .afac-infos {
         .footer-links {
-         font-weight: 700;
-         line-height: 40px;
-         .link-color{
-         color: rgb(85, 188, 247);
-        cursor: pointer;
-         }
+          font-weight: 700;
+          line-height: 40px;
+          .link-color {
+            color: rgb(85, 188, 247);
+            cursor: pointer;
+          }
         }
       }
     }
@@ -41,11 +40,11 @@
     }
   }
   .lien-dev {
-      text-align: center; 
-      .linkedin{
-        color: rgb(85, 188, 247);
-        font-weight: bold;
-        cursor: pointer;
-      }   
+    text-align: center;
+    .linkedin {
+      color: rgb(85, 188, 247);
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 }
