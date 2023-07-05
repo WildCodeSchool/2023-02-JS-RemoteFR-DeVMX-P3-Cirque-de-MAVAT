@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import BreadcrumbAuthors from "./BreadcrumbAuthors";
 
 function AuthorsFormAdd() {
   const [firstname, setFirstname] = useState("");
@@ -10,6 +11,24 @@ function AuthorsFormAdd() {
   const [birthplace, setBirthplace] = useState("");
   const [deathplace, setDeathplace] = useState("");
   const [biography, setBiography] = useState("");
+
+  const breadcrumb = [
+    {
+      id: 1,
+      title: "Mon compte",
+      link: "/account",
+    },
+    {
+      id: 2,
+      title: "Gérer les auteurs",
+      link: "/account/authors",
+    },
+    {
+      id: 3,
+      title: "Ajouter un auteur",
+      link: null,
+    },
+  ];
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +51,7 @@ function AuthorsFormAdd() {
 
   return (
     <div>
+      <BreadcrumbAuthors breadcrumb={breadcrumb} />
       <section className="account">
         <h2>Ajouter un auteur</h2>
         <form onSubmit={handleSubmit} className="register-form">
@@ -113,7 +133,7 @@ function AuthorsFormAdd() {
             required
           />
           <button className="register-button" type="submit">
-            ENREGISTRER
+            Ajouter
           </button>
         </form>
       </section>
