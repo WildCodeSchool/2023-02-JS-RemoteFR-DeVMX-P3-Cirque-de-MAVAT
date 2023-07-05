@@ -8,6 +8,7 @@ import Account from "./pages/Account";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Page404 from "./pages/Page404";
+import Mention from "./pages/Mention";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -47,9 +48,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<Page404 />} />
+            <Route path="/mention" element={<Mention />} />
           </Routes>
+          <Footer />
         </Router>
-        <Footer />
       </CurrentUserProvider>
     </div>
   );
