@@ -123,33 +123,6 @@ export default function EmblaCarousel(props) {
   });
 
   return (
-<<<<<<< HEAD
-    <div className="embla">
-      {works.length && (
-        <>
-          <div className="embla__viewport" ref={emblaMainRef}>
-            <div className="embla__container">
-              {slides.slice(0, works.length).map((index) => (
-                <div className="embla__slide" key={index}>
-                  <img
-                    className="embla__slide__img"
-                    src={`${host}/assets/media/${works[index].src}`}
-                    alt={works[index].description}
-                  />
-                  <div className="embla__slide__text">
-                    <h1>{works[index].title}</h1>
-                    {Object.keys(currentUser).length ? (
-                      <div
-                        className={
-                          favourites.has(works[index].id)
-                            ? "favourite isLiked"
-                            : "favourite"
-                        }
-                        onClick={handleClickLiked}
-                        data-work={works[index].id}
-                      />
-                    ) : null}
-=======
     <>
       {fullscreenVisible && (
         <div
@@ -157,9 +130,7 @@ export default function EmblaCarousel(props) {
           onClick={() => setFullscreenVisible(false)}
         >
           <img
-            src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-              filteredWorks[selectedIndex].src
-            }`}
+            src={`${host}/assets/media/${filteredWorks[selectedIndex].src}`}
             alt={filteredWorks[selectedIndex].description}
           />
         </div>
@@ -173,9 +144,7 @@ export default function EmblaCarousel(props) {
                   <div className="embla__slide" key={work.id}>
                     <img
                       className="embla__slide__img"
-                      src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                        work.src
-                      }`}
+                      src={`${host}/assets/media/${work.src}`}
                       alt={work.description}
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
                     />
@@ -192,7 +161,6 @@ export default function EmblaCarousel(props) {
                           data-work={work.id}
                         />
                       ) : null}
->>>>>>> dev
 
                       <h2>
                         <Link to="/author" className="embla_author">
@@ -213,25 +181,6 @@ export default function EmblaCarousel(props) {
                       )}
                     </div>
                   </div>
-<<<<<<< HEAD
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="embla-thumbs">
-            <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-              <div className="embla-thumbs__container">
-                {slides.slice(0, works.length).map((index) => (
-                  <Thumb
-                    onClick={() => onThumbClick(index)}
-                    selected={index === selectedIndex}
-                    index={index}
-                    imgSrc={`${host}/assets/media/${works[index].src}`}
-                    key={index}
-                  />
-=======
->>>>>>> dev
                 ))}
               </div>
             </div>
@@ -244,9 +193,7 @@ export default function EmblaCarousel(props) {
                       onClick={() => onThumbClick(index)}
                       selected={index === selectedIndex}
                       index={index}
-                      imgSrc={`${
-                        import.meta.env.VITE_BACKEND_URL
-                      }/assets/images/${work.src}`}
+                      imgSrc={`${host}/assets/media/${work.src}`}
                       key={work.id}
                     />
                   ))}
