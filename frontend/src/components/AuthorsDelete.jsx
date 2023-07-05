@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import React from "react";
+import { useContext } from "react";
 import axios from "axios";
+import CurrentUserContext from "../contexts/CurrentUser";
 
 function AuthorsDelete({ author }) {
+  const { currentUser } = useContext(CurrentUserContext);
   function DeleteAuthorById() {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/authors/${author.id}`)
@@ -16,7 +18,7 @@ function AuthorsDelete({ author }) {
 
   return (
     <div>
-      {author.id && (
+      {currentUser.isAdmin && author.id && (
         <button type="button" onClick={DeleteAuthorById}>
           Supprimer
         </button>
