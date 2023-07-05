@@ -214,6 +214,38 @@ VALUES (
         0
     );
 
+INSERT INTO
+    users (
+        email,
+        password,
+        firstname,
+        lastname,
+        role
+    )
+VALUES (
+        'john.doe@gmail.com',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
+        'John',
+        'Doe',
+        0
+    );
+
+INSERT INTO
+    users (
+        email,
+        password,
+        firstname,
+        lastname,
+        role
+    )
+VALUES (
+        'jane.doe@gmail.com',
+        '$argon2id$v=19$m=16384,t=2,p=1$k3aFXCpcjyZ2cHpcZPDw3w$gSJbTCadxNikkm/zhTb+IvPDDJyZe0LpZh+5bCE7X+g',
+        'Jane',
+        'Doe',
+        0
+    );
+
 -- Images
 
 INSERT INTO

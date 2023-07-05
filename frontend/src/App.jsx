@@ -16,6 +16,10 @@ import AdminWorks from "./components/AdminWorks";
 import AdminWorksList from "./components/AdminWorksList";
 import AdminWorksAdd from "./components/AdminWorksAdd";
 import AdminWorksDelete from "./components/AdminWorksDelete";
+import AdminUsers from "./components/AdminUsers";
+import AdminUsersList from "./components/AdminUsersList";
+import AdminUsersAdd from "./components/AdminUsersAdd";
+import AdminUsersDelete from "./components/AdminUsersDelete";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
@@ -38,6 +42,11 @@ function App() {
                 <Route index element={<AdminWorksList />} />
                 <Route path="add" element={<AdminWorksAdd />} />
                 <Route path="delete/:id" element={<AdminWorksDelete />} />
+              </Route>
+              <Route path="users" element={<AdminUsers />}>
+                <Route index element={<AdminUsersList />} />
+                <Route path="add" element={<AdminUsersAdd />} />
+                <Route path="delete/:id" element={<AdminUsersDelete />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />

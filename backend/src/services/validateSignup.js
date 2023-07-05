@@ -7,6 +7,7 @@ const validateSignup = (req, res, next) => {
     firstname: joi.string().max(255, "utf8").allow(null),
     lastname: joi.string().max(255, "utf8").allow(null),
   });
+  // console.log('toto', req.body);
   const { email, password, firstname, lastname } = req.body;
   const { value, error } = schema.validate({
     email,
