@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logoAfac974 from "../assets/logo-afac.svg";
 import logoIhoi from "../assets/logo-ihoi.svg";
 import logoObjetTemoin from "../assets/logo-objet-temoin.svg";
@@ -17,7 +18,9 @@ function Footer() {
           <p>La Réunion</p>
           <p>Tel : +262 692 85 18 42</p>
           <div className="footer-links">
-            <p>Mentions légales</p>
+            <p>
+              <Link to="/mention">Mentions légales</Link>
+            </p>
             <p>Crédits</p>
             <p>Contact</p>
           </div>
