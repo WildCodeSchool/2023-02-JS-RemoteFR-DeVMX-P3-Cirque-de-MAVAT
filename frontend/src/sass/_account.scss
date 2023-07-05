@@ -14,7 +14,7 @@
   @include button;
   color: var(--primary-color);
   background: transparent;
-  padding: .9rem 1.2rem 1.1rem;
+  padding: 0.9rem 1.2rem 1.1rem;
 }
 .account {
   padding: 4.2rem 8.2rem 9rem;
@@ -224,7 +224,7 @@
         p {
           text-align: center;
           &:last-child {
-            gap: .5rem;
+            gap: 0.5rem;
           }
         }
       }
