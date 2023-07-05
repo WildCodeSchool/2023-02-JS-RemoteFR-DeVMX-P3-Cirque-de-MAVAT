@@ -19,6 +19,11 @@ export default function AccountDashboard() {
             <Link to="/account/works">Gérer les œuvres</Link>
           </li>
         )}
+        {hasCurrentUser && currentUser.isAdmin && (
+          <li>
+            <Link to="/account/authors">Gérer les auteurs</Link>
+          </li>
+        )}
       </ul>
     </section>
   );

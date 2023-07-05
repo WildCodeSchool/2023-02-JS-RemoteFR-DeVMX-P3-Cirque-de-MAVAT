@@ -1,17 +1,35 @@
+import { useState } from "react";
 import Filter from "../components/Filter";
 import EmblaCarousel from "../components/EmblaCarousel";
 
 export default function Gallery() {
   const OPTIONS = {};
-  const SLIDE_COUNT = 30;
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedTechniques, setSelectedTechniques] = useState([]);
+  const [selectedFavourites, setSelectedFavourites] = useState(false);
+
+  const handleCategoryChange = (categories) => {
+    setSelectedCategories(categories);
+  };
+  const handleTechniqueChange = (techniques) => {
+    setSelectedTechniques(techniques);
+  };
+  const handleFavouritesChange = () => {
+    setSelectedFavourites(!selectedFavourites);
+  };
 
   return (
     <div className="gallery_page">
-      <Filter />
+      <Filter
+        onCategoryChange={handleCategoryChange}
+        onTechniqueChange={handleTechniqueChange}
+        onFavouriteChange={handleFavouritesChange}
+      />
       <EmblaCarousel
-        slides={SLIDES.slice(0, SLIDES.length)}
         options={OPTIONS}
+        selectedCategories={selectedCategories}
+        selectedTechniques={selectedTechniques}
+        selectedFavourites={selectedFavourites}
       />
     </div>
   );
