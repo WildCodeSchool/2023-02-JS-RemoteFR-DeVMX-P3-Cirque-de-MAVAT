@@ -20,6 +20,7 @@ export default function EmblaCarousel(props) {
     containScroll: "keepSnaps",
     dragFree: true,
   });
+  const host = import.meta.env.VITE_BACKEND_URL;
 
   const handleClickLiked = (e) => {
     const liked = favourites;
@@ -110,9 +111,7 @@ export default function EmblaCarousel(props) {
                 <div className="embla__slide" key={index}>
                   <img
                     className="embla__slide__img"
-                    src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                      works[index].src
-                    }`}
+                    src={`${host}/assets/media/${works[index].src}`}
                     alt={works[index].description}
                   />
                   <div className="embla__slide__text">
@@ -164,9 +163,7 @@ export default function EmblaCarousel(props) {
                     onClick={() => onThumbClick(index)}
                     selected={index === selectedIndex}
                     index={index}
-                    imgSrc={`${
-                      import.meta.env.VITE_BACKEND_URL
-                    }/assets/images/${works[index].src}`}
+                    imgSrc={`${host}/assets/media/${works[index].src}`}
                     key={index}
                   />
                 ))}
