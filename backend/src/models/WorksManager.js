@@ -63,6 +63,43 @@ class WorksManager extends AbstractManager {
       ]
     );
   }
+
+  update(
+    authorId,
+    categoryId,
+    techniqueId,
+    reference,
+    title,
+    shortTitle,
+    created,
+    location,
+    sizes,
+    story,
+    externalLink,
+    isPublished,
+    id
+  ) {
+    return this.database.query(
+      `UPDATE ${this.table}
+      SET author_id = ?, category_id = ?, technique_id = ?, reference = ?, title = ?, short_title = ?, created = ?, location = ?, sizes = ?, story = ?, external = ?, is_published = ?
+      WHERE id = ?`,
+      [
+        authorId,
+        categoryId,
+        techniqueId,
+        reference,
+        title,
+        shortTitle,
+        created,
+        location,
+        sizes,
+        story,
+        externalLink,
+        isPublished,
+        id,
+      ]
+    );
+  }
 }
 
 module.exports = WorksManager;

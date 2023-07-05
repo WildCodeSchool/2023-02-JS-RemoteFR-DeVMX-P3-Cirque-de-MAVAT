@@ -58,7 +58,7 @@ export default function AdminWorksUpdate() {
         setCurrentWork(fields);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [isUpdated]);
 
   useEffect(() => {
     axios
@@ -145,9 +145,9 @@ export default function AdminWorksUpdate() {
         fields.delete(field);
       }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/works`, fields)
+        .put(`${import.meta.env.VITE_BACKEND_URL}/works/${id}`, fields)
         .then((response) => {
-          if (response.data.id) setIsUpdated(true);
+          if (response.status === 204) setIsUpdated(true);
         })
         .catch((err) => setInvalidWorkUpdate(err.response.data.error));
     }
@@ -167,7 +167,7 @@ export default function AdminWorksUpdate() {
             </h2>
             {isUpdated ? (
               <>
-                <p>L’œuvre a été ajoutée avec succès.</p>
+                <p>L’œuvre a été mise à jour avec succès.</p>
                 <p>
                   <Link to="/account/works" className="back">
                     Retourner à la liste des œuvres
@@ -182,15 +182,6 @@ export default function AdminWorksUpdate() {
                     <span className="error">{invalidWorkUpdate}</span>
                   )}
                 </p>
-                {currentWork.has("src") && (
-                  <p>
-                    <img
-                      src={`${host}/assets/media/${currentWork.get("src")}`}
-                      alt={currentWork.get("description")}
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                  </p>
-                )}
                 <form
                   encType="multipart/form-data"
                   onSubmit={handleUpdate}
@@ -253,7 +244,7 @@ export default function AdminWorksUpdate() {
                         id="add-image"
                         name="image"
                         type="file"
-                        accept="image/jpeg,image/png,image/svg+xml,image/tiff"
+                        accept="image/jpeg,image/png,image/tiff"
                         ref={inputRef}
                       />
                     </p>
@@ -474,11 +465,16 @@ export default function AdminWorksUpdate() {
                   </fieldset>
                   <p>
                     <input
+                      name="imageId"
+                      type="hidden"
+                      defaultValue={currentWork.get("imageId")}
+                    />
+                    <input
                       name="prevImage"
                       type="hidden"
                       defaultValue={currentWork.get("src")}
                     />
-                    <input type="submit" value="Ajouter" />
+                    <input type="submit" value="Mettre à jour" />
                   </p>
                 </form>
               </>

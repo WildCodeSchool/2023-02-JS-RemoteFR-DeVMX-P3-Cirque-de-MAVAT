@@ -211,8 +211,8 @@ export default function AdminWorksAdd() {
                         <span aria-label=" obligatoire"> *</span>
                         {invalidFields.includes("image") && (
                           <span className="error">
-                            (un fichier au format JPG, PNG, SVG ou TIFF doit
-                            être sélectionné)
+                            (un fichier au format JPG, PNG ou TIFF doit être
+                            sélectionné)
                           </span>
                         )}
                       </label>
@@ -220,7 +220,7 @@ export default function AdminWorksAdd() {
                         id="add-image"
                         name="image"
                         type="file"
-                        accept="image/jpeg,image/png,image/svg+xml,image/tiff"
+                        accept="image/jpeg,image/png,image/tiff"
                         required
                         ref={inputRef}
                       />
