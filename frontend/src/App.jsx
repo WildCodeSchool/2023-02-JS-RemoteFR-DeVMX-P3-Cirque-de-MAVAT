@@ -46,8 +46,8 @@ function App() {
             <Route path="*" element={<Page404 />} />
             <Route path="/mention" element={<Mention />} />
           </Routes>
+          <Footer />
         </Router>
-        <Footer />
       </CurrentUserProvider>
     </div>
   );
