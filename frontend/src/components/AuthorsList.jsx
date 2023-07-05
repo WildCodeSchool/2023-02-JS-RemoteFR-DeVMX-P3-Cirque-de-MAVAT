@@ -25,33 +25,19 @@ export default function AuthorsList() {
       {currentUser.isAdmin ? (
         <section className="account authors">
           <h2>Gérer les auteurs</h2>
-          <p>
-            <Link to="/account/authors/add">Ajouter un auteur</Link>
+          <p className="authorfont">
+            <Link className="authortoadd" to="/account/authors/add">
+              Ajouter un auteur
+            </Link>
           </p>
           {authors.length && (
-            <ul>
+            <ul className="listdecoration">
               {authors.map((author) => {
-                const {
-                  id,
-                  firstname,
-                  lastname,
-                  artistname,
-                  birthdate,
-                  deathdate,
-                  birthplace,
-                  deathplace,
-                  biography,
-                } = author;
+                const { id, firstname, lastname } = author;
                 return (
-                  <li key={`authors-${id}`}>
-                    {firstname}
+                  <li className="listdecorationauthor" key={`authors-${id}`}>
+                    {firstname}&nbsp;
                     {lastname}
-                    {artistname}
-                    {birthdate}
-                    {deathdate}
-                    {birthplace}
-                    {deathplace}
-                    {biography}
                   </li>
                 );
               })}
