@@ -113,7 +113,7 @@ function AuthorsFormAdd() {
             required
           />
           <button className="register-button" type="submit">
-            ENREGISTRER
+            Ajouter
           </button>
         </form>
       </section>
