@@ -1,5 +1,6 @@
 .fullscreen-image {
   position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -44,6 +45,7 @@
   object-fit: cover;
   cursor: pointer;
 }
+
 .embla__slide__text {
   margin-left: 5rem;
   h1 {
@@ -112,7 +114,6 @@
   touch-action: manipulation;
   display: block;
   text-decoration: none;
-  cursor: pointer;
   border: 0;
   padding: 0;
   margin: 0;
@@ -128,6 +129,7 @@
   height: 9rem;
   width: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .favourite {
