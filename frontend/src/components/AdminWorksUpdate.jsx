@@ -1,5 +1,6 @@
+/* eslint-disable no-shadow */
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import AccountBreadcrumb from "./AccountBreadcrumb";
@@ -7,15 +8,18 @@ import Admin403 from "./Admin403";
 
 import CurrentUserContext from "../contexts/CurrentUser";
 
-export default function AdminWorksAdd() {
+export default function AdminWorksUpdate() {
   const { currentUser } = useContext(CurrentUserContext);
+  const { id } = useParams();
+  const [currentWork, setCurrentWork] = useState(new FormData());
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
   const [techniques, setTechniques] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
-  const [invalidWorkAddition, setInvalidWorkAddition] = useState("");
-  const [isAdded, setIsAdded] = useState(false);
+  const [invalidWorkUpdate, setInvalidWorkUpdate] = useState("");
+  const [isUpdated, setIsUpdated] = useState(false);
   const inputRef = useRef();
+  const host = import.meta.env.VITE_BACKEND_URL;
   const breadcrumb = [
     {
       id: 1,
@@ -29,13 +33,34 @@ export default function AdminWorksAdd() {
     },
     {
       id: 3,
-      title: "Ajouter une œuvre",
+      title: currentWork.has("title")
+        ? currentWork.get("title")
+        : "Modifier une œuvre",
       link: null,
     },
   ];
 
   useEffect(() => {
-    const host = import.meta.env.VITE_BACKEND_URL;
+    axios
+      .get(`${host}/works/${id}`)
+      .then((response) => {
+        const { data } = response;
+        const fields = new FormData();
+        for (const key in data) {
+          if (data[key] !== null) {
+            const camelCasedKey = key
+              .split("_")
+              .map((e, i) => (i === 0 ? e : e[0].toUpperCase() + e.slice(1)))
+              .join("");
+            fields.append(camelCasedKey, data[key]);
+          }
+        }
+        setCurrentWork(fields);
+      })
+      .catch((err) => console.error(err));
+  }, [isUpdated]);
+
+  useEffect(() => {
     axios
       .get(`${host}/authors`)
       .then((response) => setAuthors(response.data))
@@ -50,7 +75,7 @@ export default function AdminWorksAdd() {
       .catch((err) => console.error(err));
   }, []);
 
-  const handleAdd = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
     const validationFilters = {
       title: {
@@ -58,10 +83,6 @@ export default function AdminWorksAdd() {
       },
       reference: {
         type: "string",
-      },
-      image: {
-        type: "upload",
-        formats: ["image/jpeg", "image/png", "image/svg+xml", "image/tiff"],
       },
       description: {
         type: "string",
@@ -124,11 +145,11 @@ export default function AdminWorksAdd() {
         fields.delete(field);
       }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/works`, fields)
+        .put(`${import.meta.env.VITE_BACKEND_URL}/works/${id}`, fields)
         .then((response) => {
-          if (response.data.id) setIsAdded(true);
+          if (response.status === 204) setIsUpdated(true);
         })
-        .catch((err) => setInvalidWorkAddition(err.response.data.error));
+        .catch((err) => setInvalidWorkUpdate(err.response.data.error));
     }
   };
 
@@ -139,10 +160,14 @@ export default function AdminWorksAdd() {
         <>
           <AccountBreadcrumb breadcrumb={breadcrumb} />
           <section className="account works">
-            <h2>Ajouter une œuvre</h2>
-            {isAdded ? (
+            <h2>
+              {currentWork.has("title")
+                ? currentWork.get("title")
+                : "Modifier une œuvre"}
+            </h2>
+            {isUpdated ? (
               <>
-                <p>L’œuvre a été ajoutée avec succès.</p>
+                <p>L’œuvre a été mise à jour avec succès.</p>
                 <p>
                   <Link to="/account/works" className="back">
                     Retourner à la liste des œuvres
@@ -153,13 +178,13 @@ export default function AdminWorksAdd() {
               <>
                 <p>
                   Les champs accompagnés d’un * sont obligatoires
-                  {invalidWorkAddition && (
-                    <span className="error">{invalidWorkAddition}</span>
+                  {invalidWorkUpdate && (
+                    <span className="error">{invalidWorkUpdate}</span>
                   )}
                 </p>
                 <form
                   encType="multipart/form-data"
-                  onSubmit={handleAdd}
+                  onSubmit={handleUpdate}
                   noValidate
                 >
                   <fieldset>
@@ -174,7 +199,13 @@ export default function AdminWorksAdd() {
                           </span>
                         )}
                       </label>
-                      <input id="add-title" name="title" type="text" required />
+                      <input
+                        id="add-title"
+                        name="title"
+                        type="text"
+                        defaultValue={currentWork.get("title")}
+                        required
+                      />
                     </p>
                     <p>
                       <label htmlFor="add-short-title">Titre abrégé</label>
@@ -182,6 +213,7 @@ export default function AdminWorksAdd() {
                         id="add-short-title"
                         name="shortTitle"
                         type="text"
+                        defaultValue={currentWork.get("shortTitle")}
                       />
                     </p>
                     <p>
@@ -199,6 +231,7 @@ export default function AdminWorksAdd() {
                         name="reference"
                         type="text"
                         maxLength="255"
+                        defaultValue={currentWork.get("reference")}
                         required
                       />
                     </p>
@@ -206,22 +239,12 @@ export default function AdminWorksAdd() {
                   <fieldset>
                     <legend>Image</legend>
                     <p>
-                      <label htmlFor="add-image">
-                        Fichier à téléverser
-                        <span aria-label=" obligatoire"> *</span>
-                        {invalidFields.includes("image") && (
-                          <span className="error">
-                            (un fichier au format JPG, PNG ou TIFF doit être
-                            sélectionné)
-                          </span>
-                        )}
-                      </label>
+                      <label htmlFor="add-image">Fichier à téléverser</label>
                       <input
                         id="add-image"
                         name="image"
                         type="file"
                         accept="image/jpeg,image/png,image/tiff"
-                        required
                         ref={inputRef}
                       />
                     </p>
@@ -240,6 +263,7 @@ export default function AdminWorksAdd() {
                         name="description"
                         type="text"
                         maxLength="255"
+                        defaultValue={currentWork.get("description")}
                         required
                       />
                     </p>
@@ -252,7 +276,12 @@ export default function AdminWorksAdd() {
                           Auteur
                           <span aria-label=" obligatoire"> *</span>
                         </label>
-                        <select id="add-author" name="authorId" required>
+                        <select
+                          id="add-author"
+                          name="authorId"
+                          defaultValue={currentWork.get("authorId")}
+                          required
+                        >
                           {authors.map((option) => {
                             const { id, firstname, lastname, artistname } =
                               option;
@@ -274,7 +303,12 @@ export default function AdminWorksAdd() {
                           Catégorie
                           <span aria-label=" obligatoire"> *</span>
                         </label>
-                        <select id="add-category" name="categoryId" required>
+                        <select
+                          id="add-category"
+                          name="categoryId"
+                          defaultValue={currentWork.get("categoryId")}
+                          required
+                        >
                           {categories.map((option) => {
                             const { id, category } = option;
                             return (
@@ -292,7 +326,12 @@ export default function AdminWorksAdd() {
                           Technique
                           <span aria-label=" obligatoire"> *</span>
                         </label>
-                        <select id="add-technique" name="techniqueId" required>
+                        <select
+                          id="add-technique"
+                          name="techniqueId"
+                          defaultValue={currentWork.get("techniqueId")}
+                          required
+                        >
                           {techniques.map((option) => {
                             const { id, technique } = option;
                             return (
@@ -319,6 +358,7 @@ export default function AdminWorksAdd() {
                         name="created"
                         type="text"
                         maxLength="255"
+                        defaultValue={currentWork.get("created")}
                         required
                       />
                     </p>
@@ -337,6 +377,7 @@ export default function AdminWorksAdd() {
                         name="location"
                         type="text"
                         maxLength="255"
+                        defaultValue={currentWork.get("location")}
                         required
                       />
                     </p>
@@ -347,6 +388,7 @@ export default function AdminWorksAdd() {
                         name="sizes"
                         type="text"
                         maxLength="255"
+                        defaultValue={currentWork.get("sizes")}
                       />
                     </p>
                   </fieldset>
@@ -354,7 +396,11 @@ export default function AdminWorksAdd() {
                     <legend>Compléments</legend>
                     <p>
                       <label htmlFor="add-story">Anecdote</label>
-                      <textarea id="add-story" name="story" />
+                      <textarea
+                        id="add-story"
+                        name="story"
+                        defaultValue={currentWork.get("story")}
+                      />
                     </p>
                     <p>
                       <label htmlFor="add-external-link">Lien externe</label>
@@ -363,35 +409,72 @@ export default function AdminWorksAdd() {
                         name="externalLink"
                         type="url"
                         maxLength="255"
+                        defaultValue={currentWork.get("external")}
                       />
                     </p>
                   </fieldset>
                   <fieldset>
                     <legend>Publier l’œuvre&nbsp;?</legend>
                     <ul>
-                      <li>
-                        <input
-                          id="add-publish-yes"
-                          name="isPublished"
-                          type="radio"
-                          value="1"
-                        />
-                        <label htmlFor="add-publish-yes">Oui</label>
-                      </li>
-                      <li>
-                        <input
-                          id="add-publish-no"
-                          name="isPublished"
-                          type="radio"
-                          value="0"
-                          defaultChecked
-                        />
-                        <label htmlFor="add-publish-no">Non</label>
-                      </li>
+                      {currentWork.get("isPublished") === "1" ? (
+                        <>
+                          <li>
+                            <input
+                              id="add-publish-yes"
+                              name="isPublished"
+                              type="radio"
+                              value="1"
+                              defaultChecked
+                            />
+                            <label htmlFor="add-publish-yes">Oui</label>
+                          </li>
+                          <li>
+                            <input
+                              id="add-publish-no"
+                              name="isPublished"
+                              type="radio"
+                              value="0"
+                            />
+                            <label htmlFor="add-publish-no">Non</label>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <input
+                              id="add-publish-yes"
+                              name="isPublished"
+                              type="radio"
+                              value="1"
+                            />
+                            <label htmlFor="add-publish-yes">Oui</label>
+                          </li>
+                          <li>
+                            <input
+                              id="add-publish-no"
+                              name="isPublished"
+                              type="radio"
+                              value="0"
+                              defaultChecked
+                            />
+                            <label htmlFor="add-publish-no">Non</label>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </fieldset>
                   <p>
-                    <input type="submit" value="Ajouter" />
+                    <input
+                      name="imageId"
+                      type="hidden"
+                      defaultValue={currentWork.get("imageId")}
+                    />
+                    <input
+                      name="prevImage"
+                      type="hidden"
+                      defaultValue={currentWork.get("src")}
+                    />
+                    <input type="submit" value="Mettre à jour" />
                   </p>
                 </form>
               </>
