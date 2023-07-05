@@ -19,7 +19,11 @@ function AuthorsDelete({ author }) {
   return (
     <div>
       {currentUser.isAdmin && author.id && (
-        <button type="button" onClick={DeleteAuthorById}>
+        <button
+          type="button"
+          className="deleteauthors"
+          onClick={DeleteAuthorById}
+        >
           Supprimer
         </button>
       )}
