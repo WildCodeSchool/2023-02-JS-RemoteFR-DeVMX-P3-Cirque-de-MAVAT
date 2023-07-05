@@ -4,12 +4,25 @@ import axios from "axios";
 
 import Admin403 from "./Admin403";
 
+import BreadcrumbAuthors from "./BreadcrumbAuthors";
 import CurrentUserContext from "../contexts/CurrentUser";
 import AuthorsDelete from "./AuthorsDelete";
 
 export default function AuthorsList() {
   const { currentUser } = useContext(CurrentUserContext);
   const [authors, setAuthors] = useState([]);
+  const breadcrumb = [
+    {
+      id: 1,
+      title: "Mon compte",
+      link: "/account",
+    },
+    {
+      id: 2,
+      title: "Gérer les auteurs",
+      link: null,
+    },
+  ];
 
   useEffect(() => {
     axios
@@ -24,28 +37,31 @@ export default function AuthorsList() {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {currentUser.isAdmin ? (
-        <section className="account authors">
-          <h2>Gérer les auteurs</h2>
-          <p className="authorfont">
-            <Link className="authortoadd" to="/account/authors/add">
-              Ajouter un auteur
-            </Link>
-          </p>
-          {authors.length && (
-            <ul className="listdecoration">
-              {authors.map((author) => {
-                const { id, firstname, lastname } = author;
-                return (
-                  <li className="listdecorationauthor" key={`authors-${id}`}>
-                    {firstname}&nbsp;
-                    {lastname}
-                    <AuthorsDelete author={author} />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </section>
+        <>
+          <BreadcrumbAuthors breadcrumb={breadcrumb} />
+          <section className="account authors">
+            <h2>Gérer les auteurs</h2>
+            <p className="authorfont">
+              <Link className="authortoadd" to="/account/authors/add">
+                Ajouter un auteur
+              </Link>
+            </p>
+            {authors.length && (
+              <ul className="listdecoration">
+                {authors.map((author) => {
+                  const { id, firstname, lastname } = author;
+                  return (
+                    <li className="listdecorationauthor" key={`authors-${id}`}>
+                      {firstname}&nbsp;
+                      {lastname}
+                      <AuthorsDelete author={author} />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </section>
+        </>
       ) : (
         <Admin403 />
       )}
