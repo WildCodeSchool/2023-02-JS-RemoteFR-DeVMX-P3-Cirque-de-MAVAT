@@ -46,41 +46,36 @@ function Footer() {
         <p>Copyright @ 2023 AFAC974 - All rights reserved</p>
         <p>
           Developed with ♥ by
-          <Link
+          <a
+            href="https://www.linkedin.com/in/anne-louis-3326b826b/"
             className="linkedin"
-            to="https://www.linkedin.com/in/anne-louis-3326b826b/"
           >
-            {" "}
             Anne.L,
-          </Link>
-          <Link
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anthony-lasternas-208379269/"
             className="linkedin"
-            to="https://www.linkedin.com/in/anthony-lasternas-208379269/"
           >
-            {" "}
             Anthony.L,
-          </Link>
-          <Link
+          </a>
+          <a
+            href="https://www.linkedin.com/in/marine-deveza-959b48279/"
             className="linkedin"
-            to="https://www.linkedin.com/in/marine-deveza-959b48279/"
           >
-            {" "}
             Marine.D,
-          </Link>
-          <Link
+          </a>
+          <a
+            href="https://www.linkedin.com/in/trung-nguyen-4a5229268/"
             className="linkedin"
-            to="https://www.linkedin.com/in/trung-nguyen-4a5229268/"
           >
-            {" "}
             Trung.N,
-          </Link>
-          <Link
+          </a>
+          <a
+            href="https://www.linkedin.com/in/victor-brito-69040a191/"
             className="linkedin"
-            to="https://www.linkedin.com/in/victor-brito-69040a191/"
           >
-            {" "}
             Victor.B
-          </Link>
+          </a>
         </p>
       </div>
     </footer>
