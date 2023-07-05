@@ -5,6 +5,7 @@ import axios from "axios";
 import Admin403 from "./Admin403";
 
 import CurrentUserContext from "../contexts/CurrentUser";
+import AuthorsDelete from "./AuthorsDelete";
 
 export default function AuthorsList() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -38,6 +39,7 @@ export default function AuthorsList() {
                   <li className="listdecorationauthor" key={`authors-${id}`}>
                     {firstname}&nbsp;
                     {lastname}
+                    <AuthorsDelete author={author} />
                   </li>
                 );
               })}
