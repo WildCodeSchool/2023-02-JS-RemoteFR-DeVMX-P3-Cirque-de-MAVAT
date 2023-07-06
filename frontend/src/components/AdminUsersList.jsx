@@ -45,12 +45,22 @@ export default function AdminUsersList() {
             {users.length && (
               <ul>
                 {users.map((user) => {
-                  const { id, firstname, lastname } = user;
+                  const { id, firstname, lastname, email } = user;
+                  let username = "";
+                  if (firstname === null && lastname === null) {
+                    username = email;
+                  } else {
+                    if (firstname !== null) {
+                      username += firstname;
+                    }
+                    if (lastname !== null) {
+                      username += ` ${lastname}`;
+                    }
+                  }
+                  username = username.trim();
                   return (
                     <li key={`users-${id}`}>
-                      <Link to={`/account/users/${id}`}>
-                        {firstname} {lastname}
-                      </Link>
+                      <Link to={`/account/users/${id}`}>{username}</Link>
                       <Link
                         to={`/account/users/delete/${id}`}
                         className="delete"
