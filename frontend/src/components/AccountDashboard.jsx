@@ -24,6 +24,11 @@ export default function AccountDashboard() {
             </li>
           </>
         )}
+        {hasCurrentUser && currentUser.isAdmin && (
+          <li>
+            <Link to="/account/authors">Gérer les auteurs</Link>
+          </li>
+        )}
       </ul>
     </section>
   );

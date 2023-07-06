@@ -71,6 +71,50 @@ const create = (req, res) => {
     });
 };
 
+const edit = (req, res) => {
+  const { id } = req.params;
+  const {
+    authorId,
+    categoryId,
+    techniqueId,
+    reference,
+    title,
+    shortTitle,
+    created,
+    location,
+    sizes,
+    story,
+    externalLink,
+    isPublished,
+  } = req.body;
+  models.works
+    .update(
+      authorId,
+      categoryId,
+      techniqueId,
+      reference,
+      title,
+      shortTitle,
+      created,
+      location,
+      sizes,
+      story,
+      externalLink,
+      isPublished,
+      id
+    )
+    .then(([rows]) => {
+      if (rows.affectedRows)
+        // res.status(201).json({ affectedRows: rows.affectedRows });
+        res.sendStatus(204);
+      else res.sendStatus(500);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const { affectedRows } = req.body;
 
@@ -88,5 +132,6 @@ module.exports = {
   browse,
   read,
   create,
+  edit,
   destroy,
 };

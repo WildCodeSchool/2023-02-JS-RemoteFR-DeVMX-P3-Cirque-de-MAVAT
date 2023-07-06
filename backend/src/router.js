@@ -65,6 +65,13 @@ router.post(
   imagesControllers.create,
   worksControllers.create
 );
+router.put(
+  "/works/:id",
+  upload.single("image"),
+  validateWork,
+  imagesControllers.edit,
+  worksControllers.edit
+);
 router.delete(
   "/images/:id/:file",
   removeImage,
