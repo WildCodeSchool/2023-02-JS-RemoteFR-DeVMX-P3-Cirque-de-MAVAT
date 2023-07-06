@@ -11,6 +11,13 @@ class ImagesManager extends AbstractManager {
       [src, description]
     );
   }
+
+  update(src, description, id) {
+    return this.database.query(
+      `UPDATE ${this.table} SET src = ?, description = ? WHERE id = ?`,
+      [src, description, id]
+    );
+  }
 }
 
 module.exports = ImagesManager;
