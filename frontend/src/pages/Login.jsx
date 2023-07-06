@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import CurrentUserLogContext from "../contexts/CurrentUserLog";
+import axios from "axios";
+
+import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function Login() {
-  const { isUserLogged, setIsUserLogged } = useContext(CurrentUserLogContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
+  const [invalidLogin, setInvalidLogin] = useState("");
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -25,8 +28,6 @@ export default function Login() {
     };
     const errors = new Set();
 
-    setIsUserLogged(false);
-
     for (const field in fields) {
       if (!fields[field].match(validationFilters[field])) {
         errors.add(field);
@@ -37,16 +38,38 @@ export default function Login() {
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
-      setIsUserLogged(true);
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
+        .then((response) => {
+          const {
+            data: { user },
+          } = response;
+          let username = null;
+          if (user.firstname) {
+            if (user.lastname) username = `${user.firstname} ${user.lastname}`;
+            else username = user.firstname;
+          } else if (user.lastname) username = user.lastname;
+          setCurrentUser({
+            id: user.id,
+            username,
+            isAdmin: user.role === 1,
+          });
+        })
+        .catch((err) => {
+          setInvalidLogin(err.response.data.error);
+        });
     }
   };
 
   return (
     <>
-      {isUserLogged && <Navigate to="/account" />}
+      {Object.keys(currentUser).length && <Navigate to="/account" />}
       <form className="account login" onSubmit={handleLogin} noValidate>
         <h2>S’identifier</h2>
-        <p>Tous les champs sont obligatoires</p>
+        <p>
+          Tous les champs sont obligatoires
+          {invalidLogin && <span className="error">{invalidLogin}</span>}
+        </p>
         <p>
           <label htmlFor="login-email">
             Adresse email
@@ -92,7 +115,7 @@ export default function Login() {
         </p>
         <p>
           Vous n’avez pas de compte&nbsp;?{" "}
-          <Link to="/create-account">Créer un compte</Link>
+          <Link to="/signup">Créer un compte</Link>
         </p>
       </form>
     </>

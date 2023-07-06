@@ -21,6 +21,7 @@
       width: 78vw;
       list-style: none;
       border-bottom: 3px solid var(--primary-color);
+      z-index: 1;
       li {
         width: 25%;
       }
@@ -50,7 +51,7 @@
 
   .triangle {
     border-style: solid;
-    border-width: 0 80px 120px 0;
+    border-width: 0 80px 125px 0;
     border-color: transparent var(--primary-color) white transparent;
   }
 
@@ -66,6 +67,12 @@
         color: white;
         font-size: 1.5rem;
       }
+    }
+    button {
+      border: none;
+    }
+    a {
+      text-decoration: none;
     }
   }
 }
