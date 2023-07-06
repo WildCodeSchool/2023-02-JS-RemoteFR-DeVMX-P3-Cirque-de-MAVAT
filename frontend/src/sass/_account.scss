@@ -176,7 +176,8 @@
       color: var(--primary-color);
     }
   }
-  &.works {
+  &.works,
+  &.users {
     h2 {
       + p {
         font-style: initial;
@@ -259,7 +260,8 @@
         align-self: flex-end;
       }
     }
-    &.works {
+    &.works,
+    &.users {
       &.delete {
         form {
           p {
@@ -273,7 +275,8 @@
     }
   }
   @media (min-width: 560px) {
-    &.works {
+    &.works,
+    &.users {
       li {
         text-align: initial;
         display: grid;
