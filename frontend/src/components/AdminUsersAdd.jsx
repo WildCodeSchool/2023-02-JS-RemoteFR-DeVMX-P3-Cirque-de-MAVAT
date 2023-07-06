@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +9,6 @@ import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function AdminWorksAdd() {
   const { currentUser } = useContext(CurrentUserContext);
-  const [users, setUsers] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidUserAddition, setInvalidUserAddition] = useState("");
   const [isAdded, setIsAdded] = useState(false);
@@ -31,27 +30,14 @@ export default function AdminWorksAdd() {
     },
   ];
 
-  useEffect(() => {
-    const host = import.meta.env.VITE_BACKEND_URL;
-    axios
-      .get(`${host}/users`)
-      .then((response) => setUsers(response.data))
-      .catch((err) => console.error(err));
-  }, []);
-
   const handleAdd = (e) => {
     e.preventDefault();
     const validationFilters = {
       email: {
-        type: "string",
+        type: "email",
+        format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
       },
       password: {
-        type: "string",
-      },
-      firstname: {
-        type: "string",
-      },
-      lastname: {
         type: "string",
       },
       role: {
@@ -64,6 +50,14 @@ export default function AdminWorksAdd() {
       if (validationFilters[field]) {
         let isInvalid = false;
         switch (validationFilters[field].type) {
+          case "email":
+            if (
+              !value.trim() ||
+              !value.match(validationFilters[field].format)
+            ) {
+              isInvalid = true;
+            }
+            break;
           case "int":
             if (!value) {
               isInvalid = true;
@@ -85,17 +79,12 @@ export default function AdminWorksAdd() {
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
-      const emptyFields = [...fields.keys()].filter(
-        (key) => fields.get(key) !== null && !fields.get(key)
-      );
-      for (const field of emptyFields) {
-        fields.delete(field);
+      const data = {};
+      for (const [field, value] of fields.entries()) {
+        if (value) data[field] = value;
       }
-      // for (const [key, value] of fields.entries()){
-      //   console.log(key, value)
-      // }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, fields)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, data)
         .then((response) => {
           if (response.data.id) setIsAdded(true);
         })
@@ -136,7 +125,7 @@ export default function AdminWorksAdd() {
                     </p>
                     <p>
                       <label htmlFor="add-lastname">Nom</label>
-                      <input id="add-lastname" name="lastname" type="text" />
+                      <input id="add-lastname" name="" type="text" />
                     </p>
                     <p>
                       <label htmlFor="add-email">
@@ -177,29 +166,27 @@ export default function AdminWorksAdd() {
                   </fieldset>
                   <fieldset>
                     <legend>Administrateur&nbsp;?</legend>
-                    {users.length && (
-                      <ul>
-                        <li>
-                          <input
-                            id="add-role-yes"
-                            name="role"
-                            type="radio"
-                            value="1"
-                          />
-                          <label htmlFor="add-role-yes">Oui</label>
-                        </li>
-                        <li>
-                          <input
-                            id="add-role-no"
-                            name="role"
-                            type="radio"
-                            value="0"
-                            defaultChecked
-                          />
-                          <label htmlFor="add-role-no">Non</label>
-                        </li>
-                      </ul>
-                    )}
+                    <ul>
+                      <li>
+                        <input
+                          id="add-role-yes"
+                          name="role"
+                          type="radio"
+                          value="1"
+                        />
+                        <label htmlFor="add-role-yes">Oui</label>
+                      </li>
+                      <li>
+                        <input
+                          id="add-role-no"
+                          name="role"
+                          type="radio"
+                          value="0"
+                          defaultChecked
+                        />
+                        <label htmlFor="add-role-no">Non</label>
+                      </li>
+                    </ul>
                   </fieldset>
                   <p>
                     <input type="submit" value="Ajouter" />
