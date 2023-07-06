@@ -15,9 +15,14 @@ export default function AccountDashboard() {
           <Link to="/account/favourite">Mes favoris</Link>
         </li>
         {hasCurrentUser && currentUser.isAdmin && (
-          <li>
-            <Link to="/account/works">Gérer les œuvres</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/account/works">Gérer les œuvres</Link>
+            </li>
+            <li>
+              <Link to="/account/users">Gérer les utilisateurs</Link>
+            </li>
+          </>
         )}
         {hasCurrentUser && currentUser.isAdmin && (
           <li>

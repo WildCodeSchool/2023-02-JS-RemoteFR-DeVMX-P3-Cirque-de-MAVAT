@@ -18,6 +18,10 @@ import AdminWorksList from "./components/AdminWorksList";
 import AdminWorksAdd from "./components/AdminWorksAdd";
 import AdminWorksUpdate from "./components/AdminWorksUpdate";
 import AdminWorksDelete from "./components/AdminWorksDelete";
+import AdminUsers from "./components/AdminUsers";
+import AdminUsersList from "./components/AdminUsersList";
+import AdminUsersAdd from "./components/AdminUsersAdd";
+import AdminUsersDelete from "./components/AdminUsersDelete";
 import AuthorsFormAdd from "./components/AuthorsFormAdd";
 import AuthorsList from "./components/AuthorsList";
 
@@ -43,6 +47,11 @@ function App() {
                 <Route path="add" element={<AdminWorksAdd />} />
                 <Route path=":id" element={<AdminWorksUpdate />} />
                 <Route path="delete/:id" element={<AdminWorksDelete />} />
+              </Route>
+              <Route path="users" element={<AdminUsers />}>
+                <Route index element={<AdminUsersList />} />
+                <Route path="add" element={<AdminUsersAdd />} />
+                <Route path="delete/:id" element={<AdminUsersDelete />} />
               </Route>
               <Route path="/account/authors" element={<AuthorsList />} />
               <Route path="/account/authors/add" element={<AuthorsFormAdd />} />
