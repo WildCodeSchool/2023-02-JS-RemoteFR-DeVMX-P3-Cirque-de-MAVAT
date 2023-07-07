@@ -12,6 +12,9 @@ export default function AccountDashboard() {
       <h2>Mon compte</h2>
       <ul className="tools">
         <li>
+          <Link to="/account/info">Mes informations</Link>
+        </li>
+        <li>
           <Link to="/account/favourite">Mes favoris</Link>
         </li>
         {hasCurrentUser && currentUser.isAdmin && (

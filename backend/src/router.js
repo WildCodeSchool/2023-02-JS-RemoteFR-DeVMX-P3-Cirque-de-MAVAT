@@ -20,6 +20,7 @@ const validateLogin = require("./services/validateLogin");
 const validateSignup = require("./services/validateSignup");
 const hashPassword = require("./services/hashPassword");
 const validateWork = require("./services/validateWork");
+const validateUpdate = require("./services/validateUpdate");
 const removeImage = require("./services/removeImage");
 
 router.get("/items", itemControllers.browse);
@@ -80,5 +81,6 @@ router.delete(
 );
 
 router.post("/users", validateSignup, hashPassword, usersControllers.create);
+router.put("/users/:id", validateUpdate, hashPassword, usersControllers.edit);
 
 module.exports = router;
