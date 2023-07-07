@@ -7,15 +7,14 @@ import AccountBreadcrumb from "./AccountBreadcrumb";
 import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function UserUpdate() {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const { id } = currentUser;
+  const [username, setUsername] = useState(null);
   const [currentFields, setCurrentFields] = useState({});
   const [newPassword, setNewPassword] = useState("");
   const [confirmedNewPassword, setConfirmedNewPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [invalidUpdate, setInvalidUpdate] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const [isUpdated, setIsUpdated] = useState(false);
   const host = import.meta.env.VITE_BACKEND_URL;
   const breadcrumb = [
@@ -37,11 +36,18 @@ export default function UserUpdate() {
         .get(`${host}/users/${id}`)
         .then((response) => {
           const { data } = response;
+          const { firstname, lastname } = data;
 
           // Password and role are sensitive data and are not intended to be displayed here
           delete data.password;
           delete data.role;
           setCurrentFields(data);
+
+          if (firstname) {
+            if (lastname) setUsername(`${firstname} ${lastname}`);
+            else setUsername(firstname);
+          } else if (lastname) setUsername(lastname);
+          else setUsername(null);
         })
         .catch((err) => console.error(err));
     }
@@ -96,15 +102,28 @@ export default function UserUpdate() {
         if (value) data[key] = value;
         else if (key !== "password") data[key] = null;
       }
-      // axios
-      //   .put(`${host}/users/${id}`, data)
-      //   .then((response) => {
-      //     console.log("update::after", response);
-      //     // if (response.data.id) setIsUpdated(true);
-      //   })
-      //   .catch((err) => {
-      //     setInvalidUpdate(err.message);
-      //   });
+      axios
+        .put(`${host}/users/${id}`, data)
+        .then((response) => {
+          if (response.status === 204) {
+            const { firstname, lastname } = data;
+            const newCurrentUser = currentUser;
+
+            setIsUpdated(true);
+
+            if (firstname) {
+              if (lastname) setUsername(`${firstname} ${lastname}`);
+              else setUsername(firstname);
+            } else if (lastname) setUsername(lastname);
+            else setUsername(null);
+
+            newCurrentUser.username = username;
+            setCurrentUser(newCurrentUser);
+          }
+        })
+        .catch((err) => {
+          setInvalidUpdate(err.message);
+        });
     }
   };
 
@@ -116,15 +135,21 @@ export default function UserUpdate() {
         // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
           {isUpdated ? (
-            <section className="account update">
+            <section className="account users update">
               <h2>Mes informations</h2>
               <p>Votre compte utilisateur a été mis à jour avec succès.</p>
-              <p className="back">
-                <Link to="/account">Retour à mon compte</Link>
+              <p>
+                <Link to="/account" className="back">
+                  Retour à mon compte
+                </Link>
               </p>
             </section>
           ) : (
-            <form className="account update" onSubmit={handleUpdate} noValidate>
+            <form
+              className="account users update"
+              onSubmit={handleUpdate}
+              noValidate
+            >
               <h2>Mes informations</h2>
               <p>
                 Les champs accompagnés d’un * sont obligatoires
@@ -203,14 +228,16 @@ export default function UserUpdate() {
           )}
         </>
       ) : (
-        <section className="account update">
+        <section className="account users update">
           <h2>Mes informations</h2>
           <p>
             Les informations vous concernant n’ont pas pu être affichées.
             Veuillez réessayer plus tard.
           </p>
-          <p className="back">
-            <Link to="/account">Retour à mon compte</Link>
+          <p>
+            <Link to="/account" className="back">
+              Retour à mon compte
+            </Link>
           </p>
         </section>
       )}
