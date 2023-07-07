@@ -24,6 +24,7 @@ import AdminUsersAdd from "./components/AdminUsersAdd";
 import AdminUsersDelete from "./components/AdminUsersDelete";
 import AuthorsFormAdd from "./components/AuthorsFormAdd";
 import AuthorsList from "./components/AuthorsList";
+import UserUpdate from "./components/UserUpdate";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/account" element={<Account />}>
               <Route index element={<AccountDashboard />} />
+              <Route path="info" element={<UserUpdate />} />
               <Route path="works" element={<AdminWorks />}>
                 <Route index element={<AdminWorksList />} />
                 <Route path="add" element={<AdminWorksAdd />} />
