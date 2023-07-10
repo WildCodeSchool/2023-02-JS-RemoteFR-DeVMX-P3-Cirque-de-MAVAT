@@ -43,6 +43,21 @@ const create = (req, res) => {
     });
 };
 
+const edit = (req, res) => {
+  const { id } = req.params;
+  const { email, password, firstname, lastname } = req.body;
+  models.users
+    .update(email, password, firstname, lastname, id)
+    .then(([rows]) => {
+      if (rows.affectedRows) res.sendStatus(204);
+      else res.sendStatus(500);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   models.users
     .delete(req.params.id)
@@ -63,5 +78,6 @@ module.exports = {
   browse,
   read,
   create,
+  edit,
   destroy,
 };
