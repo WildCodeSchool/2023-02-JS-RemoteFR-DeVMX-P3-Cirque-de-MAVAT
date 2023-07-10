@@ -1,0 +1,194 @@
+@charset "utf-8";
+@use "mixins" as *;
+
+/** @section Elements in general */
+
+/**
+ * Reset CSS inspired from Corinne Durrmeyer’s normalize.css
+ * @see https://github.com/inseo/bpi-normalize/blob/master/normalize.css
+ */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+p,
+pre,
+blockquote,
+figure,
+figcaption,
+form,
+fieldset,
+legend,
+input,
+select,
+textarea,
+button {
+  padding: 0;
+  margin: 0;
+}
+/**
+ * [1] Prevent text resizing when the terminal orientation changes (user zoom is preserved)
+ * @bugfix @affected Safari iOS
+ */
+html {
+  font-size: 62.5%;
+  @include css-text-size-adjust(100%); /* [1] */
+}
+body {
+  font-size: 100%;
+  line-height: 1.5;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre {
+  font-size: 1rem;
+}
+pre {
+  white-space: pre-wrap;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+address {
+  font-style: normal;
+}
+fieldset,
+legend,
+img,
+abbr,
+acronym {
+  border: none;
+}
+legend {
+  white-space: normal;
+}
+input,
+select,
+textarea,
+button,
+img {
+  vertical-align: middle;
+}
+input,
+select,
+textarea,
+button,
+code,
+kbd,
+samp,
+var {
+  font-size: inherit;
+}
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  border: 1px solid;
+}
+/**
+ * Rounded corners removal
+ * @css-for Safari iOS
+ */
+input,
+select,
+textarea {
+  border-radius: 0;
+}
+input {
+  &[type="checkbox"],
+  &[type="radio"],
+  &[type="submit"],
+  &[type="reset"],
+  &[type="button"] {
+    cursor: pointer;
+  }
+}
+button,
+details summary {
+  cursor: pointer;
+}
+/**
+ * [1] Field default appearance removal
+ * @css-for Safari
+ * 
+ * [2] Default appearance removal on mobile OSs
+ * @css-for Safari iOS
+ *
+ * [3] Inheritance of the field colour
+ * @css-for Safari, Google Chrome
+ *
+ * [4] Removal of the opacity as applied by default (to enhance the contrast)
+ * @css-for Firefox
+ */
+input {
+  &[type="checkbox"],
+  &[type="radio"] {
+    border: none;
+  }
+  &[type="search"] {
+    appearance: none; /* [1] */
+  }
+  &[type="submit"],
+  &[type="reset"] {
+    appearance: none; /* [2] */
+  }
+  &::placeholder {
+    color: inherit; /* [3] */
+    opacity: 1; /* [4] */
+  }
+}
+input,
+button {
+  &[disabled] {
+    cursor: default;
+  }
+}
+/**
+ * [1] Outline added
+ * @css-for Firefox
+ */
+button {
+  background: transparent;
+  &:focus-visible {
+    outline: thin dotted; /* [1] */
+  }
+}
+img,
+object,
+audio,
+video,
+embed,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+/**
+  * Removal of the text decoration
+  * @css-for Firefox
+  */
+abbr {
+  &[title] {
+    text-decoration: none;
+  }
+}
+::selection {
+  color: black;
+  background-color: lightblue;
+  text-shadow: none;
+}

@@ -1,0 +1,44 @@
+.filter {
+  width: 20rem;
+  background: var(--primary-color);
+  margin-right: 5%;
+}
+
+.filter-menus-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+  margin-left: 3rem;
+  font-size: medium;
+  color: white;
+
+  details {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  summary {
+    font-weight: bold;
+  }
+
+  p {
+    display: flex;
+    align-items: baseline;
+  }
+
+  input {
+    margin-right: 1rem;
+  }
+  .favourite-button {
+    padding-left: 1.8rem;
+    margin-top: 1.8rem;
+    color: white;
+    border: none;
+    text-align: start;
+  }
+  .favourite-button.active {
+    font-weight: bold;
+  }
+}

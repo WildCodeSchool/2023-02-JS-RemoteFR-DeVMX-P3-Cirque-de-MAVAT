@@ -1,0 +1,26 @@
+.hexagon-shape {
+  position: absolute;
+  overflow: hidden;
+  background: transparent;
+  margin-left: 0rem;
+  margin-top: 0rem;
+  width: 198.28px;
+  height: 198.28px;
+  transform: rotate(-30deg) skewX(30deg) scaleY(0.866);
+}
+.hexagon-shape:before {
+  position: absolute;
+  right: 6.7%;
+  bottom: 0;
+  left: 6.7%;
+  top: 0;
+  transform: scaleY(1.155) skewX(-30deg) rotate(30deg);
+  background: white;
+  content: "";
+}
+
+.hexagon-part {
+  position: absolute;
+  margin-top: -10rem;
+  margin-left: 0.1rem;
+}
