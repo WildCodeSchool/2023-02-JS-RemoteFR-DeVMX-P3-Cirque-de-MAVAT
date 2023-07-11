@@ -9,6 +9,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^3.0.1",
     "axios": "^1.4.0",
+    "drift-zoom": "^1.5.1",
     "embla-carousel-react": "^8.0.0-rc07",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

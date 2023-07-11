@@ -47,6 +47,11 @@
 }
 
 .embla__slide__text {
+  position: relative;
+  width: 65%;
+  margin-left: 5%;
+  float: left;
+  //
   margin-left: 5rem;
   h1 {
     color: var(--primary-color);
