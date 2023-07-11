@@ -6,13 +6,16 @@ const validateSignup = (req, res, next) => {
     password: joi.string().presence("required"),
     firstname: joi.string().max(255, "utf8").allow(null),
     lastname: joi.string().max(255, "utf8").allow(null),
+    role: joi.number().integer().min(0).max(1).allow(null),
   });
   const { email, password, firstname, lastname } = req.body;
+  const role = Number.parseInt(req.body.role, 10);
   const { value, error } = schema.validate({
     email,
     password,
     firstname,
     lastname,
+    role,
   });
   if (error) {
     console.error(error.message);
