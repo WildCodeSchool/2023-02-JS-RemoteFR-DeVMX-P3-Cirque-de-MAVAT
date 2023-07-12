@@ -42,7 +42,7 @@ export default function Login() {
         .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
         .then((response) => {
           const {
-            data: { user },
+            data: { user, token },
           } = response;
           let username = null;
           if (user.firstname) {
@@ -53,6 +53,7 @@ export default function Login() {
             id: user.id,
             username,
             isAdmin: user.role === 1,
+            token,
           });
         })
         .catch((err) => {
