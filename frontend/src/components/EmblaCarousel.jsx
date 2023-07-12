@@ -24,8 +24,8 @@ export default function EmblaCarousel(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
   const [fullscreenVisible, setFullscreenVisible] = useState(false);
-  const [favourites, setFavourites] = useState(new Map());
-  const [areFavouritesRefreshed, setAreFavouritesRefreshed] = useState(false);
+  const [favourites, setFavourites] = useState(new Set());
+  const [areFavouritesUpdated, setAreFavouritesUpdated] = useState(false);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
@@ -47,7 +47,7 @@ export default function EmblaCarousel(props) {
           if (res.status === 204) {
             liked.delete(workId);
             setFavourites(liked);
-            setAreFavouritesRefreshed(true);
+            setAreFavouritesUpdated(true);
           }
         })
         .catch((err) => {
@@ -61,9 +61,9 @@ export default function EmblaCarousel(props) {
         })
         .then((res) => {
           if (res.data.affectedRows) {
-            liked.set(workId, true);
+            liked.add(workId);
             setFavourites(liked);
-            setAreFavouritesRefreshed(true);
+            setAreFavouritesUpdated(true);
           }
         })
         .catch((err) => {
@@ -104,21 +104,21 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     if (Object.keys(currentUser).length && currentUser.id) {
-      const liked = new Map();
+      const liked = new Set();
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/favourites/${currentUser.id}`)
         .then((res) => {
           res.data.forEach((row) => {
-            liked.set(row.work_id, true);
+            liked.add(row.work_id);
           });
           setFavourites(liked);
-          setAreFavouritesRefreshed(false);
+          setAreFavouritesUpdated(false);
         })
         .catch((err) => {
           console.error(err);
         });
     }
-  }, [areFavouritesRefreshed]);
+  }, [areFavouritesUpdated]);
 
   const filteredWorks = works.filter((work) => {
     const categoryMatches =
