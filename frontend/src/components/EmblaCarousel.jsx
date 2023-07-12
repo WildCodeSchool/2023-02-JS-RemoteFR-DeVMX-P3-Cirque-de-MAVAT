@@ -24,7 +24,8 @@ export default function EmblaCarousel(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [works, setWorks] = useState([]);
   const [fullscreenVisible, setFullscreenVisible] = useState(false);
-  const [favourites, setFavourites] = useState(new Map());
+  const [favourites, setFavourites] = useState(new Set());
+  const [areFavouritesUpdated, setAreFavouritesUpdated] = useState(false);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
@@ -43,7 +44,11 @@ export default function EmblaCarousel(props) {
           }/${workId}`
         )
         .then((res) => {
-          if (res.data.affectedRows) liked.delete(workId);
+          if (res.status === 204) {
+            liked.delete(workId);
+            setFavourites(liked);
+            setAreFavouritesUpdated(true);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -55,13 +60,16 @@ export default function EmblaCarousel(props) {
           workId,
         })
         .then((res) => {
-          if (res.data.affectedRows) liked.set(workId, true);
+          if (res.data.affectedRows) {
+            liked.add(workId);
+            setFavourites(liked);
+            setAreFavouritesUpdated(true);
+          }
         })
         .catch((err) => {
           console.error(err);
         });
     }
-    setFavourites(liked);
   };
 
   const onThumbClick = useCallback(
@@ -96,20 +104,21 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     if (Object.keys(currentUser).length && currentUser.id) {
-      const liked = new Map();
+      const liked = new Set();
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/favourites/${currentUser.id}`)
         .then((res) => {
           res.data.forEach((row) => {
-            liked.set(row.work_id, true);
+            liked.add(row.work_id);
           });
           setFavourites(liked);
+          setAreFavouritesUpdated(false);
         })
         .catch((err) => {
           console.error(err);
         });
     }
-  }, [favourites]);
+  }, [areFavouritesUpdated]);
 
   const filteredWorks = works.filter((work) => {
     const categoryMatches =
