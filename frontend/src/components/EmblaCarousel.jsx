@@ -25,6 +25,7 @@ export default function EmblaCarousel(props) {
   const [works, setWorks] = useState([]);
   const [fullscreenVisible, setFullscreenVisible] = useState(false);
   const [favourites, setFavourites] = useState(new Map());
+  const [areFavouritesRefreshed, setAreFavouritesRefreshed] = useState(false);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
@@ -43,7 +44,11 @@ export default function EmblaCarousel(props) {
           }/${workId}`
         )
         .then((res) => {
-          if (res.data.affectedRows) liked.delete(workId);
+          if (res.status === 204) {
+            liked.delete(workId);
+            setFavourites(liked);
+            setAreFavouritesRefreshed(true);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -55,13 +60,16 @@ export default function EmblaCarousel(props) {
           workId,
         })
         .then((res) => {
-          if (res.data.affectedRows) liked.set(workId, true);
+          if (res.data.affectedRows) {
+            liked.set(workId, true);
+            setFavourites(liked);
+            setAreFavouritesRefreshed(true);
+          }
         })
         .catch((err) => {
           console.error(err);
         });
     }
-    setFavourites(liked);
   };
 
   const onThumbClick = useCallback(
@@ -104,12 +112,13 @@ export default function EmblaCarousel(props) {
             liked.set(row.work_id, true);
           });
           setFavourites(liked);
+          setAreFavouritesRefreshed(false);
         })
         .catch((err) => {
           console.error(err);
         });
     }
-  }, [favourites]);
+  }, [areFavouritesRefreshed]);
 
   const filteredWorks = works.filter((work) => {
     const categoryMatches =
