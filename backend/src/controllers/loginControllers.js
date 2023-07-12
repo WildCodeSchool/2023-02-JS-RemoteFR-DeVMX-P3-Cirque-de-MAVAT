@@ -12,7 +12,8 @@ const verifyPassword = async (req, res) => {
     if (verifiedPassword) {
       const timestamp = Math.floor(Date.now() / 1000);
       const payload = {
-        sub: req.body.email,
+        sub: req.user.id,
+        role: req.user.role,
         iat: timestamp,
       };
       const options = {
