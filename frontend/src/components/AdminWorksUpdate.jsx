@@ -144,8 +144,13 @@ export default function AdminWorksUpdate() {
       for (const field of emptyFields) {
         fields.delete(field);
       }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      };
       axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/works/${id}`, fields)
+        .put(`${import.meta.env.VITE_BACKEND_URL}/works/${id}`, fields, config)
         .then((response) => {
           if (response.status === 204) setIsUpdated(true);
         })

@@ -123,8 +123,13 @@ export default function AdminWorksAdd() {
       for (const field of emptyFields) {
         fields.delete(field);
       }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      };
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/works`, fields)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/works`, fields, config)
         .then((response) => {
           if (response.data.id) setIsAdded(true);
         })
