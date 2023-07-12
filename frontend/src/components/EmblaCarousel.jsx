@@ -7,7 +7,7 @@ import axios from "axios";
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
-import Drift from "drift-zoom";
+// import Drift from "drift-zoom";
 import CurrentUserContext from "../contexts/CurrentUser";
 import Thumb from "./EmblaCarouselThumbsButton";
 
@@ -125,18 +125,19 @@ export default function EmblaCarousel(props) {
     );
   });
 
-  const driftImgs = [...document.querySelectorAll(".embla__slide__img")];
-  const pane = [...document.querySelectorAll(".embla__slide__text")];
-  useEffect(() => {
-    if (Array.isArray(driftImgs)) {
-      driftImgs.map((img, index) => {
-        return new Drift(img, {
-          paneContainer: pane[index],
-          zoomFactor: 3,
-        });
-      });
-    }
-  }, [driftImgs, pane]);
+  // const driftImgs = [...document.querySelectorAll(".embla__slide__img")];
+  // const pane = [...document.querySelectorAll(".embla__slide__text")];
+  // useEffect(() => {
+  //   console.log("render");
+  //   if (Array.isArray(driftImgs)) {
+  //     driftImgs.map((img, index) => {
+  //       return new Drift(img, {
+  //         paneContainer: pane[index],
+  //         zoomFactor: 3,
+  //       });
+  //     });
+  //   }
+  // }, [driftImgs, pane]);
 
   return (
     <>
