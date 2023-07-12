@@ -35,30 +35,32 @@ export default function EmblaCarousel(props) {
   const handleClickLiked = (e) => {
     const liked = favourites;
     const workId = Number.parseInt(e.target.dataset.work, 10);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    };
     if (liked.has(workId) && e.target.classList.contains("isLiked")) {
       axios
-        .delete(
-          `${import.meta.env.VITE_BACKEND_URL}/favourites/${
-            currentUser.id
-          }/${workId}`
-        )
+        .delete(`${host}/favourites/${currentUser.id}/${workId}`, config)
         .then((res) => {
           if (res.data.affectedRows) liked.delete(workId);
         })
         .catch((err) => {
-          console.error(err);
+          console.error(err.response.data);
         });
     } else {
+      const body = {
+        userId: currentUser.id,
+        workId,
+      };
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/favourites`, {
-          userId: currentUser.id,
-          workId,
-        })
+        .post(`${host}/favourites`, body, config)
         .then((res) => {
           if (res.data.affectedRows) liked.set(workId, true);
         })
         .catch((err) => {
-          console.error(err);
+          console.error(err.response.data);
         });
     }
     setFavourites(liked);
@@ -87,7 +89,7 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/works`)
+      .get(`${host}/works`)
       .then((res) => setWorks(res.data))
       .catch((err) => {
         console.error(err);
@@ -98,7 +100,7 @@ export default function EmblaCarousel(props) {
     if (Object.keys(currentUser).length && currentUser.id) {
       const liked = new Map();
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/favourites/${currentUser.id}`)
+        .get(`${host}/favourites/${currentUser.id}`)
         .then((res) => {
           res.data.forEach((row) => {
             liked.set(row.work_id, true);
