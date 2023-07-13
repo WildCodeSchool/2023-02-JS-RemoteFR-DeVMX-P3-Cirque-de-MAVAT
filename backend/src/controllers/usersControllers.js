@@ -29,9 +29,9 @@ const read = (req, res) => {
 };
 
 const create = (req, res) => {
-  const { email, password, firstname, lastname } = req.body;
+  const { email, password, firstname, lastname, role } = req.body;
   models.users
-    .create(email, password, firstname, lastname)
+    .create(email, password, firstname, lastname, role)
     .then(([rows]) => {
       res.status(201).json({ id: rows.insertId });
     })
@@ -45,9 +45,9 @@ const create = (req, res) => {
 
 const edit = (req, res) => {
   const { id } = req.params;
-  const { email, password, firstname, lastname } = req.body;
+  const { email, password, firstname, lastname, role } = req.body;
   models.users
-    .update(email, password, firstname, lastname, id)
+    .update(email, password, firstname, lastname, role, id)
     .then(([rows]) => {
       if (rows.affectedRows) res.sendStatus(204);
       else res.sendStatus(500);

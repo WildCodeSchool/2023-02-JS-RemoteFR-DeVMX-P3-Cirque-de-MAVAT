@@ -3,65 +3,62 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUp() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidSignUp, setInvalidSignUp] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
-  const handleFirstName = (e) => {
-    setFirstname(e.target.value);
-  };
-  const handleLastName = (e) => {
-    setLastname(e.target.value);
-  };
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const handleConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
-  };
   const handleSignUp = (e) => {
     e.preventDefault();
     const validationFilters = {
-      email: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
-      password: /^\S+$/i,
-      confirmPassword: /^\S+$/i,
+      email: {
+        type: "email",
+        format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
+      },
+      password: {
+        type: "string",
+      },
+      confirmPassword: {
+        type: "string",
+      },
     };
-    const fields = {
-      email,
-      password,
-      confirmPassword,
-      firstname,
-      lastname,
-    };
+    const fields = new FormData(e.target);
     const errors = new Set();
 
-    for (const field in fields) {
-      if (!fields[field].match(validationFilters[field])) {
+    for (const [field, value] of fields.entries()) {
+      if (validationFilters[field]) {
+        let isInvalid = false;
+        switch (validationFilters[field].type) {
+          case "email":
+            if (!value || !value.match(validationFilters[field].format)) {
+              isInvalid = true;
+            }
+            break;
+          default:
+            if (!value.trim()) {
+              isInvalid = true;
+            }
+            break;
+        }
+        if (isInvalid) {
+          errors.add(field);
+        } else {
+          errors.delete(field);
+        }
+      }
+      if (field === "confirmPassword" && value !== fields.get("password")) {
         errors.add(field);
-      } else if (
-        field === "confirmPassword" &&
-        fields[field] !== fields.password
-      ) {
-        errors.add(field);
-      } else {
-        errors.delete(field);
       }
     }
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
-      delete fields.confirmPassword;
-      if (!fields.firstname) delete fields.firstname;
-      if (!fields.lastname) delete fields.lastname;
+      const data = {};
+      fields.delete("confirmPassword");
+      for (const [key, value] of fields.entries()) {
+        if (value) data[key] = value;
+        else data[key] = null;
+      }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, fields)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, data)
         .then((response) => {
           if (response.data.id) setIsRegistered(true);
         })
@@ -96,8 +93,6 @@ export default function SignUp() {
               name="firstname"
               type="text"
               maxLength="255"
-              value={firstname}
-              onChange={handleFirstName}
             />
           </p>
           <p>
@@ -107,8 +102,6 @@ export default function SignUp() {
               name="lastname"
               type="text"
               maxLength="255"
-              value={lastname}
-              onChange={handleLastName}
             />
           </p>
           <p>
@@ -121,14 +114,7 @@ export default function SignUp() {
                 </span>
               )}
             </label>
-            <input
-              id="signup-email"
-              name="email"
-              type="email"
-              value={email}
-              required
-              onChange={handleEmail}
-            />
+            <input id="signup-email" name="email" type="email" required />
           </p>
           <p>
             <label htmlFor="signup-password">
@@ -142,10 +128,8 @@ export default function SignUp() {
               id="signup-password"
               name="password"
               type="password"
-              value={password}
               autoComplete="new-password"
               required
-              onChange={handlePassword}
             />
           </p>
           <p>
@@ -162,9 +146,7 @@ export default function SignUp() {
               id="signup-password-confirm"
               name="confirmPassword"
               type="password"
-              value={confirmPassword}
               required
-              onChange={handleConfirmPassword}
             />
           </p>
           <p>
