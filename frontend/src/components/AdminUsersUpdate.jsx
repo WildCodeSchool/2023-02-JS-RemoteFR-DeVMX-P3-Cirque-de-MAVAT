@@ -7,11 +7,10 @@ import Admin403 from "./Admin403";
 
 import CurrentUserContext from "../contexts/CurrentUser";
 
-export default function AdminWorksAdd() {
+export default function AdminUsersUpdate() {
   const { currentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
   const [userToModify, setUserToModify] = useState(new FormData());
-  // const [users, setUsers] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidUserUpdate, setInvalidUserUpdate] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
@@ -63,15 +62,15 @@ export default function AdminWorksAdd() {
         type: "email",
         format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
       },
-      password: {
-        type: "string",
-      },
       role: {
         type: "int",
       },
     };
     const fields = new FormData(e.target);
     const errors = new Set();
+    let newPassword;
+    let confirmedNewPassword;
+
     for (const [field, value] of fields.entries()) {
       if (validationFilters[field]) {
         let isInvalid = false;
@@ -100,10 +99,16 @@ export default function AdminWorksAdd() {
         } else {
           errors.delete(field);
         }
+      } else if (["password", "confirmPassword"].includes(field)) {
+        if (field === "password") newPassword = value;
+        else {
+          confirmedNewPassword = value;
+        }
       }
     }
+    if (newPassword !== confirmedNewPassword) errors.add("confirmPassword");
+    else errors.delete("confirmPassword");
     setInvalidFields([...errors]);
-
     if (errors.size === 0) {
       const data = {};
       const emptyFields = [...fields.keys()].filter(
@@ -112,7 +117,12 @@ export default function AdminWorksAdd() {
       for (const field of emptyFields) {
         fields.delete(field);
       }
+      fields.delete("confirmPassword");
 
+      for (const [key, value] of fields.entries()) {
+        if (value) data[key] = value;
+        else if (key !== "password") data[key] = null;
+      }
       axios
         .put(`${host}/users/${id}`, data)
         .then((response) => {
@@ -128,7 +138,7 @@ export default function AdminWorksAdd() {
       {currentUser.isAdmin ? (
         <>
           <AccountBreadcrumb breadcrumb={breadcrumb} />
-          <section className="account users">
+          <section className="account users update">
             <h2>
               {userToModify.has("title")
                 ? userToModify.get("title")
@@ -173,7 +183,7 @@ export default function AdminWorksAdd() {
                     </p>
                     <p>
                       <label htmlFor="update-email">
-                        Email
+                        Adresse Email
                         <span aria-label=" obligatoire"> *</span>
                         {invalidFields.includes("email") && (
                           <span className="error">
@@ -192,21 +202,29 @@ export default function AdminWorksAdd() {
                     </p>
                     <p>
                       <label htmlFor="update-password">
-                        Mot de passe
-                        <span aria-label=" obligatoire"> *</span>
-                        {invalidFields.includes("password") && (
-                          <span className="error">
-                            (un mot de passe doit être saisi)
-                          </span>
-                        )}
+                        Votre nouveau mot de passe
                       </label>
                       <input
                         id="update-password"
                         name="password"
                         type="password"
-                        maxLength="255"
-                        defaultValue={userToModify.get("password")}
-                        required
+                        autoComplete="new-password"
+                      />
+                    </p>
+                    <p>
+                      <label htmlFor="update-password-confirm">
+                        Confirmez votre nouveau mot de passe
+                        {invalidFields.includes("confirmPassword") && (
+                          <span className="error">
+                            (le nouveau mot de passe doit être resaisi à
+                            l’identique)
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        id="update-password-confirm"
+                        name="confirmPassword"
+                        type="password"
                       />
                     </p>
                   </fieldset>

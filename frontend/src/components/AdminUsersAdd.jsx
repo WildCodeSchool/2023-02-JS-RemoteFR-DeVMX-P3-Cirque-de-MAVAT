@@ -125,7 +125,7 @@ export default function AdminWorksAdd() {
                     </p>
                     <p>
                       <label htmlFor="add-lastname">Nom</label>
-                      <input id="add-lastname" name="" type="text" />
+                      <input id="add-lastname" name="lastname" type="text" />
                     </p>
                     <p>
                       <label htmlFor="add-email">

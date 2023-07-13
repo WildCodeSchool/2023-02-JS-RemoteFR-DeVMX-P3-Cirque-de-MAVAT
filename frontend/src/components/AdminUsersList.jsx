@@ -61,6 +61,9 @@ export default function AdminUsersList() {
                   return (
                     <li key={`users-${id}`}>
                       <Link to={`/account/users/${id}`}>{username}</Link>
+                      <Link to={`/account/users/${id}`} className="edit">
+                        Modifier
+                      </Link>
                       <Link
                         to={`/account/users/delete/${id}`}
                         className="delete"
