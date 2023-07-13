@@ -31,6 +31,7 @@ import UserUpdate from "./components/UserUpdate";
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
+import AuthorsDelete from "./components/AuthorsDelete";
 
 function App() {
   return (
@@ -62,6 +63,10 @@ function App() {
                 <Route index element={<AuthorsList />} />
                 <Route path="add" element={<AuthorsFormAdd />} />
               </Route>
+              <Route
+                path="/account/authors/delete/:id"
+                element={<AuthorsDelete />}
+              />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
