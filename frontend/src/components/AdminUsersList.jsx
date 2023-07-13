@@ -60,7 +60,7 @@ export default function AdminUsersList() {
                   username = username.trim();
                   return (
                     <li key={`users-${id}`}>
-                      <Link to={`/account/users/${id}`}>{username}</Link>
+                      {username}
                       <Link to={`/account/users/${id}`} className="edit">
                         Modifier
                       </Link>
