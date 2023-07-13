@@ -11,8 +11,6 @@ export default function UserUpdate() {
   const { id } = currentUser;
   const [username, setUsername] = useState(null);
   const [currentFields, setCurrentFields] = useState({});
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmedNewPassword, setConfirmedNewPassword] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidUpdate, setInvalidUpdate] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
@@ -63,6 +61,8 @@ export default function UserUpdate() {
     };
     const fields = new FormData(e.target);
     const errors = new Set();
+    let newPassword;
+    let confirmedNewPassword;
 
     for (const [field, value] of fields.entries()) {
       if (validationFilters[field]) {
@@ -84,15 +84,13 @@ export default function UserUpdate() {
         } else {
           errors.delete(field);
         }
-      } else if (["password", "confirmPassword"].includes(field) && value) {
-        if (field === "password") setNewPassword(value);
-        else {
-          setConfirmedNewPassword(value);
-          if (newPassword !== confirmedNewPassword) errors.add(field);
-          else errors.delete(field);
-        }
+      } else if (["password", "confirmPassword"].includes(field)) {
+        if (field === "password") newPassword = value;
+        else confirmedNewPassword = value;
       }
     }
+    if (newPassword !== confirmedNewPassword) errors.add("confirmPassword");
+    else errors.delete("confirmPassword");
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
@@ -209,7 +207,7 @@ export default function UserUpdate() {
               <p>
                 <label htmlFor="update-password-confirm">
                   Confirmez votre nouveau mot de passe
-                  {confirmedNewPassword !== newPassword && (
+                  {invalidFields.includes("confirmPassword") && (
                     <span className="error">
                       (le nouveau mot de passe doit être resaisi à l’identique)
                     </span>
