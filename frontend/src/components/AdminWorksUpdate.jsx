@@ -154,7 +154,7 @@ export default function AdminWorksUpdate() {
         .then((response) => {
           if (response.status === 204) setIsUpdated(true);
         })
-        .catch((err) => setInvalidWorkUpdate(err.response.data.error));
+        .catch((err) => setInvalidWorkUpdate(err.response.data));
     }
   };
 

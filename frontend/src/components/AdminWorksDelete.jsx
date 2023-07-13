@@ -70,7 +70,7 @@ export default function AdminWorksDelete() {
       .then((response) => {
         if (response.status === 204) setIsDeleted(true);
       })
-      .catch((err) => setInvalidWorkDeletion(err.response.data.error));
+      .catch((err) => setInvalidWorkDeletion(err.response.data));
   };
 
   return (

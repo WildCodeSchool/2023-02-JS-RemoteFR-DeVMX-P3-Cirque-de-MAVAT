@@ -133,7 +133,7 @@ export default function AdminWorksAdd() {
         .then((response) => {
           if (response.data.id) setIsAdded(true);
         })
-        .catch((err) => setInvalidWorkAddition(err.response.data.error));
+        .catch((err) => setInvalidWorkAddition(err.response.data));
     }
   };
 

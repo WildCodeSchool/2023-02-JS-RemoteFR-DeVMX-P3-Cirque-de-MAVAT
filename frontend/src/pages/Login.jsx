@@ -57,7 +57,7 @@ export default function Login() {
           });
         })
         .catch((err) => {
-          setInvalidLogin(err.response.data.error);
+          setInvalidLogin(err.response.data);
         });
     }
   };
