@@ -125,7 +125,7 @@ export default function UserUpdate() {
           }
         })
         .catch((err) => {
-          setInvalidUpdate(err.message);
+          setInvalidUpdate(err.response.data);
         });
     }
   };
