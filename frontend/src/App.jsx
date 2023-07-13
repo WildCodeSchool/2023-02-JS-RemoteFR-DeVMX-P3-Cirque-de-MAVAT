@@ -62,8 +62,8 @@ function App() {
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<Page404 />} />
             <Route path="/mention" element={<Mention />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
           <Footer />
         </Router>
