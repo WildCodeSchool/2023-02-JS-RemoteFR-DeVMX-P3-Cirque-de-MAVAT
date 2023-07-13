@@ -56,7 +56,7 @@ export default function AuthorsList() {
                       {/* <AuthorsDelete author={author} /> */}
                       <Link
                         to={`/account/authors/delete/${id}`}
-                        className="deleteBtn"
+                        className="deleteauthors"
                       >
                         Supprimer
                       </Link>
