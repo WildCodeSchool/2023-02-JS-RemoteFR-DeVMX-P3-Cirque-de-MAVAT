@@ -7,11 +7,10 @@ import Admin403 from "./Admin403";
 
 import CurrentUserContext from "../contexts/CurrentUser";
 
-export default function AdminWorksAdd() {
+export default function AdminUsersUpdate() {
   const { currentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
   const [userToModify, setUserToModify] = useState(new FormData());
-  // const [users, setUsers] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidUserUpdate, setInvalidUserUpdate] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
@@ -63,15 +62,15 @@ export default function AdminWorksAdd() {
         type: "email",
         format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
       },
-      password: {
-        type: "string",
-      },
       role: {
         type: "int",
       },
     };
     const fields = new FormData(e.target);
     const errors = new Set();
+    let newPassword;
+    let confirmedNewPassword;
+
     for (const [field, value] of fields.entries()) {
       if (validationFilters[field]) {
         let isInvalid = false;
@@ -100,10 +99,16 @@ export default function AdminWorksAdd() {
         } else {
           errors.delete(field);
         }
+      } else if (["password", "confirmPassword"].includes(field)) {
+        if (field === "password") newPassword = value;
+        else {
+          confirmedNewPassword = value;
+        }
       }
     }
+    if (newPassword !== confirmedNewPassword) errors.add("confirmPassword");
+    else errors.delete("confirmPassword");
     setInvalidFields([...errors]);
-
     if (errors.size === 0) {
       const data = {};
       const emptyFields = [...fields.keys()].filter(
@@ -112,11 +117,16 @@ export default function AdminWorksAdd() {
       for (const field of emptyFields) {
         fields.delete(field);
       }
+      fields.delete("confirmPassword");
 
+      for (const [key, value] of fields.entries()) {
+        if (value) data[key] = value;
+        else if (key !== "password") data[key] = null;
+      }
       axios
         .put(`${host}/users/${id}`, data)
         .then((response) => {
-          if (response.data.id) setIsUpdated(true);
+          if (response.status === 204) setIsUpdated(true);
         })
         .catch((err) => setInvalidUserUpdate(err.response.data.error));
     }
@@ -128,7 +138,7 @@ export default function AdminWorksAdd() {
       {currentUser.isAdmin ? (
         <>
           <AccountBreadcrumb breadcrumb={breadcrumb} />
-          <section className="account users">
+          <section className="account users update">
             <h2>
               {userToModify.has("title")
                 ? userToModify.get("title")
@@ -154,26 +164,26 @@ export default function AdminWorksAdd() {
                 <form onSubmit={handleUpdate} noValidate>
                   <fieldset>
                     <p>
-                      <label htmlFor="add-firstname">Prénom</label>
+                      <label htmlFor="update-firstname">Prénom</label>
                       <input
-                        id="add-firstname"
+                        id="update-firstname"
                         name="firstname"
                         type="text"
                         defaultValue={userToModify.get("firstname")}
                       />
                     </p>
                     <p>
-                      <label htmlFor="add-lastname">Nom</label>
+                      <label htmlFor="update-lastname">Nom</label>
                       <input
-                        id="add-lastname"
-                        name=""
+                        id="update-lastname"
+                        name="lastname"
                         type="text"
                         defaultValue={userToModify.get("lastname")}
                       />
                     </p>
                     <p>
-                      <label htmlFor="add-email">
-                        Email
+                      <label htmlFor="update-email">
+                        Adresse Email
                         <span aria-label=" obligatoire"> *</span>
                         {invalidFields.includes("email") && (
                           <span className="error">
@@ -182,7 +192,7 @@ export default function AdminWorksAdd() {
                         )}
                       </label>
                       <input
-                        id="add-email"
+                        id="update-email"
                         name="email"
                         type="email"
                         maxLength="255"
@@ -191,47 +201,81 @@ export default function AdminWorksAdd() {
                       />
                     </p>
                     <p>
-                      <label htmlFor="add-password">
-                        Mot de passe
-                        <span aria-label=" obligatoire"> *</span>
-                        {invalidFields.includes("password") && (
+                      <label htmlFor="update-password">
+                        Votre nouveau mot de passe
+                      </label>
+                      <input
+                        id="update-password"
+                        name="password"
+                        type="password"
+                        autoComplete="new-password"
+                      />
+                    </p>
+                    <p>
+                      <label htmlFor="update-password-confirm">
+                        Confirmez votre nouveau mot de passe
+                        {invalidFields.includes("confirmPassword") && (
                           <span className="error">
-                            (un mot de passe doit être saisi)
+                            (le nouveau mot de passe doit être resaisi à
+                            l’identique)
                           </span>
                         )}
                       </label>
                       <input
-                        id="add-password"
-                        name="password"
+                        id="update-password-confirm"
+                        name="confirmPassword"
                         type="password"
-                        maxLength="255"
-                        defaultValue={userToModify.get("password")}
-                        required
                       />
                     </p>
                   </fieldset>
                   <fieldset>
                     <legend>Administrateur&nbsp;?</legend>
                     <ul>
-                      <li>
-                        <input
-                          id="add-role-yes"
-                          name="role"
-                          type="radio"
-                          value="1"
-                        />
-                        <label htmlFor="add-role-yes">Oui</label>
-                      </li>
-                      <li>
-                        <input
-                          id="add-role-no"
-                          name="role"
-                          type="radio"
-                          value="0"
-                          defaultChecked
-                        />
-                        <label htmlFor="add-role-no">Non</label>
-                      </li>
+                      {userToModify.get("role") === "1" ? (
+                        <>
+                          <li>
+                            <input
+                              id="update-role-yes"
+                              name="role"
+                              type="radio"
+                              value="1"
+                              defaultChecked
+                            />
+                            <label htmlFor="update-role-yes">Oui</label>
+                          </li>
+                          <li>
+                            <input
+                              id="update-role-no"
+                              name="role"
+                              type="radio"
+                              value="0"
+                            />
+                            <label htmlFor="update-role-no">Non</label>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <input
+                              id="update-role-yes"
+                              name="role"
+                              type="radio"
+                              value="1"
+                            />
+                            <label htmlFor="update-role-yes">Oui</label>
+                          </li>
+                          <li>
+                            <input
+                              id="update-role-no"
+                              name="role"
+                              type="radio"
+                              value="0"
+                              defaultChecked
+                            />
+                            <label htmlFor="update-role-no">Non</label>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </fieldset>
                   <p>

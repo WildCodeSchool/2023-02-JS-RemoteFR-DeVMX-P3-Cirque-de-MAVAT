@@ -145,9 +145,11 @@
     li {
       color: white;
       background: var(--primary-color);
+      text-align: center;
       flex-basis: 15rem;
       display: inline-flex;
       aspect-ratio: 1;
+      padding: .5rem;
     }
     a {
       text-decoration: none;
