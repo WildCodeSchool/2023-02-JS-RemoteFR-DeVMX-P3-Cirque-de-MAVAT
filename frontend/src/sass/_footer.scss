@@ -41,10 +41,14 @@
   }
   .lien-dev {
     text-align: center;
+    .developped {
+      margin-right: 1rem;
+    }
     .linkedin {
       color: rgb(85, 188, 247);
       font-weight: bold;
       cursor: pointer;
+      margin-right: 1rem;
     }
   }
 }
