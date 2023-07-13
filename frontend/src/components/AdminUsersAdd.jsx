@@ -83,12 +83,17 @@ export default function AdminWorksAdd() {
       for (const [field, value] of fields.entries()) {
         if (value) data[field] = value;
       }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      };
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, data)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, data, config)
         .then((response) => {
           if (response.data.id) setIsAdded(true);
         })
-        .catch((err) => setInvalidUserAddition(err.response.data.error));
+        .catch((err) => setInvalidUserAddition(err.response.data));
     }
   };
 
