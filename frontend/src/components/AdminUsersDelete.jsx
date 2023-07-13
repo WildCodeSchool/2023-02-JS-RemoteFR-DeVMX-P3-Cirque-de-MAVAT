@@ -11,7 +11,8 @@ export default function AdminUsersDelete() {
   const { currentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [setUserId] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [userId, setUserId] = useState([]);
   const [invalidUserDeletion, setInvalidUserDeletion] = useState("");
   const [isDeleted, setIsDeleted] = useState(false);
   const host = import.meta.env.VITE_BACKEND_URL;
