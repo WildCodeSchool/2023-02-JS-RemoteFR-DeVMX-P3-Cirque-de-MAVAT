@@ -45,7 +45,8 @@ function Footer() {
       <div className="lien-dev">
         <p>Copyright @ 2023 AFAC974 - All rights reserved</p>
         <p>
-          Developed with ♥ by
+          <span className="developped">Développé avec ♥ par </span>
+
           <a
             href="https://www.linkedin.com/in/anne-louis-3326b826b/"
             className="linkedin"
