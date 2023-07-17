@@ -24,7 +24,6 @@ function Footer() {
                   Mentions légales
                 </Link>
               </p>
-              <p>Contact</p>
             </div>
           </div>
         </div>
@@ -43,7 +42,7 @@ function Footer() {
         </div>
       </div>
       <div className="lien-dev">
-        <p>Copyright @ 2023 AFAC974 - All rights reserved</p>
+        <p>©2023 AFAC974 - Tous droits réservés</p>
         <p>
           <span className="developped">Développé avec ♥ par </span>
 
