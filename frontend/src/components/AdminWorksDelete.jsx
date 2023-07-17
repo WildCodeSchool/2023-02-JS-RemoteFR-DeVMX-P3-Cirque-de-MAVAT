@@ -57,12 +57,20 @@ export default function AdminWorksDelete() {
   const handleDelete = (e) => {
     e.preventDefault();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    };
     axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/images/${imageId}/${file}`)
+      .delete(
+        `${import.meta.env.VITE_BACKEND_URL}/images/${imageId}/${file}`,
+        config
+      )
       .then((response) => {
         if (response.status === 204) setIsDeleted(true);
       })
-      .catch((err) => setInvalidWorkDeletion(err.response.data.error));
+      .catch((err) => setInvalidWorkDeletion(err.response.data));
   };
 
   return (

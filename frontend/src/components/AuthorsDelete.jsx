@@ -4,9 +4,10 @@
 import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import CurrentUserContext from "../contexts/CurrentUser";
+
 import BreadcrumbAuthors from "./BreadcrumbAuthors";
 import Admin403 from "./Admin403";
+import CurrentUserContext from "../contexts/CurrentUser";
 
 function AuthorsDelete() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -36,8 +37,13 @@ function AuthorsDelete() {
   function DeleteAuthorById(e) {
     e.preventDefault();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    };
     axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/authors/${id}`)
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/authors/${id}`, config)
       .then((res) => res.data)
       .then(() => setIsDeleted(!isDeleted))
       .catch((err) => setInvalidWorkDeletion(err.response.data.error));
@@ -58,7 +64,7 @@ function AuthorsDelete() {
             <h2>Supprimer un auteur</h2>
             {isDeleted ? (
               <>
-                <p>L’œuvre a été supprimée avec succès.</p>
+                <p>L’auteur a été supprimé avec succès.</p>
                 <p>
                   <Link to="/account/authors" className="back">
                     Retourner à la liste des auteurs

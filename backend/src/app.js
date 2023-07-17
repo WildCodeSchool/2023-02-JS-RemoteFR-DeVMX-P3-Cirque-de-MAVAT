@@ -26,11 +26,11 @@ app.use(
 
 const router = require("./router");
 
-app.use(router);
-
 // serve the `backend/public` folder for public resources
 
 app.use(express.static(path.join(__dirname, "../public")));
+
+app.use(router);
 
 // serve REACT APP
 
