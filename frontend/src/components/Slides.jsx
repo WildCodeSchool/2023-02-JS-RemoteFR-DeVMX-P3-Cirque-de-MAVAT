@@ -35,7 +35,7 @@ function Slides() {
             height="310"
           />
           <figcaption>
-            GALLERIE : Laissez-vous séduire par nos oeuvres d'art
+            GALERIE : Laissez-vous séduire par nos oeuvres d'art
           </figcaption>
         </figure>
       ),
@@ -51,7 +51,8 @@ function Slides() {
             height="310"
           />
           <figcaption>
-            EXPOSITION : Hippolyte Charles Napoléon MORTIER Duc de Trévise
+            EXPOSITION : Hippolyte Charles Napoléon MORTIER <br />
+            Duc de Trévise
             <em>(oeuvres aquarelles et dessins)</em>
           </figcaption>
         </figure>
@@ -73,7 +74,7 @@ function Slides() {
     },
   ];
 
-  const delay = 3000;
+  const delay = 5000;
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);

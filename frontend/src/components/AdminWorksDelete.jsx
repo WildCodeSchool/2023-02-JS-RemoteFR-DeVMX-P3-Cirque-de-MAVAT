@@ -13,6 +13,7 @@ export default function AdminWorksDelete() {
   const navigate = useNavigate();
   const [imageId, setImageId] = useState(0);
   const [file, setFile] = useState("");
+  const [imageTitle, setImageTitle] = useState("");
   const [invalidWorkDeletion, setInvalidWorkDeletion] = useState("");
   const [isDeleted, setIsDeleted] = useState(false);
   const host = import.meta.env.VITE_BACKEND_URL;
@@ -37,7 +38,10 @@ export default function AdminWorksDelete() {
   useEffect(() => {
     axios
       .get(`${host}/works/${id}`)
-      .then((response) => setImageId(response.data.image_id))
+      .then((response) => {
+        setImageId(response.data.image_id);
+        setImageTitle(response.data.title);
+      })
       .catch((err) => console.error(err));
   }, []);
   useEffect(() => {
@@ -83,7 +87,10 @@ export default function AdminWorksDelete() {
             <h2>Supprimer une œuvre</h2>
             {isDeleted ? (
               <>
-                <p>L’œuvre a été supprimée avec succès.</p>
+                <p>
+                  L’œuvre intitulée
+                  <em>{imageTitle}</em> a été supprimée avec succès.
+                </p>
                 <p>
                   <Link to="/account/works" className="back">
                     Retourner à la liste des œuvres
@@ -93,7 +100,8 @@ export default function AdminWorksDelete() {
             ) : (
               <form onSubmit={handleDelete} onReset={cancelDelete} noValidate>
                 <p>
-                  Êtes-vous sûr de supprimer l’œuvre&nbsp;?
+                  Êtes-vous sûr de bien vouloir supprimer l’œuvre intitulée
+                  <em>{imageTitle}</em>&nbsp;?
                   {invalidWorkDeletion && (
                     <span className="error">{invalidWorkDeletion}</span>
                   )}
