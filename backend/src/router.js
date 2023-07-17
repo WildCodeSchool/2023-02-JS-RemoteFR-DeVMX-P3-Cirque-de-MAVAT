@@ -23,6 +23,7 @@ const verifyToken = require("./services/verifyToken");
 const validateWork = require("./services/validateWork");
 const validateUpdate = require("./services/validateUpdate");
 const removeImage = require("./services/removeImage");
+const validateAdminRole = require("./services/validateAdminRole");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -76,9 +77,9 @@ router.put(
 router.put("/users/:id", validateUpdate, hashPassword, usersControllers.edit);
 router.delete("/users/:id", usersControllers.destroy);
 
-router.post("/authors", authorsControllers.add);
-router.put("/authors/:id", authorsControllers.edit);
-router.delete("/authors/:id", authorsControllers.destroy);
+router.post("/authors", validateAdminRole, authorsControllers.add);
+router.put("/authors/:id", validateAdminRole, authorsControllers.edit);
+router.delete("/authors/:id", validateAdminRole, authorsControllers.destroy);
 
 router.post("/favourites", favouritesControllers.create);
 router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
