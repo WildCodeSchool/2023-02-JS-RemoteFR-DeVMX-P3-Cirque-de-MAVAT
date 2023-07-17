@@ -1,4 +1,6 @@
-import { useContext } from "react";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import { useContext, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import CurrentUserContext from "../contexts/CurrentUser";
@@ -6,7 +8,6 @@ import CurrentUserContext from "../contexts/CurrentUser";
 import logo from "../assets/logo-afac.svg";
 import account from "../assets/icon-account.svg";
 import disconnect from "../assets/icon-disconnect.svg";
-import favorite from "../assets/icon-favorite.svg";
 
 import diamant from "../assets/Group 1.svg";
 
@@ -17,16 +18,21 @@ export default function Header() {
   const logout = () => {
     setCurrentUser({});
   };
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const closeNavbar = () => {
+    setShowNavbar(false);
+  };
 
   return (
-    <header className="header">
+    <header className={`header ${showNavbar ? "show" : ""}`}>
       <div className="top-header">
         {hasCurrentUser && currentUser.username && (
           <p className="hello">Bonjour, {currentUser.username}</p>
         )}
       </div>
       <div className="bottom-header">
-        <NavLink to="/" className="logo-container">
+        <NavLink to="/" className="logo-container" onClick={closeNavbar}>
           <img src={logo} alt="logo AFAC 974" className="img-logo" />
         </NavLink>
 
@@ -38,8 +44,14 @@ export default function Header() {
                 className={
                   location === "/gallery" ? "navlink active" : "navlink"
                 }
+                onClick={closeNavbar}
               >
-                <img src={diamant} alt="diamant" className="diamant" />
+                <img
+                  src={diamant}
+                  alt="diamant"
+                  className="diamant"
+                  style={{ pointerEvents: "none" }}
+                />
                 Galerie
               </NavLink>
             </li>
@@ -49,8 +61,14 @@ export default function Header() {
                 className={
                   location === "/author" ? "navlink active" : "navlink"
                 }
+                onClick={closeNavbar}
               >
-                <img src={diamant} alt="diamant" className="diamant" />
+                <img
+                  src={diamant}
+                  alt="diamant"
+                  className="diamant"
+                  style={{ pointerEvents: "none" }}
+                />
                 Auteur
               </NavLink>
             </li>
@@ -58,37 +76,71 @@ export default function Header() {
               <NavLink
                 to="/about"
                 className={location === "/about" ? "navlink active" : "navlink"}
+                onClick={closeNavbar}
               >
-                <img src={diamant} alt="diamant" className="diamant" />À propos
+                <img
+                  src={diamant}
+                  alt="diamant"
+                  className="diamant"
+                  style={{ pointerEvents: "none" }}
+                />
+                À propos
               </NavLink>
             </li>
+            {showNavbar && (
+              <>
+                <li>
+                  <NavLink
+                    to="/account"
+                    className={
+                      location === "/account" ? "navlink active" : "navlink"
+                    }
+                    onClick={closeNavbar}
+                  >
+                    Mon compte
+                  </NavLink>
+                </li>
+                <li>
+                  {hasCurrentUser && (
+                    <button type="button" onClick={logout}>
+                      Déconnexion
+                    </button>
+                  )}
+                </li>
+              </>
+            )}
           </ul>
         </nav>
         <nav className="icon-nav">
-          {hasCurrentUser && (
-            <figure>
-              <img src={favorite} alt="favorite icon" className="icon-fav" />
-              <figcaption>Favoris</figcaption>
-            </figure>
-          )}
-          <Link to="/account">
-            <figure>
-              <img src={account} alt="account icon" className="icon-account" />
-              <figcaption>Compte</figcaption>
-            </figure>
-          </Link>
-          {hasCurrentUser && (
-            <button type="button" onClick={logout}>
+          <div className="icon-container">
+            <Link to="/account">
               <figure>
                 <img
-                  src={disconnect}
-                  alt="disconnect icon"
-                  className="icon-disconnect"
+                  src={account}
+                  alt="account icon"
+                  className="icon-account"
                 />
-                <figcaption>Déconnexion</figcaption>
+                <figcaption>Compte</figcaption>
               </figure>
-            </button>
-          )}
+            </Link>
+            {hasCurrentUser && (
+              <button type="button" onClick={logout}>
+                <figure>
+                  <img
+                    src={disconnect}
+                    alt="disconnect icon"
+                    className="icon-disconnect"
+                  />
+                  <figcaption>Déconnexion</figcaption>
+                </figure>
+              </button>
+            )}
+          </div>
+          <div className="burger" onClick={() => setShowNavbar(!showNavbar)}>
+            <div className={`line ${showNavbar ? "line1" : ""}`} />
+            <div className={`line ${showNavbar ? "line2" : ""}`} />
+            <div className={`line ${showNavbar ? "line3" : ""}`} />
+          </div>
         </nav>
       </div>
     </header>
