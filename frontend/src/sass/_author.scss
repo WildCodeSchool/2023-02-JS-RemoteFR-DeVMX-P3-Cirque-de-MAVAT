@@ -20,8 +20,7 @@
   margin: 3rem auto 20rem auto;
   width: 60%;
   p {
-    font-family: Poppins, sans-serif;
-    src: url("/src/assets/fonts/Poppins-Regular.woff2") format("woff2");
+  
     font-size: 2rem;
     text-align: justify;
   }
@@ -31,8 +30,6 @@
     font-weight: bold;
     font-size: 3rem;
     margin-bottom: 2rem;
-    font-family: Poppins;
-    src: url("/src/assets/fonts/Poppins-Italic.woff2") format("woff2");
     font-display: swap;
 
   }

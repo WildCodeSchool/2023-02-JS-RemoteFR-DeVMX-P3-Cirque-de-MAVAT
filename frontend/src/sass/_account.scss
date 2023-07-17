@@ -40,16 +40,12 @@
     transform: rotate(180deg);
   }
   h2 {
-    font-family: Poppins;
     font-size: 4rem;
-    src: url("/src/assets/fonts/Poppins-Italic.woff2") format("woff2");
     color: var(--primary-color);
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 1.4rem;
     + p {
-      font-family: Poppins;
-      src: url("/src/assets/fonts/Poppins-Regular.woff2") format("woff2");
       font-size: 1.2rem;
       font-style: italic;
       text-align: center;
