@@ -4,9 +4,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useRef, useState } from "react";
 import Imagejourneepatrimoine from "../assets/imagejourneepatrimoine.png";
-import Imagefleur from "../assets/imagefleur.png";
-import Imagearbrefleur from "../assets/imagearbrevache.jpg";
-import Imagearbredessin from "../assets/imagearbredessin.jpg";
+import Artgallery from "../assets/artgallery.jpg";
+import Imageauthor from "../assets/imageauthor.jpg";
+import Projetafac from "../assets/projetafac.png";
 
 function Slides() {
   const slidePictures = [
@@ -20,7 +20,7 @@ function Slides() {
             width="640"
             height="310"
           />
-          <figcaption>Journée du Patrimoine</figcaption>
+          <figcaption>A DECOUVRIR</figcaption>
         </figure>
       ),
     },
@@ -29,27 +29,13 @@ function Slides() {
         <figure>
           <img
             className="imgslide"
-            src={Imagefleur}
-            alt=""
-            width="640"
-            height="310"
-          />
-          <figcaption>Oeuvre aquarelle</figcaption>
-        </figure>
-      ),
-    },
-    {
-      picture: (
-        <figure>
-          <img
-            className="imgslide"
-            src={Imagearbrefleur}
+            src={Artgallery}
             alt=""
             width="640"
             height="310"
           />
           <figcaption>
-            Oeuvre dessin<em>(Image arbre en fleur au crayon)</em>
+            GALLERIE : Laissez-vous séduire par nos oeuvres d'art
           </figcaption>
         </figure>
       ),
@@ -59,12 +45,29 @@ function Slides() {
         <figure>
           <img
             className="imgslide"
-            src={Imagearbredessin}
+            src={Imageauthor}
             alt=""
             width="640"
             height="310"
           />
-          <figcaption>Oeuvre Dessin</figcaption>
+          <figcaption>
+            EXPOSITION : Hippolyte Charles Napoléon MORTIER Duc de Trévise
+            <em>(oeuvres aquarelles et dessins)</em>
+          </figcaption>
+        </figure>
+      ),
+    },
+    {
+      picture: (
+        <figure>
+          <img
+            className="imgslide"
+            src={Projetafac}
+            alt=""
+            width="640"
+            height="310"
+          />
+          <figcaption>ACTUALITE : projets 2023</figcaption>
         </figure>
       ),
     },
