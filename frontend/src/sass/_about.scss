@@ -3,20 +3,25 @@
   width: 60%;
 
   h1 {
+    font-family: Poppins;
     color: var(--primary-color);
     font-weight: bold;
     font-size: 5rem;
   }
 
   h2 {
+    font-family: Poppins;
     color: var(--primary-color);
+    src: url("/src/assets/fonts/Poppins-Italic.woff2") format("woff2");
     font-weight: bold;
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
   }
 
   p {
-    font-size: 2.2rem;
+    font-family: Poppins, sans-serif;
+    src: url("/src/assets/fonts/Poppins-Regular.woff2") format("woff2"); 
+    font-size: 2rem;
     text-align: justify;
   }
   .about-afac-974 {
