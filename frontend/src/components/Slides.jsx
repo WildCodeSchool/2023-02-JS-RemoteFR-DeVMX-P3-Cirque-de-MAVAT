@@ -17,7 +17,7 @@ function Slides() {
             className="imgslide"
             src={Imagejourneepatrimoine}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>A DECOUVRIR</figcaption>
@@ -31,7 +31,7 @@ function Slides() {
             className="imgslide"
             src={Artgallery}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>
@@ -47,7 +47,7 @@ function Slides() {
             className="imgslide"
             src={Imageauthor}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>
@@ -64,7 +64,7 @@ function Slides() {
             className="imgslide"
             src={Projetafac}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>ACTUALITE : projets 2023</figcaption>
