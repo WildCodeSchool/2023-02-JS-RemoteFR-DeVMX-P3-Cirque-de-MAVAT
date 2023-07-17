@@ -9,9 +9,12 @@ export default function About() {
     <div className="about">
       <h1>Qui sommes-nous?</h1>
       <div className="about-afac-974">
-        <img src={logoAfac} alt="logo AFAC 974" className="img-logo-afac" />
+        <div className="logo-afac-container">
+          <h2>
+            <img src={logoAfac} alt="AFAC 974" className="img-logo-afac" />
+          </h2>
+        </div>
         <div className="about-info-afac">
-          <h2>AFAC 974</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
             laboriosam eligendi atque nesciunt aliquam ad beatae reiciendis
@@ -23,13 +26,16 @@ export default function About() {
       <div className="about-partners">
         <h1>Les Partenaires</h1>
         <div className="about-objet-temoin">
-          <img
-            src={logoObjetTemoin}
-            alt="logo Objet Témoin"
-            className="img-logo-objet-temoin"
-          />
+          <div className="logo-objet-temoin-container">
+            <h2>
+              <img
+                src={logoObjetTemoin}
+                alt="Objet Témoin"
+                className="img-logo-objet-temoin"
+              />
+            </h2>
+          </div>
           <div className="about-info-objet-temoin">
-            <h2>Objet Témoin ASBL</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
               nihil atque officiis, facilis maxime ab laborum assumenda facere
@@ -39,17 +45,20 @@ export default function About() {
           </div>
         </div>
         <div className="about-ihoi">
+          <div className="logo-ihoi-container">
+            <h2>
+              <div className="background-logo-ihoi">
+                <img src={logoIHOI} alt="IHOI" className="img-logo-ihoi" />
+              </div>
+            </h2>
+          </div>
           <div className="about-info-ihoi">
-            <h2>IHOI</h2>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis,
               rerum. Nemo illo debitis numquam voluptatem recusandae officia, et
               nostrum ratione tenetur doloribus animi, unde quibusdam aperiam!
               laboriosam tenetur.
             </p>
-          </div>
-          <div className="background-logo">
-            <img src={logoIHOI} alt="logo IHOI" className="img-logo-ihoi" />
           </div>
         </div>
       </div>
