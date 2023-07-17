@@ -123,12 +123,17 @@ export default function AdminUsersUpdate() {
         if (value) data[key] = value;
         else if (key !== "password") data[key] = null;
       }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      };
       axios
-        .put(`${host}/users/${id}`, data)
+        .put(`${host}/users/${id}`, data, config)
         .then((response) => {
           if (response.status === 204) setIsUpdated(true);
         })
-        .catch((err) => setInvalidUserUpdate(err.response.data.error));
+        .catch((err) => setInvalidUserUpdate(err.response.data));
     }
   };
 

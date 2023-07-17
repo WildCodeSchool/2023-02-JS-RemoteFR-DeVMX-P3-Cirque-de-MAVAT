@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+
 import BreadcrumbAuthors from "./BreadcrumbAuthors";
+import CurrentUserContext from "../contexts/CurrentUser";
 
 function AuthorsFormAdd() {
+  const { currentUser } = useContext(CurrentUserContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [artistname, setArtistname] = useState("");
@@ -32,17 +35,27 @@ function AuthorsFormAdd() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    };
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/authors`, {
-        firstname,
-        lastname,
-        artistname,
-        birthdate,
-        deathdate,
-        birthplace,
-        deathplace,
-        biography,
-      })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/authors`,
+        {
+          firstname,
+          lastname,
+          artistname,
+          birthdate,
+          deathdate,
+          birthplace,
+          deathplace,
+          biography,
+        },
+        config
+      )
       .then((res) => res.data)
       .catch((err) => {
         console.error(err);
