@@ -63,7 +63,7 @@ export default function SignUp() {
           if (response.data.id) setIsRegistered(true);
         })
         .catch((err) => {
-          setInvalidSignUp(err.response.data.error);
+          setInvalidSignUp(err.response.data);
         });
     }
   };

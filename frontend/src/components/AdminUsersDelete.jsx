@@ -49,12 +49,17 @@ export default function AdminUsersDelete() {
   const handleDelete = (e) => {
     e.preventDefault();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    };
     axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/users/${id}`)
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/users/${id}`, config)
       .then((response) => {
         if (response.status === 204) setIsDeleted(true);
       })
-      .catch((err) => setInvalidUserDeletion(err.response.data.error));
+      .catch((err) => setInvalidUserDeletion(err.response.data));
   };
 
   return (

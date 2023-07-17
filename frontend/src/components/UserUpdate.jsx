@@ -100,8 +100,13 @@ export default function UserUpdate() {
         if (value) data[key] = value;
         else if (key !== "password") data[key] = null;
       }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      };
       axios
-        .put(`${host}/users/${id}`, data)
+        .put(`${host}/users/${id}`, data, config)
         .then((response) => {
           if (response.status === 204) {
             const { firstname, lastname } = data;
@@ -120,7 +125,7 @@ export default function UserUpdate() {
           }
         })
         .catch((err) => {
-          setInvalidUpdate(err.message);
+          setInvalidUpdate(err.response.data);
         });
     }
   };
