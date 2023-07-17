@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -12,9 +12,11 @@ import CurrentUserContext from "../contexts/CurrentUser";
 function AuthorsDelete() {
   const { currentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [invalidWorkDeletion, setInvalidWorkDeletion] = useState("");
   const [isDeleted, setIsDeleted] = useState(false);
   const { id } = useParams();
+  const host = import.meta.env.VITE_BACKEND_URL;
 
   const breadcrumb = [
     {
@@ -54,6 +56,28 @@ function AuthorsDelete() {
     navigate("/account/authors");
   };
 
+  useEffect(() => {
+    axios
+      .get(`${host}/authors/${id}`)
+      .then((response) => {
+        const { firstname, lastname, artistname } = response.data;
+        let retrievedUsername = "";
+        if (firstname === null && lastname === null) {
+          retrievedUsername = artistname;
+        } else {
+          if (firstname !== null) {
+            retrievedUsername += firstname;
+          }
+          if (lastname !== null) {
+            retrievedUsername += ` ${lastname}`;
+          }
+        }
+        retrievedUsername = retrievedUsername.trim();
+        setUsername(retrievedUsername);
+      })
+      .catch((err) => console.error(err))
+  }, []);
+
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -64,7 +88,7 @@ function AuthorsDelete() {
             <h2>Supprimer un auteur</h2>
             {isDeleted ? (
               <>
-                <p>L’auteur a été supprimé avec succès.</p>
+                <p>L’auteur {username} a été supprimé avec succès.</p>
                 <p>
                   <Link to="/account/authors" className="back">
                     Retourner à la liste des auteurs
@@ -78,7 +102,7 @@ function AuthorsDelete() {
                 noValidate
               >
                 <p>
-                  Êtes-vous sûr de supprimer l’auteur&nbsp;?
+                  Êtes-vous sûr de supprimer l’auteur {username}&nbsp;?
                   {invalidWorkDeletion && (
                     <span className="error">{invalidWorkDeletion}</span>
                   )}
