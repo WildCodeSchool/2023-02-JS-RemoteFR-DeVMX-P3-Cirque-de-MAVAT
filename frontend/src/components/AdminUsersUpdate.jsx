@@ -11,6 +11,7 @@ export default function AdminUsersUpdate() {
   const { currentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
   const [userToModify, setUserToModify] = useState(new FormData());
+  const [username, setUsername] = useState("");
   const [invalidFields, setInvalidFields] = useState([]);
   const [invalidUserUpdate, setInvalidUserUpdate] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
@@ -28,9 +29,7 @@ export default function AdminUsersUpdate() {
     },
     {
       id: 3,
-      title: userToModify.has("email")
-        ? userToModify.get("email")
-        : "Modifier un utilisateur",
+      title: username,
       link: null,
     },
   ];
@@ -51,6 +50,20 @@ export default function AdminUsersUpdate() {
           }
         }
         setUserToModify(fields);
+        const { firstname, lastname, email } = data;
+        let retrievedUsername = "";
+        if (firstname === null && lastname === null) {
+          retrievedUsername = email;
+        } else {
+          if (firstname !== null) {
+            retrievedUsername += firstname;
+          }
+          if (lastname !== null) {
+            retrievedUsername += ` ${lastname}`;
+          }
+        }
+        retrievedUsername = retrievedUsername.trim();
+        setUsername(retrievedUsername);
       })
       .catch((err) => console.error(err));
   }, [isUpdated]);
@@ -144,11 +157,7 @@ export default function AdminUsersUpdate() {
         <>
           <AccountBreadcrumb breadcrumb={breadcrumb} />
           <section className="account users update">
-            <h2>
-              {userToModify.has("title")
-                ? userToModify.get("title")
-                : "Modifier un utilisateur"}
-            </h2>
+            <h2>{username}</h2>
             {isUpdated ? (
               <>
                 <p>L’utilisateur a été mis à jour avec succès.</p>
