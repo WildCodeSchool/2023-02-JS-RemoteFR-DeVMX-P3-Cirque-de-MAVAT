@@ -6,8 +6,8 @@ import logoObjetTemoin from "../assets/logo-objet-temoin.svg";
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-top">
-        <div className="footer-left">
+      <div className="footer-afac-main">
+        <div className="footer-afac">
           <div className="logo-afac974">
             <a href="https://capeline974.re/CAPELINE/CARTOTHEQUE/capeline-accueil.html">
               <img src={logoAfac974} alt="logo AFAC 974" />
@@ -24,12 +24,11 @@ function Footer() {
                   Mentions légales
                 </Link>
               </p>
-              <p>Contact</p>
             </div>
           </div>
         </div>
-        <div className="footer-right">
-          <p>Nos Partenaires</p>
+        <div className="footer-partners">
+          <h1>Nos Partenaires</h1>
           <div className="logo-ihoi">
             <a href="https://ihoi.org/app/photopro.sk/ihoi_icono/?">
               <img src={logoIhoi} alt="logo IHOI" />
@@ -43,7 +42,7 @@ function Footer() {
         </div>
       </div>
       <div className="lien-dev">
-        <p>Copyright @ 2023 AFAC974 - All rights reserved</p>
+        <p>©2023 AFAC974 - Tous droits réservés</p>
         <p>
           <span className="developped">Développé avec ♥ par </span>
 
