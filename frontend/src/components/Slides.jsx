@@ -17,7 +17,7 @@ function Slides() {
             className="imgslide"
             src={Imagejourneepatrimoine}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>A DECOUVRIR</figcaption>
@@ -31,11 +31,11 @@ function Slides() {
             className="imgslide"
             src={Artgallery}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>
-            GALLERIE : Laissez-vous séduire par nos oeuvres d'art
+            GALERIE : Laissez-vous séduire par nos oeuvres d'art
           </figcaption>
         </figure>
       ),
@@ -47,11 +47,12 @@ function Slides() {
             className="imgslide"
             src={Imageauthor}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>
-            EXPOSITION : Hippolyte Charles Napoléon MORTIER Duc de Trévise
+            EXPOSITION : Hippolyte Charles Napoléon MORTIER <br />
+            Duc de Trévise
             <em>(oeuvres aquarelles et dessins)</em>
           </figcaption>
         </figure>
@@ -64,7 +65,7 @@ function Slides() {
             className="imgslide"
             src={Projetafac}
             alt=""
-            width="640"
+            width="1000"
             height="310"
           />
           <figcaption>ACTUALITE : projets 2023</figcaption>
@@ -73,7 +74,7 @@ function Slides() {
     },
   ];
 
-  const delay = 3000;
+  const delay = 5000;
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);

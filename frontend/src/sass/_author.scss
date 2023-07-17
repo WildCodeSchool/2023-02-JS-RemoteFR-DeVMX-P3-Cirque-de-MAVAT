@@ -1,5 +1,4 @@
 .img-author {
-  margin-top: 15rem;
   width: 650px;
   height: 800px;
 }
@@ -7,7 +6,6 @@
 .author-paint {
   display: flex;
   flex-direction: column;
-  margin-top: 14rem;
 }
 
 .img-author {
@@ -17,10 +15,9 @@
 
 .author {
   display: flex;
-  margin: 3rem auto 20rem auto;
+  margin: 0 auto;
   width: 60%;
   p {
-  
     font-size: 2rem;
     text-align: justify;
   }
@@ -31,6 +28,5 @@
     font-size: 3rem;
     margin-bottom: 2rem;
     font-display: swap;
-
   }
 }

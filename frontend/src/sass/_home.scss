@@ -1,9 +1,8 @@
 .slideshow {
   margin: 0 auto;
-  margin-top: 100px;
   overflow: hidden;
   height: 700px;
-  width: 800px;
+  max-width: 1000px;
 
   figure {
     position: relative;
@@ -13,7 +12,7 @@
 
   .imgslide {
     height: 500px;
-    width: 800px;
+    width: 1000px;
   }
 
   figure:after {
@@ -77,4 +76,16 @@
 
 .slideshowDot.active {
   background-color: #6a0dad;
+}
+
+@media (max-width: 480px) {
+  .slideshow {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 880px) {
+  .slideshow {
+    max-width: 700px;
+  }
 }

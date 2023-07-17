@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@use "base/mixins" as *;
+
 @mixin button {
   font-style: italic;
 }
@@ -22,7 +24,7 @@
   position: relative;
   &::before,
   &::after {
-    background: url("./assets/login.svg") no-repeat;
+    background: url("./assets/back-office.svg") no-repeat;
     display: block;
     width: 175px;
     height: 177px;
@@ -45,6 +47,7 @@
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 1.4rem;
+    @include css-hyphens(auto);
     + p {
       font-size: 1.2rem;
       font-style: italic;
@@ -149,7 +152,7 @@
       flex-basis: 15rem;
       display: inline-flex;
       aspect-ratio: 1;
-      padding: .5rem;
+      padding: 0.5rem;
     }
     a {
       text-decoration: none;
@@ -179,7 +182,8 @@
     }
   }
   &.works,
-  &.users {
+  &.users,
+  &.authors {
     h2 {
       + p {
         font-style: initial;
@@ -188,7 +192,6 @@
           font-weight: inherit;
           text-transform: initial;
           align-self: center;
-          width: 12rem;
         }
       }
     }
@@ -245,6 +248,15 @@
       }
     }
   }
+  &.works {
+    h2 {
+      + p {
+        a {
+          width: 12rem;
+        }
+      }
+    }
+  }
   @media (min-width: 480px) {
     display: grid;
     h2 {
@@ -282,7 +294,6 @@
       li {
         text-align: initial;
         display: grid;
-        grid-template-columns: 12rem 1fr repeat(2, auto);
         column-gap: 1rem;
         align-items: center;
         .edit,
@@ -290,6 +301,16 @@
           width: initial;
           margin-inline: initial;
         }
+      }
+    }
+    &.works {
+      li {
+        grid-template-columns: 12rem 1fr repeat(2, auto);
+      }
+    }
+    &.users {
+      li {
+        grid-template-columns: 1fr repeat(2, auto);
       }
     }
   }

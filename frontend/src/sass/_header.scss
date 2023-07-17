@@ -3,17 +3,14 @@
   height: 10rem;
   display: flex;
   justify-content: flex-end;
-    align-items: center;
-   
-    .hello{
-      font-size:large;
-      color: white;
-      padding-right: 60px;
-      display: flex;
-      justify-content: flex-end;
-      align-content: center;
-      padding-top: 30px;
-    }
+  align-items: center;
+
+  .hello {
+    font-size: large;
+    color: white;
+    padding-right: 60px;
+    padding-top: 30px;
+  }
 }
 
 .bottom-header {
@@ -26,6 +23,7 @@
   }
   .bottom-container {
     display: flex;
+    margin-bottom: 5rem;
     ul {
       display: flex;
       justify-content: flex-end;
@@ -41,7 +39,7 @@
       .navlink {
         text-decoration: none;
         color: black;
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
       .navlink:hover,
       .navlink.active {
@@ -49,10 +47,12 @@
       }
       .diamant {
         position: relative;
-        top: -90px;
-        left: 78px;
+        top: -77px;
+        left: 87px;
         opacity: 0;
         transition: all 0.2s ease-in-out;
+        width: 7rem;
+        height: 7rem;
       }
 
       .navlink:hover,
@@ -64,7 +64,7 @@
 
   .icon-nav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     background-color: var(--primary-color);
     clip-path: polygon(21% 120%, 500% 0, 0 0);
     height: 123px;
@@ -72,7 +72,12 @@
     float: left;
     align-items: center;
     flex-direction: row;
-    
+    .icon-container {
+      display: flex;
+      justify-content: space-evenly;
+      width: 80%;
+    }
+
     figure {
       text-align: center;
       figcaption {
@@ -85,6 +90,111 @@
     }
     a {
       text-decoration: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .burger {
+    position: relative;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    .line {
+      width: 30px;
+      height: 3px;
+      background-color: white;
+      margin-bottom: 6px;
+      transition: transform 0.3s;
+
+      &.line1 {
+        transform: rotate(45deg) translate(5px, 8px);
+      }
+
+      &.line2 {
+        opacity: 0;
+      }
+
+      &.line3 {
+        transform: rotate(-45deg) translate(5px, -8px);
+      }
+    }
+  }
+  .header {
+    display: block;
+    .img-logo {
+      width: 20rem;
+      top: 40px;
+    }
+    .navlink {
+      display: none;
+    }
+    figure {
+      display: none;
+    }
+    &.show {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: var(--primary-gradient-color);
+      z-index: 10;
+      .top-header {
+        display: none;
+      }
+      .img-logo {
+        display: none;
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        .navlink {
+          display: block;
+          color: white;
+          font-size: 4rem;
+          width: 100vw;
+          margin-bottom: 2rem;
+        }
+        .navlink:hover,
+        .navlink.active {
+          color: white;
+          font-weight: 700;
+        }
+        .diamant {
+          display: none;
+        }
+        button {
+          color: white;
+          border: none;
+          font-size: 4rem;
+        }
+        button:hover {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .top-header {
+      .hello {
+        font-size: 15px;
+        padding: 0 1rem 5rem 0;
+      }
+    }
+    .header {
+      .img-logo {
+        width: 15rem;
+        top: 55px;
+        left: 20px;
+      }
+      .burger {
+        right: 15px;
+      }
     }
   }
 }
