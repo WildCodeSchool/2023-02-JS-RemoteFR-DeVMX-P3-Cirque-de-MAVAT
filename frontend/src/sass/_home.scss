@@ -77,3 +77,15 @@
 .slideshowDot.active {
   background-color: #6a0dad;
 }
+
+@media (max-width: 480px) {
+  .slideshow {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 880px) {
+  .slideshow {
+    max-width: 700px;
+  }
+}
