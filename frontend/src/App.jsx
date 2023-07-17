@@ -62,11 +62,8 @@ function App() {
               <Route path="authors" element={<AdminAuthors />}>
                 <Route index element={<AuthorsList />} />
                 <Route path="add" element={<AuthorsFormAdd />} />
+                <Route path="delete/:id" element={<AuthorsDelete />} />
               </Route>
-              <Route
-                path="/account/authors/delete/:id"
-                element={<AuthorsDelete />}
-              />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
