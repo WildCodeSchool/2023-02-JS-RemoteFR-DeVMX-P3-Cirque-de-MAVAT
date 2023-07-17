@@ -25,6 +25,3 @@ jobs:
 
       - name: Caprover Deploy
         run: caprover deploy -h "${{ secrets.CAPROVER_SERVER }}" -p '${{ secrets.CAPROVER_PASSWORD }}' -b 'main' -a "${{ secrets.CAPROVER_BACK_APPNAME }}"
-
-      - name: Database deploy
-        run: npm run migrate
