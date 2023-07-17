@@ -8,7 +8,7 @@ import account from "../assets/icon-account.svg";
 import disconnect from "../assets/icon-disconnect.svg";
 import favorite from "../assets/icon-favorite.svg";
 
-import diamant from "../assets/bouton1.svg";
+import diamant from "../assets/Group 1.svg";
 
 export default function Header() {
   const location = useLocation();
