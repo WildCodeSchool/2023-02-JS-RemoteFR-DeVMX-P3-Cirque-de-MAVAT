@@ -59,26 +59,19 @@ const edit = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  const { role } = req.payload;
-  if (role !== 1) {
-    res
-      .status(403)
-      .send("Vous n’avez pas l’autorisation d’effectuer cette opération.");
-  } else {
-    models.users
-      .delete(req.params.id)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  }
+  models.users
+    .delete(req.params.id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 module.exports = {

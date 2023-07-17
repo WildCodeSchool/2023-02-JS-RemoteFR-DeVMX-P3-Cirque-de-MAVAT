@@ -75,7 +75,7 @@ router.put(
 );
 
 router.put("/users/:id", validateUpdate, hashPassword, usersControllers.edit);
-router.delete("/users/:id", usersControllers.destroy);
+router.delete("/users/:id", validateAdminRole, usersControllers.destroy);
 
 router.post("/authors", validateAdminRole, authorsControllers.add);
 router.put("/authors/:id", validateAdminRole, authorsControllers.edit);
@@ -86,6 +86,7 @@ router.delete("/favourites/:userId/:workId", favouritesControllers.destroy);
 
 router.delete(
   "/images/:id/:file",
+  validateAdminRole,
   removeImage,
   imagesControllers.destroy,
   worksControllers.destroy
