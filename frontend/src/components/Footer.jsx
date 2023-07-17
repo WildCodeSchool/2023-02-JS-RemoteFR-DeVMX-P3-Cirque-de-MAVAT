@@ -6,8 +6,8 @@ import logoObjetTemoin from "../assets/logo-objet-temoin.svg";
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-top">
-        <div className="footer-left">
+      <div className="footer-afac-main">
+        <div className="footer-afac">
           <div className="logo-afac974">
             <a href="https://capeline974.re/CAPELINE/CARTOTHEQUE/capeline-accueil.html">
               <img src={logoAfac974} alt="logo AFAC 974" />
@@ -28,8 +28,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="footer-right">
-          <p>Nos Partenaires</p>
+        <div className="footer-partners">
+          <h1>Nos Partenaires</h1>
           <div className="logo-ihoi">
             <a href="https://ihoi.org/app/photopro.sk/ihoi_icono/?">
               <img src={logoIhoi} alt="logo IHOI" />

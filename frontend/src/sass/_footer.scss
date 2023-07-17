@@ -1,64 +1,58 @@
 .footer {
   background: var(--primary-gradient-color);
   color: white;
-  font-size: 2rem;
   
-  .footer-top {
-    width: 100%;
+  .footer-afac-main {
+    width: 90%;
+    margin: auto;
     display: flex;
-    @media (max-width:480px) {
-      flex-direction: column;
-    }
-    align-items: center;
+    flex-direction: column;
     justify-content: space-around;
-    min-height: 34rem;
-    .footer-left {
-      display: flex;
-      @media (max-width:480px) {
-        font-size: 1.3rem;
-        margin-top: 5%;
-      }
-  
-      .logo-afac974 {
-        width: 30%;
-        margin: 0 5%;
-      }
-      .afac-infos {
-        .footer-links {
-          font-weight: 700;
-          @media (max-width:480px) {
-          font-size: 1rem;
-          }
-          line-height: 2.5rem;
-          .link-color {
-            color: rgb(85, 188, 247);
-            cursor: pointer;
-          }
-        }
-      }
-    }
-    .footer-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-        width: 80%;
 
-      p {
-        font-weight: 700;
+      @media (min-width:700px) {
+          flex-direction: row;
+        }
+        
+        .footer-afac {
+          display: flex;
+          justify-content: space-evenly;
+          margin: 5% 0;
+
+          .logo-afac974 {
+            width: 30%;
+          }
+
+          .afac-infos {
+            margin-left: 3%;
+
+            .footer-links {
+              padding: auto;
+                line-height: 2.5rem;
+                .link-color {
+                  color: rgb(85, 188, 247);
+                  cursor: pointer;
+                }
+            }
+          }
       }
+
+        .footer-partners {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 5% 0;
     }
   }
   .lien-dev {
+    width: 90%;
+    margin: auto;
     text-align: center;
     padding-bottom: 3%;
-    @media (max-width:480px) {
-    font-size: 1.2rem;
-    }
     .linkedin {
       margin-right: 1rem;
+      margin: 0 0.3rem;
       color: rgb(85, 188, 247);
       font-weight: bold;
-      font-size: 1.2rem;
       cursor: pointer;
     }
   }
