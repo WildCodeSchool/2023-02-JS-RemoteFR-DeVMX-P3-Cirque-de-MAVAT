@@ -20,7 +20,11 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="top-header" />
+      <div className="top-header">
+        {hasCurrentUser && currentUser.username && (
+          <p className="hello">Bonjour, {currentUser.username}</p>
+        )}
+      </div>
       <div className="bottom-header">
         <NavLink to="/" className="logo-container">
           <img src={logo} alt="logo AFAC 974" className="img-logo" />
@@ -60,7 +64,6 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-        <div className="triangle" />
         <nav className="icon-nav">
           {hasCurrentUser && (
             <figure>
@@ -87,9 +90,6 @@ export default function Header() {
             </button>
           )}
         </nav>
-        {hasCurrentUser && currentUser.username && (
-          <p className="hello">Bonjour, {currentUser.username}</p>
-        )}
       </div>
     </header>
   );

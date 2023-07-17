@@ -23,6 +23,7 @@ import AdminUsersList from "./components/AdminUsersList";
 import AdminUsersAdd from "./components/AdminUsersAdd";
 import AdminUsersUpdate from "./components/AdminUsersUpdate";
 import AdminUsersDelete from "./components/AdminUsersDelete";
+import AdminAuthors from "./components/AdminAuthors";
 import AuthorsFormAdd from "./components/AuthorsFormAdd";
 import AuthorsList from "./components/AuthorsList";
 import UserUpdate from "./components/UserUpdate";
@@ -30,6 +31,7 @@ import UserUpdate from "./components/UserUpdate";
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
+import AuthorsDelete from "./components/AuthorsDelete";
 
 function App() {
   return (
@@ -57,13 +59,19 @@ function App() {
                 <Route path=":id" element={<AdminUsersUpdate />} />
                 <Route path="delete/:id" element={<AdminUsersDelete />} />
               </Route>
-              <Route path="/account/authors" element={<AuthorsList />} />
-              <Route path="/account/authors/add" element={<AuthorsFormAdd />} />
+              <Route path="authors" element={<AdminAuthors />}>
+                <Route index element={<AuthorsList />} />
+                <Route path="add" element={<AuthorsFormAdd />} />
+              </Route>
+              <Route
+                path="/account/authors/delete/:id"
+                element={<AuthorsDelete />}
+              />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<Page404 />} />
             <Route path="/mention" element={<Mention />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
           <Footer />
         </Router>
