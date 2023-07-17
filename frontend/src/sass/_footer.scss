@@ -2,11 +2,11 @@
   background: var(--primary-gradient-color);
   color: white;
   font-size: 2rem;
-  
+
   .footer-top {
     width: 100%;
     display: flex;
-    @media (max-width:480px) {
+    @media (max-width: 480px) {
       flex-direction: column;
     }
     align-items: center;
@@ -14,11 +14,11 @@
     min-height: 34rem;
     .footer-left {
       display: flex;
-      @media (max-width:480px) {
+      @media (max-width: 480px) {
         font-size: 1.3rem;
         margin-top: 5%;
       }
-  
+
       .logo-afac974 {
         width: 30%;
         margin: 0 5%;
@@ -26,8 +26,8 @@
       .afac-infos {
         .footer-links {
           font-weight: 700;
-          @media (max-width:480px) {
-          font-size: 1rem;
+          @media (max-width: 480px) {
+            font-size: 1rem;
           }
           line-height: 2.5rem;
           .link-color {
@@ -41,7 +41,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-        width: 80%;
+      width: 80%;
 
       p {
         font-weight: 700;
@@ -51,8 +51,8 @@
   .lien-dev {
     text-align: center;
     padding-bottom: 3%;
-    @media (max-width:480px) {
-    font-size: 1.2rem;
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
     }
     .linkedin {
       margin-right: 1rem;
