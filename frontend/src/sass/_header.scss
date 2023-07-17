@@ -1,6 +1,19 @@
 .top-header {
   background-color: var(--primary-color);
   height: 10rem;
+  display: flex;
+  justify-content: flex-end;
+    align-items: center;
+   
+    .hello{
+      font-size:large;
+      color: white;
+      padding-right: 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-content: center;
+      padding-top: 30px;
+    }
 }
 
 .bottom-header {
@@ -49,18 +62,17 @@
     }
   }
 
-  .triangle {
-    border-style: solid;
-    border-width: 0 80px 125px 0;
-    border-color: transparent var(--primary-color) white transparent;
-  }
-
   .icon-nav {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    justify-content: space-evenly;
     background-color: var(--primary-color);
+    clip-path: polygon(21% 120%, 500% 0, 0 0);
+    height: 123px;
     width: 100%;
+    float: left;
+    align-items: center;
+    flex-direction: row;
+    
     figure {
       text-align: center;
       figcaption {
