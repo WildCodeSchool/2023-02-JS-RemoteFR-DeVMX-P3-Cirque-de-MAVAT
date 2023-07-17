@@ -49,10 +49,12 @@
       }
       .diamant {
         position: relative;
-        top: -90px;
-        left: 78px;
+        top: -77px;
+        left: 87px;
         opacity: 0;
         transition: all 0.2s ease-in-out;
+        width: 7rem;
+        height: 7rem;
       }
 
       .navlink:hover,
