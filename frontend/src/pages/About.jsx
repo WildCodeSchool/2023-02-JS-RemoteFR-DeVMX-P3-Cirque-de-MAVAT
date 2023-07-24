@@ -25,12 +25,16 @@ export default function About() {
             collectivités, des établissements scolaires, des entreprises ou des
             associations :
           </p>
-          <p>
-            <span>2021</span> : PRE Caisse des Ecoles du Tampon, Lycée Ambroise
-            Vollard <br />
-            <span>2022</span> : Service addictologie, CHU Nord, Lycée Pierre
-            Lagourgue, Amis de l'Université, Fondation Favron ...
-          </p>
+          <ul>
+            <li>
+              <span>2021</span> : PRE Caisse des Ecoles du Tampon, Lycée
+              Ambroise Vollard <br />
+            </li>
+            <li>
+              <span>2022</span> : Service addictologie, CHU Nord, Lycée Pierre
+              Lagourgue, Amis de l'Université, Fondation Favron ...
+            </li>
+          </ul>
         </div>
       </div>
       <div className="about-partners">
