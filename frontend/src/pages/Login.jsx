@@ -129,12 +129,6 @@ export default function Login() {
               required
               onChange={handlePassword}
             />
-            <Link
-              to="/login/forgotten-password"
-              className="forgotten-password-link"
-            >
-              Mot de passe oublié&nbsp;?
-            </Link>
           </p>
           <p>
             <input type="submit" value="Se connecter" />
