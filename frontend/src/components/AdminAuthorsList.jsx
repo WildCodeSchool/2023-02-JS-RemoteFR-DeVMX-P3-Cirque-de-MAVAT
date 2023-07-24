@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Admin403 from "./Admin403";
 
-import BreadcrumbAuthors from "./BreadcrumbAuthors";
+import AccountBreadcrumb from "./AccountBreadcrumb";
 import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function AdminAuthorsList() {
@@ -37,7 +37,7 @@ export default function AdminAuthorsList() {
     <>
       {currentUser.isAdmin ? (
         <>
-          <BreadcrumbAuthors breadcrumb={breadcrumb} />
+          <AccountBreadcrumb breadcrumb={breadcrumb} />
           <section className="account authors">
             <h2>Gérer les auteurs</h2>
             <p className="authorfont">

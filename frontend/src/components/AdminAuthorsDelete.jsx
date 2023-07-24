@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import BreadcrumbAuthors from "./BreadcrumbAuthors";
+import AccountBreadcrumb from "./AccountBreadcrumb";
 import Admin403 from "./Admin403";
 import CurrentUserContext from "../contexts/CurrentUser";
 
@@ -83,7 +83,7 @@ export default function AdminAuthorsDelete() {
     <>
       {currentUser.isAdmin ? (
         <>
-          <BreadcrumbAuthors breadcrumb={breadcrumb} />
+          <AccountBreadcrumb breadcrumb={breadcrumb} />
           <section className="account works delete">
             <h2>Supprimer un auteur</h2>
             {isDeleted ? (

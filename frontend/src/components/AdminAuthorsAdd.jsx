@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import BreadcrumbAuthors from "./BreadcrumbAuthors";
+import AccountBreadcrumb from "./AccountBreadcrumb";
 import CurrentUserContext from "../contexts/CurrentUser";
 
 export default function AdminAuthorsAdd() {
@@ -68,7 +68,7 @@ export default function AdminAuthorsAdd() {
 
   return (
     <div>
-      <BreadcrumbAuthors breadcrumb={breadcrumb} />
+      <AccountBreadcrumb breadcrumb={breadcrumb} />
       <section className="account authors">
         <h2>Ajouter un auteur</h2>
         {isAdded ? (
