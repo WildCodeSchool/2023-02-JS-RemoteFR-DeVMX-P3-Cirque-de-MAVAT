@@ -1,8 +1,13 @@
+import rgpd from "../assets/rgpd.svg";
+
 export default function Mention() {
   return (
     <div className="main-legal">
       <div className="legal">
-        <h1>Mentions Légales</h1>
+        <div className="title-rgpd">
+          <img src={rgpd} alt="padlock" />
+          <h1>Mentions Légales</h1>
+        </div>
         <p>Copyright : sur toutes les œuvres du site de l'AFAC 974.</p>
         <p>
           Propriété intellectuelle: Toutes copies, reproductions, captures
