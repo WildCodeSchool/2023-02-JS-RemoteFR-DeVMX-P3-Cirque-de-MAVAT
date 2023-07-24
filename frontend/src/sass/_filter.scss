@@ -5,16 +5,18 @@
   margin-bottom: 3rem;
 }
 
-.filter-menus-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  height: 100%;
-  margin-left: 3rem;
-  font-size: medium;
-  color: white;
-
+@media (min-width: 1000px) {
+  .filter-menus-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+    margin-left: 3rem;
+    font-size: medium;
+    color: white;
+  }
+}
   details {
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -42,4 +44,3 @@
   .favourite-button.active {
     font-weight: bold;
   }
-}
