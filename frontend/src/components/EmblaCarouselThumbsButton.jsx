@@ -19,6 +19,7 @@ export default function Thumb(props) {
           className="embla-thumbs__slide__img"
           src={imgSrc}
           alt="Your alt text"
+          onContextMenu={(e) => e.preventDefault()}
         />
       </button>
     </div>
