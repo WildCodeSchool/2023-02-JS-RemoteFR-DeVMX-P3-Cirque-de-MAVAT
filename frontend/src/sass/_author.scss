@@ -30,3 +30,29 @@
     font-display: swap;
   }
 }
+
+@media (max-width: 480px) {
+  .author {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-author {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .author {
+    width: 90%;
+  }
+
+  .img-author {
+    height: 90%;
+  }
+
+  .author p {
+    font-size: 1.5rem;
+  }
+}

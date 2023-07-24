@@ -30,12 +30,20 @@ function Footer() {
         <div className="footer-partners">
           <h1>Nos Partenaires</h1>
           <div className="logo-ihoi">
-            <a href="https://ihoi.org/app/photopro.sk/ihoi_icono/?">
+            <a
+              href="https://ihoi.org/app/photopro.sk/ihoi_icono/?"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={logoIhoi} alt="logo IHOI" />
             </a>
           </div>
           <div className="logo-objet-temoin">
-            <a href="https://museo.vandanjon.com/index.php/en/">
+            <a
+              href="https://museo.vandanjon.com/index.php/en/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={logoObjetTemoin} alt="logo Objet Témoin" />
             </a>
           </div>
