@@ -64,7 +64,6 @@
     .img-logo-afac {
       width: 100%;
       max-height: 15rem;
-
       @media (min-width: 800px) {
       }
     }
@@ -87,6 +86,7 @@
   }
   .logo-objet-temoin-container {
     text-align: center;
+
     @media (min-width: 800px) {
       width: 45%;
     }
@@ -95,7 +95,6 @@
   .img-logo-objet-temoin {
     width: 100%;
     max-height: 15rem;
-
     @media (min-width: 800px) {
       width: 55%;
     }
@@ -119,6 +118,7 @@
       padding: auto;
       .img-logo-ihoi {
         width: 95%;
+
         padding: 2%;
         background-color: var(--primary-color);
       }
