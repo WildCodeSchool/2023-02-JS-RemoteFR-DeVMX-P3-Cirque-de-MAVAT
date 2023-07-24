@@ -89,9 +89,11 @@
     }
   }
   .lien-dev {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 90%;
     margin: auto;
-    text-align: center;
     padding-bottom: 3%;
     .linkedin {
       margin-right: 1rem;
