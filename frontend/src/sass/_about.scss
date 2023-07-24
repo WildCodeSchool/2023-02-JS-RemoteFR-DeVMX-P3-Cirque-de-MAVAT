@@ -74,6 +74,9 @@
       }
     }
     .about-info-afac {
+      p {
+        display: block;
+      }
       @media (min-width: 800px) {
         width: 55%;
       }
