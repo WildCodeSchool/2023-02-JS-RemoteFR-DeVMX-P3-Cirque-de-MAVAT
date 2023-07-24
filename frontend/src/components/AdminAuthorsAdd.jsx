@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import BreadcrumbAuthors from "./BreadcrumbAuthors";
 import CurrentUserContext from "../contexts/CurrentUser";
 
-function AuthorsFormAdd() {
+export default function AdminAuthorsAdd() {
   const { currentUser } = useContext(CurrentUserContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -168,4 +168,3 @@ function AuthorsFormAdd() {
     </div>
   );
 }
-export default AuthorsFormAdd;

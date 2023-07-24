@@ -24,14 +24,14 @@ import AdminUsersAdd from "./components/AdminUsersAdd";
 import AdminUsersUpdate from "./components/AdminUsersUpdate";
 import AdminUsersDelete from "./components/AdminUsersDelete";
 import AdminAuthors from "./components/AdminAuthors";
-import AuthorsFormAdd from "./components/AuthorsFormAdd";
-import AuthorsList from "./components/AuthorsList";
+import AdminAuthorsList from "./components/AdminAuthorsList";
+import AdminAuthorsAdd from "./components/AdminAuthorsAdd";
+import AdminAuthorsDelete from "./components/AdminAuthorsDelete";
 import UserUpdate from "./components/UserUpdate";
 
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 import "./styles.scss";
-import AuthorsDelete from "./components/AuthorsDelete";
 
 function App() {
   return (
@@ -60,9 +60,9 @@ function App() {
                 <Route path="delete/:id" element={<AdminUsersDelete />} />
               </Route>
               <Route path="authors" element={<AdminAuthors />}>
-                <Route index element={<AuthorsList />} />
-                <Route path="add" element={<AuthorsFormAdd />} />
-                <Route path="delete/:id" element={<AuthorsDelete />} />
+                <Route index element={<AdminAuthorsList />} />
+                <Route path="add" element={<AdminAuthorsAdd />} />
+                <Route path="delete/:id" element={<AdminAuthorsDelete />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />

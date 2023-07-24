@@ -9,7 +9,7 @@ import BreadcrumbAuthors from "./BreadcrumbAuthors";
 import Admin403 from "./Admin403";
 import CurrentUserContext from "../contexts/CurrentUser";
 
-function AuthorsDelete() {
+export default function AdminAuthorsDelete() {
   const { currentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -121,5 +121,3 @@ function AuthorsDelete() {
     </>
   );
 }
-
-export default AuthorsDelete;

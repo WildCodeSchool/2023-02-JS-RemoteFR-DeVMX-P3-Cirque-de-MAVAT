@@ -7,7 +7,7 @@ import Admin403 from "./Admin403";
 import BreadcrumbAuthors from "./BreadcrumbAuthors";
 import CurrentUserContext from "../contexts/CurrentUser";
 
-export default function AuthorsList() {
+export default function AdminAuthorsList() {
   const { currentUser } = useContext(CurrentUserContext);
   const [authors, setAuthors] = useState([]);
   const breadcrumb = [
