@@ -20,7 +20,7 @@ function Slides() {
             width="1000"
             height="310"
           />
-          <figcaption>A DECOUVRIR</figcaption>
+          <figcaption>À découvrir</figcaption>
         </figure>
       ),
     },
@@ -35,7 +35,7 @@ function Slides() {
             height="310"
           />
           <figcaption>
-            GALERIE : Laissez-vous séduire par nos oeuvres d'art
+            Galerie&nbsp;: Laissez-vous séduire par nos œuvres d’art
           </figcaption>
         </figure>
       ),
@@ -51,9 +51,8 @@ function Slides() {
             height="310"
           />
           <figcaption>
-            EXPOSITION : Hippolyte Charles Napoléon MORTIER <br />
-            Duc de Trévise
-            <em>(oeuvres aquarelles et dessins)</em>
+            Exposition&nbsp;: Hippolyte Charles Napoléon Mortier, duc de Trévise{" "}
+            <em>(œuvres, aquarelles et dessins)</em>
           </figcaption>
         </figure>
       ),
@@ -68,7 +67,7 @@ function Slides() {
             width="1000"
             height="310"
           />
-          <figcaption>ACTUALITE : projets 2023</figcaption>
+          <figcaption>Actualité&nbsp;: projets 2023</figcaption>
         </figure>
       ),
     },
@@ -107,7 +106,11 @@ function Slides() {
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {slidePictures.map((data, index) => (
-          <div className="slide" key={index}>
+          <div
+            className="slide"
+            key={index}
+            onContextMenu={(e) => e.preventDefault()}
+          >
             {" "}
             {data.picture}{" "}
           </div>
