@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -180,38 +182,37 @@ export default function EmblaCarousel(props) {
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
                       onContextMenu={handleContextMenu}
                     />
-                    <div className="embla__slide__text">
-                      <h1>{work.title}</h1>
-                      {Object.keys(currentUser).length ? (
-                        <div
-                          className={
-                            favourites.has(work.id)
-                              ? "favourite isLiked"
-                              : "favourite"
-                          }
-                          onClick={handleClickLiked}
-                          data-work={work.id}
-                        />
-                      ) : null}
 
-                      <h2>
-                        <Link to="/author" className="embla_author">
-                          {work.firstname} {work.lastname}
-                        </Link>
-                      </h2>
-                      <h3>Référence image ADR : {work.reference}</h3>
-                      <h3>Technique : {work.technique}</h3>
-                      {work.sizes && <h3>Dimension : {work.sizes} cm</h3>}
-                      <h3>Année de réalisation : {work.created}</h3>
-                      <h3>Lieu de conservation : {work.location}</h3>
-                      <p>{work.story}</p>
-                      {work.external && (
-                        <span>
-                          Article lié :{" "}
-                          <a href={work.external}>{work.external}</a>
-                        </span>
-                      )}
-                    </div>
+                    <h1>{work.title}</h1>
+                    {Object.keys(currentUser).length ? (
+                      <button
+                        className={
+                          favourites.has(work.id)
+                            ? "favourite isLiked"
+                            : "favourite"
+                        }
+                        onClick={handleClickLiked}
+                        data-work={work.id}
+                      />
+                    ) : null}
+
+                    <h2>
+                      <Link to="/author" className="embla_author">
+                        {work.firstname} {work.lastname}
+                      </Link>
+                    </h2>
+                    <h3>Référence image ADR : {work.reference}</h3>
+                    <h3>Technique : {work.technique}</h3>
+                    {work.sizes && <h3>Dimension : {work.sizes} cm</h3>}
+                    <h3>Année de réalisation : {work.created}</h3>
+                    <h3>Lieu de conservation : {work.location}</h3>
+                    <p>{work.story}</p>
+                    {work.external && (
+                      <span>
+                        Article lié :{" "}
+                        <a href={work.external}>{work.external}</a>
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
