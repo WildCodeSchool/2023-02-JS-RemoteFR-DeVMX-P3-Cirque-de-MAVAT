@@ -97,7 +97,7 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     axios
-      .get(`${host}/works`)
+      .get(`${host}/works?published=true`)
       .then((res) => setWorks(res.data))
       .catch((err) => {
         console.error(err);
@@ -175,6 +175,7 @@ export default function EmblaCarousel(props) {
                       data-zoom={`${host}/assets/media/${work.src}`}
                       alt={work.description}
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
+                      onContextMenu={(e) => e.preventDefault()}
                     />
                     <div className="embla__slide__text">
                       <h1>{work.title}</h1>
