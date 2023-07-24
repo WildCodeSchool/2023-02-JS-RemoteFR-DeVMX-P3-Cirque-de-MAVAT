@@ -43,6 +43,7 @@
     color: var(--primary-color);
     font-size: 3rem;
     font-weight: 700;
+    margin-right: 7rem;
   }
   .embla_author {
     color: black;
@@ -138,17 +139,14 @@
 }
 
 .favourite {
-  width: 30px;
-  height: 10%;
-  background-repeat: no-repeat;
+  width: 5rem;
+  aspect-ratio: 1;
   border: none;
   position: absolute;
   top: 0;
-  right: 0;
-  background-color: green;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/4f/Ei-heart.svg");
-  &.isLiked {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/35/Emoji_u2665.svg");
+  right: 1rem;
+  path {
+    fill: var(--secondary-color);
   }
 }
 }
