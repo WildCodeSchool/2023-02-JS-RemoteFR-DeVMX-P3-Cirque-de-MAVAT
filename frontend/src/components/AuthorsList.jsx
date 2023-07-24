@@ -45,7 +45,7 @@ export default function AuthorsList() {
                 Ajouter un auteur
               </Link>
             </p>
-            {authors.length && (
+            {authors.length ? (
               <ul className="listdecoration">
                 {authors.map((author) => {
                   const { id, firstname, lastname } = author;
@@ -64,6 +64,8 @@ export default function AuthorsList() {
                   );
                 })}
               </ul>
+            ) : (
+              <p>Aucun auteur enregistré.</p>
             )}
           </section>
         </>

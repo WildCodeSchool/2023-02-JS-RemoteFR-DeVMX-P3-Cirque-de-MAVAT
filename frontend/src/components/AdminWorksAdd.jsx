@@ -251,7 +251,7 @@ export default function AdminWorksAdd() {
                   </fieldset>
                   <fieldset>
                     <legend>Caractéristiques</legend>
-                    {authors.length && (
+                    {authors.length ? (
                       <p>
                         <label htmlFor="add-author">
                           Auteur
@@ -272,8 +272,8 @@ export default function AdminWorksAdd() {
                           })}
                         </select>
                       </p>
-                    )}
-                    {categories.length && (
+                    ) : null}
+                    {categories.length ? (
                       <p>
                         <label htmlFor="add-category">
                           Catégorie
@@ -290,8 +290,8 @@ export default function AdminWorksAdd() {
                           })}
                         </select>
                       </p>
-                    )}
-                    {techniques.length && (
+                    ) : null}
+                    {techniques.length ? (
                       <p>
                         <label htmlFor="add-technique">
                           Technique
@@ -308,7 +308,7 @@ export default function AdminWorksAdd() {
                           })}
                         </select>
                       </p>
-                    )}
+                    ) : null}
                     <p>
                       <label htmlFor="add-created">
                         Date de réalisation

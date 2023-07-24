@@ -5,7 +5,7 @@ export default function AccountBreadcrumb({ breadcrumb }) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {breadcrumb.length && (
+      {breadcrumb.length ? (
         <nav className="account-breadcrumb">
           <ul>
             {breadcrumb.map((item) => {
@@ -18,7 +18,7 @@ export default function AccountBreadcrumb({ breadcrumb }) {
             })}
           </ul>
         </nav>
-      )}
+      ) : null}
     </>
   );
 }
