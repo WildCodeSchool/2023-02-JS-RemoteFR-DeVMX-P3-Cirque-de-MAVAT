@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const { published } = req.query;
   models.works
-    .findAllWorks()
+    .findAllWorks(published)
     .then(([rows]) => {
       res.send(rows);
     })
