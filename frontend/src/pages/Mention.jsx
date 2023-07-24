@@ -5,7 +5,7 @@ export default function Mention() {
     <div className="main-legal">
       <div className="legal">
         <div className="title-rgpd">
-          <img src={rgpd} alt="" />
+          <img src={rgpd} alt="padlock" />
           <h1>Mentions Légales</h1>
         </div>
         <p>Copyright : sur toutes les œuvres du site de l'AFAC 974.</p>
