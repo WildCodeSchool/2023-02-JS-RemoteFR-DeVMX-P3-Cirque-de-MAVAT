@@ -42,12 +42,13 @@
     transform: rotate(180deg);
   }
   h2 {
-    font-size: 4rem;
+    font-size: 2rem;
     color: var(--primary-color);
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 1.4rem;
-    @include css-hyphens(auto);
+    -webkit-hyphens: auto;
+    hyphens: auto;
     + p {
       font-size: 1.2rem;
       font-style: italic;
@@ -286,6 +287,13 @@
           }
         }
       }
+    }
+  }
+  @media (max-width: 559px) {
+    input:not([type="checkbox"], [type="radio"], [type="submit"], [type="reset"]),
+    select,
+    textarea {
+      width: calc(100vw - 16.4rem);
     }
   }
   @media (min-width: 560px) {
