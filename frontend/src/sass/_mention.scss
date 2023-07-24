@@ -1,14 +1,49 @@
 .main-legal {
   .legal {
-    width: 50%;
-    display: flex;
-    text-align: justify;
-    flex-direction: column;
-    margin: auto;
+    margin: 0 auto 10rem auto;
+    width: 80%;
+
+    @media (min-width: 600px) {
+      width: 60%;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
     p {
-      font-size: x-large;
-      margin-top: 3px;
-      margin-top: 3px;
+      font-size: 1rem;
+      text-align: justify;
+      margin-bottom: 3%;
+    }
+
+    @media (min-width: 800px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1400px) {
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.8rem;
+      }
     }
   }
 }
