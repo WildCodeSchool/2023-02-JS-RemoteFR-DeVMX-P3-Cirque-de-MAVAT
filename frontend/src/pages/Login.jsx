@@ -19,27 +19,49 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const validationFilters = {
-      email: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
-      password: /^\S+$/i,
+      email: {
+        type: "email",
+        format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
+      },
+      password: {
+        type: "string",
+      },
     };
-    const fields = {
-      email,
-      password,
-    };
+    const fields = new FormData(e.target);
     const errors = new Set();
 
-    for (const field in fields) {
-      if (!fields[field].match(validationFilters[field])) {
-        errors.add(field);
-      } else {
-        errors.delete(field);
+    for (const [field, value] of fields.entries()) {
+      if (validationFilters[field]) {
+        let isInvalid = false;
+        switch (validationFilters[field].type) {
+          case "email":
+            if (!value || !value.match(validationFilters[field].format)) {
+              isInvalid = true;
+            }
+            break;
+          default:
+            if (!value.trim()) {
+              isInvalid = true;
+            }
+            break;
+        }
+        if (isInvalid) {
+          errors.add(field);
+        } else {
+          errors.delete(field);
+        }
       }
     }
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
+      const data = {};
+      fields.delete("confirmPassword");
+      for (const [key, value] of fields.entries()) {
+        data[key] = value;
+      }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, data)
         .then((response) => {
           const {
             data: { user, token },

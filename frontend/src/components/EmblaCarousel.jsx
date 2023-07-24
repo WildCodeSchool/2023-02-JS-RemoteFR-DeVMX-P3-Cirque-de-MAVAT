@@ -76,6 +76,8 @@ export default function EmblaCarousel(props) {
     }
   };
 
+  const handleContextMenu = (e) => e.preventDefault();
+
   const onThumbClick = useCallback(
     (index) => {
       if (!emblaMainApi || !emblaThumbsApi) return;
@@ -99,7 +101,7 @@ export default function EmblaCarousel(props) {
 
   useEffect(() => {
     axios
-      .get(`${host}/works`)
+      .get(`${host}/works?published=true`)
       .then((res) => setWorks(res.data))
       .catch((err) => {
         console.error(err);
@@ -161,6 +163,7 @@ export default function EmblaCarousel(props) {
           <img
             src={`${host}/assets/media/${filteredWorks[selectedIndex].src}`}
             alt={filteredWorks[selectedIndex].description}
+            onContextMenu={handleContextMenu}
           />
         </div>
       )}
@@ -177,6 +180,7 @@ export default function EmblaCarousel(props) {
                       data-zoom={`${host}/assets/media/${work.src}`}
                       alt={work.description}
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
+                      onContextMenu={handleContextMenu}
                     />
 
                     <h1>{work.title}</h1>

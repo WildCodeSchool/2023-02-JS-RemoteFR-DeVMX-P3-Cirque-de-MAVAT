@@ -12,7 +12,8 @@
 
   .imgslide {
     height: 500px;
-    width: 1000px;
+    object-fit: cover;
+    object-position: center;
   }
 
   figure:after {
@@ -36,12 +37,12 @@
     border-top: 1px solid rgb(225, 225, 225);
     letter-spacing: 0.05em;
     word-spacing: 0.05em;
-    font-family: Georgia, Times, serif;
-    font-weight: bolder;
+    font-weight: bold;
     background: #fff;
     background: rgba(255, 255, 255, 0.7);
     color: #555;
     text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.3);
+    white-space: initial;
   }
 }
 
