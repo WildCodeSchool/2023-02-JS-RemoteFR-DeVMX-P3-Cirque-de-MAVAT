@@ -42,7 +42,7 @@ export default function AdminUsersList() {
             <p>
               <Link to="/account/users/add">Ajouter un utilisateur</Link>
             </p>
-            {users.length && (
+            {users.length ? (
               <ul>
                 {users.map((user) => {
                   const { id, firstname, lastname, email } = user;
@@ -74,6 +74,8 @@ export default function AdminUsersList() {
                   );
                 })}
               </ul>
+            ) : (
+              <p>Aucun utilisateur enregistré.</p>
             )}
           </section>
         </>
