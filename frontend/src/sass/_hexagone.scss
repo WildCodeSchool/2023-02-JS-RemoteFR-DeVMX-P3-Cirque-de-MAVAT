@@ -18,8 +18,10 @@
   background: white;
   content: "";
 }
-
 .hexagon-part {
+  @media (max-width: 999px){
+    display: none;
+  }
   position: absolute;
   margin-top: -10rem;
   margin-left: 0.1rem;
