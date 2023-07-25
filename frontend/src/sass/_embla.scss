@@ -1,3 +1,47 @@
+.embla__slide {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    font-weight: 700;
+    margin-right: 7rem;
+  }
+  .embla_author {
+    color: black;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+  span {
+    font-size: 2rem;
+    font-style: italic;
+  
+    a {
+      color: var(--primary-color);
+    }
+  }
+}
+.favourite {
+  width: 5rem;
+  aspect-ratio: 1;
+  border: none;
+  align-self: end;
+  path {
+    fill: var(--secondary-color);
+  }
+}
+.embla__viewport {
+  padding-inline: 1rem;
+}
 @media (min-width: 1000px) {
   .fullscreen-image {
     position: fixed;
@@ -17,7 +61,6 @@
       max-height: 90%;
     }
   }
-
   .embla {
     max-width: 65%;
   }
@@ -33,46 +76,17 @@
     margin-left: calc(1rem * -1);
   }
   .embla__slide {
+    display: block;
     flex: 0 0 100%;
-    padding-left: 2rem;
-    position: relative;
     width: 65%;
     margin-left: 5rem;
     margin-right: 5rem;
-    h1 {
-      color: var(--primary-color);
-      font-size: 3rem;
-      font-weight: 700;
-      margin-right: 7rem;
-    }
-    .embla_author {
-      color: black;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    h3 {
-      font-size: 2rem;
-    }
-    p {
-      font-size: 2rem;
-      padding: 2rem 0;
-    }
-    span {
-      font-size: 2rem;
-      font-style: italic;
-
-      a {
-        color: var(--primary-color);
-      }
-    }
+    position: relative;
   }
   .embla__slide__img {
     display: block;
     width: 55%;
     margin-right: 1.5rem;
-    // margin-bottom: 1rem;
     float: left;
     object-fit: cover;
     cursor: pointer;
@@ -145,16 +159,10 @@
     object-fit: cover;
     cursor: pointer;
   }
-
   .favourite {
-    width: 5rem;
-    aspect-ratio: 1;
-    border: none;
     position: absolute;
     top: 0;
     right: 1rem;
-    path {
-      fill: var(--secondary-color);
-    }
+    z-index: -1;
   }
 }
