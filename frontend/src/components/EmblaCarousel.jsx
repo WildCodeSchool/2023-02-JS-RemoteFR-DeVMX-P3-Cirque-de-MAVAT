@@ -184,7 +184,7 @@ export default function EmblaCarousel(props) {
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
                       onContextMenu={handleContextMenu}
                     />
-
+                    <div className="embla__slide__text" />
                     <h1>{work.title}</h1>
                     {Object.keys(currentUser).length ? (
                       <button
