@@ -42,6 +42,11 @@
 .embla__viewport {
   padding-inline: 1rem;
 }
+@media (max-width: 999px) {
+  .embla-thumbs {
+    display: none;
+  }
+}
 @media (min-width: 1000px) {
   .fullscreen-image {
     position: fixed;
