@@ -43,6 +43,9 @@
   padding-inline: 1rem;
 }
 @media (max-width: 999px) {
+  .embla__slide__text {
+    display: none;
+  }
   .embla-thumbs {
     display: none;
   }
