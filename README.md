@@ -1,7 +1,8 @@
 ## Concept
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
-It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
+This repository is the third and last team project carried out during a course at [Wild Code School](https://github.com/WildCodeSchool). This team project was made by [AnthonyLASTERNAS](https://github.com/AnthonyLASTERNAS), [AnneL51100](https://github.com/AnneL51100), [MarineDeveza](https://github.com/MarineDeveza), [nguyen-tt](https://github.com/nguyen-tt) and [webdevbynight](https://github.com/webdevbynight).
+
+This project is based on React, Express and MySQL.
 
 ## Setup & Use
 
@@ -20,7 +21,7 @@ git config --global core.autocrlf false
 - Clone this repo, enter it
 - If you are using `yarn` or `pnpm`, adapt the `config/cli` in `package.json`
 - Run command `npm install`
-- _NB: To launch the backend server, you'll need an environment file with database credentials. You'll find a template one in `backend/.env.sample`_
+- _NB: To launch the backend server, you’ll need an environment file with database credentials. You’ll find a template one in `backend/.env.sample`_
 
 ### Available Commands
 
@@ -38,9 +39,9 @@ git config --global core.autocrlf false
 - _Concurrently_ : Allows for several commands to run concurrently in the same CLI
 - _Husky_ : Allows to execute specific commands that trigger on _git_ events
 - _Vite_ : Alternative to _Create-React-App_, packaging less tools for a more fluid experience
-- _ESLint_ : "Quality of code" tool, ensures chosen rules will be enforced
-- _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
-- _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
+- _ESLint_ : “Quality of code” tool, ensures chosen rules will be enforced
+- _Prettier_ : “Quality of code” tool as well, focuses on the styleguide
+- _ Airbnb Standard_ : One of the most known “standards”, even though it’s not officially linked to ES/JS
 - _Nodemon_ : Allows to restart the server everytime a .js file is udated
 
 ### Deployment
