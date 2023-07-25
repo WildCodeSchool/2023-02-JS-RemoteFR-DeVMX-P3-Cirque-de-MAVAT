@@ -4,10 +4,10 @@ import axios from "axios";
 
 import Admin403 from "./Admin403";
 
-import BreadcrumbAuthors from "./BreadcrumbAuthors";
+import AccountBreadcrumb from "./AccountBreadcrumb";
 import CurrentUserContext from "../contexts/CurrentUser";
 
-export default function AuthorsList() {
+export default function AdminAuthorsList() {
   const { currentUser } = useContext(CurrentUserContext);
   const [authors, setAuthors] = useState([]);
   const breadcrumb = [
@@ -37,7 +37,7 @@ export default function AuthorsList() {
     <>
       {currentUser.isAdmin ? (
         <>
-          <BreadcrumbAuthors breadcrumb={breadcrumb} />
+          <AccountBreadcrumb breadcrumb={breadcrumb} />
           <section className="account authors">
             <h2>Gérer les auteurs</h2>
             <p className="authorfont">
@@ -45,7 +45,7 @@ export default function AuthorsList() {
                 Ajouter un auteur
               </Link>
             </p>
-            {authors.length && (
+            {authors.length ? (
               <ul className="listdecoration">
                 {authors.map((author) => {
                   const { id, firstname, lastname } = author;
@@ -64,6 +64,8 @@ export default function AuthorsList() {
                   );
                 })}
               </ul>
+            ) : (
+              <p>Aucun auteur enregistré.</p>
             )}
           </section>
         </>
