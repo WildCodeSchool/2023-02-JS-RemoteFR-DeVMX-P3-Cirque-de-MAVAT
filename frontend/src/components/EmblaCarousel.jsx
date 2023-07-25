@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -34,14 +36,16 @@ export default function EmblaCarousel(props) {
   const host = import.meta.env.VITE_BACKEND_URL;
 
   const handleClickLiked = (e) => {
+    let { target } = e;
+    while (target.nodeName !== "BUTTON") target = target.parentNode;
     const liked = favourites;
-    const workId = Number.parseInt(e.target.dataset.work, 10);
+    const workId = Number.parseInt(target.dataset.work, 10);
     const config = {
       headers: {
         Authorization: `Bearer ${currentUser.token}`,
       },
     };
-    if (liked.has(workId) && e.target.classList.contains("isLiked")) {
+    if (liked.has(workId) && target.classList.contains("isLiked")) {
       axios
         .delete(`${host}/favourites/${currentUser.id}/${workId}`, config)
         .then((res) => {
@@ -73,6 +77,8 @@ export default function EmblaCarousel(props) {
         });
     }
   };
+
+  const handleContextMenu = (e) => e.preventDefault();
 
   const onThumbClick = useCallback(
     (index) => {
@@ -159,6 +165,7 @@ export default function EmblaCarousel(props) {
           <img
             src={`${host}/assets/media/${filteredWorks[selectedIndex].src}`}
             alt={filteredWorks[selectedIndex].description}
+            onContextMenu={handleContextMenu}
           />
         </div>
       )}
@@ -175,40 +182,63 @@ export default function EmblaCarousel(props) {
                       data-zoom={`${host}/assets/media/${work.src}`}
                       alt={work.description}
                       onClick={() => setFullscreenVisible(!fullscreenVisible)}
-                      onContextMenu={(e) => e.preventDefault()}
+                      onContextMenu={handleContextMenu}
                     />
-                    <div className="embla__slide__text">
-                      <h1>{work.title}</h1>
-                      {Object.keys(currentUser).length ? (
-                        <div
-                          className={
-                            favourites.has(work.id)
-                              ? "favourite isLiked"
-                              : "favourite"
-                          }
-                          onClick={handleClickLiked}
-                          data-work={work.id}
-                        />
-                      ) : null}
 
-                      <h2>
-                        <Link to="/author" className="embla_author">
-                          {work.firstname} {work.lastname}
-                        </Link>
-                      </h2>
-                      <h3>Référence image ADR : {work.reference}</h3>
-                      <h3>Technique : {work.technique}</h3>
-                      {work.sizes && <h3>Dimension : {work.sizes} cm</h3>}
-                      <h3>Année de réalisation : {work.created}</h3>
-                      <h3>Lieu de conservation : {work.location}</h3>
-                      <p>{work.story}</p>
-                      {work.external && (
-                        <span>
-                          Article lié :{" "}
-                          <a href={work.external}>{work.external}</a>
-                        </span>
-                      )}
-                    </div>
+                    <h1>{work.title}</h1>
+                    {Object.keys(currentUser).length ? (
+                      <button
+                        className={
+                          favourites.has(work.id)
+                            ? "favourite isLiked"
+                            : "favourite"
+                        }
+                        title={
+                          favourites.has(work.id)
+                            ? "Retirer de mes favoris"
+                            : "Ajouter à mes favoris"
+                        }
+                        onClick={handleClickLiked}
+                        data-work={work.id}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="50"
+                          height="50"
+                          viewBox="0 0 50 50"
+                        >
+                          {favourites.has(work.id) ? (
+                            <>
+                              <desc>Retirer de mes favoris</desc>
+                              <path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z" />
+                            </>
+                          ) : (
+                            <>
+                              <desc>Ajouter à mes favoris</desc>
+                              <path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5zM17 12c-3.9 0-7 3.1-7 7 0 5.1 3.2 8.5 15 18.1 11.8-9.6 15-13 15-18.1 0-3.9-3.1-7-7-7-3.5 0-5.4 2.1-6.9 3.8L25 17.1l-1.1-1.3C22.4 14.1 20.5 12 17 12z" />
+                            </>
+                          )}
+                        </svg>
+                      </button>
+                    ) : null}
+
+                    <h2>
+                      <Link to="/author" className="embla_author">
+                        {work.firstname} {work.lastname}
+                      </Link>
+                    </h2>
+                    <h3>Référence image ADR : {work.reference}</h3>
+                    <h3>Technique : {work.technique}</h3>
+                    {work.sizes && <h3>Dimension : {work.sizes} cm</h3>}
+                    <h3>Année de réalisation : {work.created}</h3>
+                    <h3>Lieu de conservation : {work.location}</h3>
+                    <p>{work.story}</p>
+                    {work.external && (
+                      <span>
+                        Article lié :{" "}
+                        <a href={work.external}>{work.external}</a>
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>

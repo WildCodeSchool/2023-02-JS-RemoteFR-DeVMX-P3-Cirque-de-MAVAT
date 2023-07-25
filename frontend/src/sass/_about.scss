@@ -1,5 +1,5 @@
 .about {
-  margin: 0 auto 15% auto;
+  margin: 0 auto 10% auto;
   width: 80%;
 
   @media (min-width: 600px) {
@@ -9,45 +9,58 @@
   h1 {
     color: var(--primary-color);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
   p {
     font-size: 1rem;
     text-align: justify;
-    margin-bottom: 10%;
+    margin-bottom: 3%;
+  }
+  ul {
+    list-style: none;
+    span {
+      text-decoration: underline;
+    }
   }
 
   @media (min-width: 800px) {
     h1 {
-      font-size: 1.7rem;
+      font-size: 2rem;
     }
-    p {
+    p,
+    ul {
       font-size: 1.3rem;
     }
   }
 
   @media (min-width: 1200px) {
     h1 {
-      font-size: 2.1rem;
+      font-size: 2.5rem;
     }
-    p {
+    p,
+    ul {
       font-size: 1.5rem;
     }
   }
 
   @media (min-width: 1400px) {
     h1 {
-      font-size: 2.3rem;
+      font-size: 3rem;
     }
-    p {
+    p,
+    ul {
       font-size: 1.8rem;
     }
   }
 
   .about-afac-974 {
+    @media (min-width: 600px) {
+      margin: 5% auto 20% auto;
+    }
     @media (min-width: 800px) {
       display: flex;
-      margin-top: 5rem;
+      align-items: center;
+      margin: 5% auto 15% auto;
     }
     .logo-afac-container {
       @media (min-width: 800px) {
@@ -56,12 +69,14 @@
     }
     .img-logo-afac {
       width: 100%;
-      max-height: 10rem;
-
+      max-height: 15rem;
       @media (min-width: 800px) {
       }
     }
     .about-info-afac {
+      p {
+        display: block;
+      }
       @media (min-width: 800px) {
         width: 55%;
       }
@@ -70,13 +85,17 @@
 }
 
 .about-objet-temoin {
+  @media (min-width: 600px) {
+    margin: 5% auto 20% auto;
+  }
   @media (min-width: 800px) {
     display: flex;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    align-items: center;
+    margin: 5% auto 10% auto;
   }
   .logo-objet-temoin-container {
-    // margin: 0 auto;
+    text-align: center;
+
     @media (min-width: 800px) {
       width: 45%;
     }
@@ -84,9 +103,7 @@
 
   .img-logo-objet-temoin {
     width: 100%;
-    max-height: 10rem;
-    margin: 0 auto;
-
+    max-height: 15rem;
     @media (min-width: 800px) {
       width: 55%;
     }
@@ -102,14 +119,15 @@
 .about-ihoi {
   @media (min-width: 800px) {
     display: flex;
+    align-items: center;
     flex-direction: row-reverse;
   }
   .logo-ihoi-container {
     .background-logo-ihoi {
-      margin-left: 7%;
       padding: auto;
       .img-logo-ihoi {
-        width: 90%;
+        width: 95%;
+
         padding: 2%;
         background-color: var(--primary-color);
       }
@@ -129,6 +147,7 @@
   }
 
   .about-info-ihoi {
+    margin-right: 10%;
     @media (min-width: 800px) {
       width: 55%;
     }

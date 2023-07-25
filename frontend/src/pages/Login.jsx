@@ -19,27 +19,49 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const validationFilters = {
-      email: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
-      password: /^\S+$/i,
+      email: {
+        type: "email",
+        format: /^[-_.a-z0-9]+@[-_a-z0-9]+(\.[a-z]{2,4})?\.[a-z]{2,6}$/i,
+      },
+      password: {
+        type: "string",
+      },
     };
-    const fields = {
-      email,
-      password,
-    };
+    const fields = new FormData(e.target);
     const errors = new Set();
 
-    for (const field in fields) {
-      if (!fields[field].match(validationFilters[field])) {
-        errors.add(field);
-      } else {
-        errors.delete(field);
+    for (const [field, value] of fields.entries()) {
+      if (validationFilters[field]) {
+        let isInvalid = false;
+        switch (validationFilters[field].type) {
+          case "email":
+            if (!value || !value.match(validationFilters[field].format)) {
+              isInvalid = true;
+            }
+            break;
+          default:
+            if (!value.trim()) {
+              isInvalid = true;
+            }
+            break;
+        }
+        if (isInvalid) {
+          errors.add(field);
+        } else {
+          errors.delete(field);
+        }
       }
     }
     setInvalidFields([...errors]);
 
     if (errors.size === 0) {
+      const data = {};
+      fields.delete("confirmPassword");
+      for (const [key, value] of fields.entries()) {
+        data[key] = value;
+      }
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, fields)
+        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, data)
         .then((response) => {
           const {
             data: { user, token },
@@ -63,62 +85,60 @@ export default function Login() {
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {Object.keys(currentUser).length && <Navigate to="/account" />}
-      <form className="account login" onSubmit={handleLogin} noValidate>
-        <h2>S’identifier</h2>
-        <p>
-          Tous les champs sont obligatoires
-          {invalidLogin && <span className="error">{invalidLogin}</span>}
-        </p>
-        <p>
-          <label htmlFor="login-email">
-            Adresse email
-            {invalidFields.includes("email") && (
-              <span className="error">
-                (une adresse email doit être saisie)
-              </span>
-            )}
-          </label>
-          <input
-            id="login-email"
-            name="email"
-            type="email"
-            value={email}
-            required
-            onChange={handleEmail}
-          />
-        </p>
-        <p>
-          <label htmlFor="login-password">
-            Mot de passe
-            {invalidFields.includes("password") && (
-              <span className="error">(un mot de passe doit être saisi)</span>
-            )}
-          </label>
-          <input
-            id="login-password"
-            name="password"
-            type="password"
-            value={password}
-            required
-            onChange={handlePassword}
-          />
-          <Link
-            to="/login/forgotten-password"
-            className="forgotten-password-link"
-          >
-            Mot de passe oublié&nbsp;?
-          </Link>
-        </p>
-        <p>
-          <input type="submit" value="Se connecter" />
-        </p>
-        <p>
-          Vous n’avez pas de compte&nbsp;?{" "}
-          <Link to="/signup">Créer un compte</Link>
-        </p>
-      </form>
+      {Object.keys(currentUser).length ? (
+        <Navigate to="/account" />
+      ) : (
+        <form className="account login" onSubmit={handleLogin} noValidate>
+          <h2>S’identifier</h2>
+          <p>
+            Tous les champs sont obligatoires
+            {invalidLogin && <span className="error">{invalidLogin}</span>}
+          </p>
+          <p>
+            <label htmlFor="login-email">
+              Adresse email
+              {invalidFields.includes("email") && (
+                <span className="error">
+                  (une adresse email doit être saisie)
+                </span>
+              )}
+            </label>
+            <input
+              id="login-email"
+              name="email"
+              type="email"
+              value={email}
+              required
+              onChange={handleEmail}
+            />
+          </p>
+          <p>
+            <label htmlFor="login-password">
+              Mot de passe
+              {invalidFields.includes("password") && (
+                <span className="error">(un mot de passe doit être saisi)</span>
+              )}
+            </label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              value={password}
+              required
+              onChange={handlePassword}
+            />
+          </p>
+          <p>
+            <input type="submit" value="Se connecter" />
+          </p>
+          <p>
+            Vous n’avez pas de compte&nbsp;?{" "}
+            <Link to="/signup">Créer un compte</Link>
+          </p>
+        </form>
+      )}
     </>
   );
 }

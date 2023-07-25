@@ -62,17 +62,14 @@
 
       .afac-infos {
         margin-left: 3%;
-
-        .link-color {
-          padding-top: 2%;
+        p {
+          margin-bottom: 3%;
         }
+
         .footer-links {
-          padding: auto;
-          margin-top: 5%;
-          line-height: 2.5rem;
+          margin-top: 10%;
           .link-color {
             color: rgb(85, 188, 247);
-            cursor: pointer;
           }
         }
       }
@@ -83,12 +80,20 @@
       flex-direction: column;
       align-items: center;
       margin: 5% 0;
+      h1 {
+        margin-bottom: 2rem;
+      }
+      .logo-ihoi {
+        margin-bottom: 3rem;
+      }
     }
   }
   .lien-dev {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 90%;
     margin: auto;
-    text-align: center;
     padding-bottom: 3%;
     .linkedin {
       margin-right: 1rem;
