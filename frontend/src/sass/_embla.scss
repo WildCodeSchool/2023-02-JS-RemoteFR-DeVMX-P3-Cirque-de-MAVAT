@@ -78,6 +78,14 @@
     cursor: pointer;
   }
 
+  .embla__slide__text {
+    width: 44%;
+    aspect-ratio: 3/4;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   .embla__slide__number {
     width: 4.6rem;
     height: 4.6rem;
@@ -145,6 +153,7 @@
     position: absolute;
     top: 0;
     right: 1rem;
+    z-index: -1;
     path {
       fill: var(--secondary-color);
     }
