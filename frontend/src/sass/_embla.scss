@@ -153,6 +153,7 @@
     position: absolute;
     top: 0;
     right: 1rem;
+    z-index: -1;
     path {
       fill: var(--secondary-color);
     }
