@@ -1,8 +1,12 @@
-
-
-@media (min-width: 1000px){
-.gallery_page {
-  display: flex;
-  justify-content: center;
+@media (min-width: 1000px) {
+  .gallery_page {
+    display: flex;
+    justify-content: center;
+  }
 }
+
+@media (max-width: 999px) {
+  .fullscreen-image {
+    display: none;
+  }
 }
