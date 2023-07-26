@@ -24,12 +24,15 @@
   span {
     font-size: 2rem;
     font-style: italic;
-  
+
     a {
       color: var(--primary-color);
       overflow-wrap: break-word;
     }
   }
+}
+.embla__slide__img {
+  margin: 8rem 0 2rem 0;
 }
 .favourite {
   width: 5rem;
@@ -41,7 +44,7 @@
   }
 }
 .embla__viewport {
-  padding-inline: 1rem;
+  padding-inline: 5rem;
 }
 @media (max-width: 999px) {
   .embla__slide__text {
@@ -53,7 +56,6 @@
 }
 @media (min-width: 1000px) {
   .fullscreen-image {
-    position: fixed;
     position: fixed;
     top: 0;
     left: 0;
@@ -75,6 +77,7 @@
   }
   .embla__viewport {
     overflow: hidden;
+    padding-inline: 1rem;
   }
   .embla__container {
     backface-visibility: hidden;
@@ -94,15 +97,17 @@
   }
   .embla__slide__img {
     display: block;
-    width: 55%;
-    margin-right: 1.5rem;
+    width: 35%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 3rem;
     float: left;
     object-fit: cover;
     cursor: pointer;
   }
 
   .embla__slide__text {
-    width: 44%;
+    width: 64%;
     aspect-ratio: 3/4;
     position: absolute;
     top: 0;

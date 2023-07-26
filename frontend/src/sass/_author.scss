@@ -1,25 +1,16 @@
 .img-author {
-  width: 650px;
-  height: 800px;
-}
-
-.author-paint {
-  display: flex;
-  flex-direction: column;
-}
-
-.img-author {
   width: 50%;
   margin-right: 4%;
+  object-fit: cover;
+  float: left;
 }
 
 .author {
-  display: flex;
   margin: 0 auto;
   width: 60%;
+  overflow: hidden;
   p {
     font-size: 2rem;
-    text-align: justify;
   }
 
   h2 {
