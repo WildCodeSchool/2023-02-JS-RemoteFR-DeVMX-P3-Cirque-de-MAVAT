@@ -7,14 +7,14 @@
     "fix": "prettier --write . && eslint --fix --ext .jsx ."
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^3.0.1",
+    "@vitejs/plugin-react": "^5.1.2",
     "axios": "^1.4.0",
     "drift-zoom": "^1.5.1",
     "embla-carousel-react": "^8.0.0-rc07",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.12.1",
+    "react-router-dom": "^6.30.3",
     "vite": "^7.3.0"
   },
   "devDependencies": {
